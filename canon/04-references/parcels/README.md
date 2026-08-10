@@ -27,6 +27,8 @@
 | Gods Register | DriveG/ABSOLUTNO | the pantheon (Thor, Seth, Morana...), fingerprints, relation legend |
 | Le Double Operator | DriveG/ABSOLUTNO | the "le" scope/ethic operator; the 9-dim word-vector ψ_w |
 | Ethics of Relation | DriveG/ABSOLUTNO | the APD relational model (5 domains, guards, 10 axioms) |
+| Jewik Ethical Code | DriveG/ABSOLUTNO | the ethics engine (guards, 8 axioms, 12 obligations, P(5) seal protocol) |
+| Darilni Dialogi | DriveG/ABSOLUTNO | the gift dialogues (3 lines + DAR); REK 03 = Fire/Water boundary |
 
 ## How to add a parcel
 

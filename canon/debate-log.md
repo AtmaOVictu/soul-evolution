@@ -226,7 +226,33 @@ deciding whether it lands as clarity or excuse. The word-vector ψ_w
 
 ---
 
-## 036 — The relational model governs alliances/bonds — OPEN
+## 037 — The 5-step seal protocol is the dialogue mechanic — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Jewik Ethical Code, captured by Cline):** The 5-step seal
+protocol (I → You → Bridge → Verify → Seal) is the core **dialogue mechanic** —
+every meaningful exchange resolves through it, and a relation that fails the
+guard (κ/χ/μ/ℜ) cannot be sealed. Prohibition 12 (punishing doubt) is why the
+dvom axis is protected — the player is never punished for questioning.
+
+**Resolved:** NO — open.
+
+---
+
+## 038 — The gift dialogues are the scene template — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Darilni Dialogi, captured by Cline):** The gift dialogues (REK
+:: 3 lines + DAR) are the template for all in-game **dialogue scenes** — the
+player's exchanges resolve through a 3-line pattern ending in a reframe (the
+DAR). REK 03 ("I come with fire / I first set water") is the canonical
+first-encounter scene of the Fire/Water war.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
