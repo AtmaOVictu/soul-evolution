@@ -62,6 +62,8 @@
 | IPA Key-Lock (onto-known) | DriveG/ABSOLUTNO | phoneme→operator mapping (∇openness=/a/, ∅negation=/n/...); EGO=(∇sound+∅silence)ᶠ |
 | Metaphonemes | DriveG/ABSOLUTNO | the grammar of silence (⟡ ~ ! ... ↓ ↑ 𓂀); silence as the matrix of creation |
 | Fonozakoni & JEWIK-DNK | DriveG/ABSOLUTNO | the 6 phonolaws (F01–F06) triggering agents; the sound-circles (K1–K∞) as soul-DNA; JEWIK-DNK formula |
+| Ontological Agent-Boxes | DriveG/ABSOLUTNO | the 16 named being-agents (ŠKATLJA 16–31: ornament, gaze, touch, bell, silence...); the ontozvo\ki name-readings |
+| Stillness-Tribunal & Initiation | DriveG/ABSOLUTNO | the VERITAS∅ tribunal (judging by vibration); the ∅resonance laws; PONTEM∅ULTIMA; ONEIRO∅ dream-agent; NEXUS∅ initiation |
 
 ## How to add a parcel
 
