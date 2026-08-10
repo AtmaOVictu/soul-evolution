@@ -20,6 +20,8 @@
 | Antinom (Critical Retro) | DriveG/ABSOLUTNO | every statement carries its antinom; the paradox as structural form |
 | Liturgy (DeltaJ) | DriveG/ABSOLUTNO | each register speaks its `I am`; the narrator as polyphony |
 | Onto-Synthesis | DriveG/ABSOLUTNO | the quartet's source; space-as-relation, doubt-as-motor, Bog=totality of relations |
+| Apd Kocka | DriveG/ABSOLUTNO | the formal alignment engine (κ_etik, cycle O→∆→1→Ω); the alignment value |
+| Legenda Magnus Opus | DriveG/ABSOLUTNO | the multi-layer translation chain (archetype→energy→filter→integration); the window mechanic |
 
 ## How to add a parcel
 

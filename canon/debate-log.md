@@ -163,7 +163,35 @@ paradox.
 
 ---
 
-## 029 — "Bog = totality of relations" — the Absolute as the sum of relations — OPEN
+## 030 — κ_etik is the player's alignment score — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Apd Kocka, captured by Cline):** The ethical coefficient
+κ_etik ∈ [−1,1] (computed from truth/love/right/responsibility minus fear/
+greed/apathy) is a **quantifiable alignment score** — every act raises or
+lowers it, making "good/better/detriment" (scenario 008) a measurable dynamic.
+The reversal rule (if Δ<0, revert one phase with damping) may model "the feat
+becomes its own grey" — overcrowding alignment reverses it.
+
+**Resolved:** NO — open.
+
+---
+
+## 031 — The token-through-windows translation is the window mechanic — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Legenda Magnus Opus, captured by Cline):** The translation
+chain (archetype → energy → filter → integration) is the **core window
+mechanic** — the player reveals a token's truth by passing it through
+perspectives, each mutating it. This is "Many Windows of the Plane" (scenario
+014) made mechanical. The resonant filter (sphere) maps to the celestial
+registers (Aether = amplify, Metatime = transform).
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
