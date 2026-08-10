@@ -147,7 +147,25 @@ is a position, not a bystander.
 
 ---
 
-## 025 — CORRECTION: Dark takes Water, not Air — canon
+## 026 — The higher registers: Aether, Paradoxes, Metatime — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS (canon fragment from Luka, `[OPEN/LUKA]`).
+
+**Fragment:** Aether / paradoxes / metatime — three registers above the four
+elements.
+
+**Proposal (Cline):** (a) **Aether** = the fifth element, the celestial medium
+what stars are made of, the galaxy's substance. (b) **Paradoxes** = the
+reality-breaking registers (first: one cannot exist without the other; second:
+justice of duration) — generative tears, not errors. (c) **Metatime** = time
+above the born time, the observer-time of the cycle itself.
+
+**Question it leaves open:** Are these the Absolute's celestial registers (the
+windows at the galactic scale — see parcel-operativni-list), or a transcendent
+tier the player must understand but never directly enter?
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** CORRECTION (Luka's ruling, supersedes earlier Fire/Air pairing).

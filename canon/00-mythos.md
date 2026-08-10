@@ -158,6 +158,17 @@ what breaks reality when it finally arrives.
 
 *(Canon fragment `[OPEN/LUKA]` — full reading in `11-time-death-scales.md`.)*
 
+## The Higher Registers
+
+Above the four elements lie three higher registers: **Aether** (the fifth
+element, the celestial medium the stars burn in), **Paradoxes** (the
+reality-breaking tears — first: one cannot exist without the other; second:
+justice of duration), and **Metatime** (time above the born time, the
+observer-time of the cycle itself). These are the celestial tier — what the
+plane is *made of* beyond the war.
+
+*(Canon fragment `[OPEN/LUKA]` — full reading in `12-aether-paradox-metatime.md`.)*
+
 ---
 
 ## OPEN QUESTIONS (for debate)
