@@ -163,7 +163,19 @@ paradox.
 
 ---
 
-## 028 — The narrator is a polyphony, not a single voice — OPEN
+## 029 — "Bog = totality of relations" — the Absolute as the sum of relations — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from the Onto-Synthesis, captured by Cline):** The table's synthesis
+gives **Bog = totality of relations** — God is the sum of the plane's
+relations, not a separate being. This reframes the "Absolute" (the five
+positions from Operativni List) as the *sum of all relations*, and the higher
+registers (Aether/Paradoxes/Metatime) as *modes of that totality* rather than
+entities.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

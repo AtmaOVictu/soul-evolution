@@ -19,6 +19,7 @@
 | Topological Networks | DriveG/ABSOLUTNO | the DNK spiral + crack topology; the register-flow (Time → Personal Gate); the ring releases |
 | Antinom (Critical Retro) | DriveG/ABSOLUTNO | every statement carries its antinom; the paradox as structural form |
 | Liturgy (DeltaJ) | DriveG/ABSOLUTNO | each register speaks its `I am`; the narrator as polyphony |
+| Onto-Synthesis | DriveG/ABSOLUTNO | the quartet's source; space-as-relation, doubt-as-motor, Bog=totality of relations |
 
 ## How to add a parcel
 
