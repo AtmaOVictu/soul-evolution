@@ -29,6 +29,7 @@ func _initialize() -> void:
 	_test_vault_success()
 	_test_vault_coin_guard()
 	_test_vault_perception_does_not_change_odds()
+	_test_vault_records_multiple_draws()
 	_test_soul_stream_incarnation()
 	_report()
 	quit()
@@ -168,6 +169,27 @@ func _test_vault_coin_guard() -> void:
 	_assert(r["ok"] == false, "draw_from_machine refuses when coins_held < coin_value")
 	_assert(r.get("reason") == "no coin", "refusal reports reason 'no coin'")
 	_assert(v.souls.size() == 0, "a refused draw is not recorded")
+
+
+func _test_vault_records_multiple_draws() -> void:
+	# souls.size() should track successful draws exactly across repeated
+	# calls — growing by one per success, not at all on a refused draw.
+	var v = SoulVaultScript.new()
+	var expected_size := 0
+	for i in 15:
+		var r: Dictionary = v.draw_from_machine(1, 5, 100, 100)  # always affordable
+		_assert(r["ok"] == true, "draw_from_machine succeeds on repeated draws (trial %d)" % i)
+		expected_size += 1
+		_assert(v.souls.size() == expected_size, "souls.size() grows by 1 per successful draw (trial %d, got %d)" % [i, v.souls.size()])
+	# A refused draw (can't afford it) must not grow the vault further.
+	var refused: Dictionary = v.draw_from_machine(100, 5, 100, 100)
+	_assert(refused["ok"] == false, "an unaffordable draw is refused even after prior successes")
+	_assert(v.souls.size() == expected_size, "a refused draw does not grow souls.size()")
+	# Each recorded soul should carry a distinct soul id (from a distinct genome).
+	var ids := {}
+	for rec in v.souls:
+		ids[rec["id"]] = true
+	_assert(ids.size() == v.souls.size(), "each recorded soul has a distinct id")
 
 
 func _test_vault_perception_does_not_change_odds() -> void:

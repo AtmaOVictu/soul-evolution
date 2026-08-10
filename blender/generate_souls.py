@@ -146,8 +146,60 @@ def render_black_sprite() -> None:
 	bpy.ops.render.render(write_still=True)
 
 
+def render_window_frame() -> None:
+	# WINDOW FRAME — canon's per-element treasure-hoard art frame
+	# (canon/05-treasures.md:59-63, canon/00-mythos.md:95). Same shell-only
+	# philosophy as the soul sprites above: neutral grey, zero hue of its
+	# own. The quality tint (gold/silver/dull — vault_machine_ui.gd's
+	# _color_for_quality palette) is poured in at runtime via `modulate`
+	# (character_sheet.gd), not baked here.
+	clear_scene()
+	outer = 1.0
+	border = 0.16
+	depth = 0.14
+	bar_specs = [
+		((0.0, outer - border * 0.5, 0.0), (outer, border * 0.5, depth)),
+		((0.0, -(outer - border * 0.5), 0.0), (outer, border * 0.5, depth)),
+		((outer - border * 0.5, 0.0, 0.0), (border * 0.5, outer, depth)),
+		((-(outer - border * 0.5), 0.0, 0.0), (border * 0.5, outer, depth)),
+	]
+	bars = []
+	for loc, scl in bar_specs:
+		bpy.ops.mesh.primitive_cube_add(size=1.0, location=loc)
+		bar = bpy.context.object
+		bar.scale = scl
+		bpy.ops.object.transform_apply(location=True, rotation=False, scale=True)
+		bars.append(bar)
+
+	for bar in bars:
+		bar.select_set(True)
+	bpy.context.view_layer.objects.active = bars[0]
+	bpy.ops.object.join()
+	obj = bpy.context.object
+	obj.name = "WindowFrame"
+
+	bevel = obj.modifiers.new("Bevel", 'BEVEL')
+	bevel.width = 0.03
+	bevel.segments = 3
+	bpy.ops.object.modifier_apply(modifier="Bevel")
+	bpy.ops.object.shade_smooth()
+
+	mat = bpy.data.materials.new("WindowFrameMat")
+	mat.use_nodes = True
+	bsdf = mat.node_tree.nodes["Principled BSDF"]
+	bsdf.inputs["Base Color"].default_value = (0.5, 0.5, 0.5, 1.0)
+	bsdf.inputs["Roughness"].default_value = 0.45
+	bsdf.inputs["Emission Strength"].default_value = 0.0
+	obj.data.materials.append(mat)
+
+	_setup_sprite_camera_and_lights(ortho_scale=2.6)
+	_setup_sprite_render("window_frame")
+	bpy.ops.render.render(write_still=True)
+
+
 build_reference_scene()
 render_white_sprite()
 render_black_sprite()
+render_window_frame()
 print("=== SOUL ASSET PIPELINE COMPLETE ===")
-print("Sprites: white_soul.png, black_soul.png")
+print("Sprites: white_soul.png, black_soul.png, window_frame.png")
