@@ -1146,3 +1146,67 @@ The operators appear as articulation-values (/LE/, /D/, /n/, /„/=doubt-as-orie
 This is the math of the player's growth through dimensions.
 
 **Resolved:** NO — open.
+
+---
+
+## 075 — Windows (treasure-hoard art frames) implemented in the Soul Vault — BUILT, not LOCKED
+
+**Date:** 2026-08-10
+**Status:** BUILT, not LOCKED. This entry records what shipped in code, not a
+debated design — canon is being used as creative direction for an already-working
+system, per explicit instruction not to gate implementation on a lock.
+
+**Built (Claude):** The Soul Vault gumball machine (`scripts/soul_vault.gd`,
+`scripts/vault_machine_ui.gd`) now has a persistent visual gallery in the
+character sheet (`scripts/character_sheet.gd`) — every drawn soul gets a framed,
+quality-tinted entry with a small unlabeled procedural glyph, rather than only a
+one-shot draw animation. The frame asset (`assets/window_frame.png`) is rendered
+in Blender (`blender/generate_souls.py:render_window_frame`) as a neutral grey
+shell with no color of its own; the quality tint (gold/silver/dull, reusing
+`vault_machine_ui.gd`'s existing `_color_for_quality` palette) is poured in live
+via `modulate`, never baked — consistent with how the soul sprites already treat
+color as a runtime layer.
+
+**Grounded in:** `00-mythos.md:95`, `05-treasures.md:59-63` ("The windows are the
+treasure-hoards... to be hoarded, upgraded, traded"), `10-galaxy.md:37-45`
+("windows... are perspectives"), `03-scenarios/scn-009-the-exchange-of-treasures.md:30-31`.
+
+**Not yet built:** upgrading/trading windows, per-element framing (currently one
+neutral frame shape for all elements), any window beyond the vault's own draws.
+
+**Resolved:** NO — open for debate/lock. What's here is a first pass at the
+*display* half of "windows," not a ruling on the full economy `05-treasures.md`
+describes.
+
+---
+
+## 076 — The Grand Council (movement-lock, domination/split, Rebirth) implemented — BUILT, not LOCKED
+
+**Date:** 2026-08-10
+**Status:** BUILT, not LOCKED. Implements the cycle already reasoned out in
+`CRITICAL_BRIEF.md` §3/§8, not a new debated proposal.
+
+**Built (Claude):** `scripts/main.gd` now enforces the War → Greying → Council →
+Rebirth cycle as a rule, not narration only. Once `death_count` crosses
+`council_threshold`, movement locks (`battle_active = false`) and a modal
+(`scripts/council_ui.gd`) forces a choice between **domination** (30% of the
+larger army forcibly converted to the opposite polarity, paid *after* the
+choice) and **split** (15% of each army converted evenly, *up front*, same total
+tax, voluntary). Either choice triggers Rebirth: `world_color` halves (color
+reappears, doesn't vanish), neutron remnants clear, `death_count` resets, and a
+`feats_gained` counter increments — left inert in this pass, an explicit hook for
+a future feats/meta-cycle system rather than wired in now.
+
+**Grounded in:** `00-mythos.md:61-73` (the eternal cycle itself);
+`CRITICAL_BRIEF.md` §3 (domination vs. splitting, "both fail against the truth
+that one cannot exist without the other") and §8 (the specific asymmetric-tax
+mechanic this implements).
+
+**Not yet built:** feats actually affecting anything (e.g. widening the
+blindness formula from entry-adjacent concealment work); the Time-as-trader
+economy; the 12 axes. Numeric tax percentages and `council_threshold` are
+untuned starting points, not balance.
+
+**Resolved:** NO — open for debate/lock. What's here is a playable first pass at
+the mechanic `CRITICAL_BRIEF.md` already reasoned through, not a canon ruling on
+its final shape.
