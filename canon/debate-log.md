@@ -269,7 +269,33 @@ tone and trigger, and dialogue/self-care resolves through their syncs.
 
 ---
 
-## 047 — The meta-spiral is the core loop; emotions are agents — OPEN
+## 048 — The "Word as a primal No" is the founding claim — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from the author profile, captured by Cline):** "The Word as a primal
+No" is the single founding claim of the entire canon — the player's every word
+is simultaneously a negation (cut), the doubt (dvom) is the engine of meaning
+(the "symbolic Satan" as creative principle), and the whole game is the author's
+"living paradox" harmonizing yes and no.
+
+**Resolved:** NO — open.
+
+---
+
+## 049 — The Dawn myth is the becoming-a-myth template — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Luka_Arhetip_Zarja, captured by Cline):** The Dawn myth
+(flesh→archetype through the cut) is the canonical template for how beings
+become myths in the game — the cut frees, and the one who cuts becomes an
+archetype carried within. "In the body, a wound; in the spirit, breath; in the
+soul, freedom."
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
