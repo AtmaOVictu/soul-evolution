@@ -147,7 +147,25 @@ is a position, not a bystander.
 
 ---
 
-## 023 — The topologies define the player's cycle-path; the ring releases — OPEN
+## 024 — Time, Death, and the Missing Scales — canon fragment — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS (direct canon fragment from Luka, `[OPEN/LUKA]`).
+
+**Fragment:** When time is born, death starts beating (death is the depth of
+the drum). Time, death, and movement persist, each on its own pendulum swing.
+The tehtnica (scales) are still missing. The justice of duration belongs to
+everyone and at once to no one. A second paradox breaks reality.
+
+**Proposal (Cline):** Time's birth = death's beginning (death as time's depth).
+The trio (time/death/movement) is a companion register to the foundational
+quartet. The missing **tehtnica (scales)** is the register the plane lacks — the
+justice of duration that weighs fairly. Question: is the tehtnica the 4th
+element (Water, the weigher) or a separate justice register above the elements
+that Time uses at the Grand Council? The second paradox (justice = everyone's
+and no one's) is what breaks reality.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

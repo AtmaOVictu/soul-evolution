@@ -140,6 +140,17 @@ windows are the perspectives onto the plane.
 
 *(Full mapping in `10-galaxy.md`.)*
 
+## Time, Death, and the Missing Scales
+
+When time is born, death starts beating — **death is the depth of the drum.**
+Time, death, and movement persist, each on its own pendulum swing. The
+**tehtnica (scales) are still missing** — the balance that would weigh duration
+fairly. The justice of duration belongs to everyone and at once to no one. A
+**second paradox** — the justice of duration being everyone's and no one's — is
+what breaks reality when it finally arrives.
+
+*(Canon fragment `[OPEN/LUKA]` — full reading in `11-time-death-scales.md`.)*
+
 ---
 
 ## OPEN QUESTIONS (for debate)
@@ -156,3 +167,5 @@ windows are the perspectives onto the plane.
 - [ ] Is Earth's system Steadiness/Grounding, and is Water (fourth) to come?
 - [ ] Does the player ever leave "our part" to see the galactic map, or are
       other systems only glimpsed through other windows?
+- [ ] Is the tehtnica (scales) the fourth element (Water) or a justice register
+      above the elements?
