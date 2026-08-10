@@ -117,7 +117,21 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 014 — The plane is galactic; maps/perspective are integral — OPEN
+## 015 — The foundational quartet: space · time · movement · doubt — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Luka, captured by Cline):** Within the plane, four registers are
+foundational — **space, time, movement, and doubt** — and **doubt is the
+essential (bitna) one**. This is the canon's ordering of the axes: the quartet
+grounds the plane; doubt is its load-bearing member. Grounded in the axiom
+"only in doubt is movement possible" and the ¬ (negation/doubt) operator.
+
+**Question it leaves open:** Does the quartet *hierarchize* the 12 axes (dvom
+as root, others derived), or is doubt only the essential emblem of a balanced
+set?
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
