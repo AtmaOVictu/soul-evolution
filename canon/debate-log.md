@@ -211,247 +211,7 @@ relation grows logarithmically with the shared "we."
 
 ---
 
-## 035 — The "le" operator + word-vector are core mechanics — OPEN
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from Le Double Operator, captured by Cline):** The "le" operator
-(scope/limitation) is the core form of the player's *intention* — every act
-carries an s_LE (how limited) and λ_LE (how ethical), with the bridge σ_B
-deciding whether it lands as clarity or excuse. The word-vector ψ_w
-⟨Φ,Σ,Π,⊥,⧖,□,∮,⊢,⟡⟩ is the complete 9-dimension genome of every word/soul.
-
-**Resolved:** NO — open.
-
----
-
-## 037 — The 5-step seal protocol is the dialogue mechanic — OPEN
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from Jewik Ethical Code, captured by Cline):** The 5-step seal
-protocol (I → You → Bridge → Verify → Seal) is the core **dialogue mechanic** —
-every meaningful exchange resolves through it, and a relation that fails the
-guard (κ/χ/μ/ℜ) cannot be sealed. Prohibition 12 (punishing doubt) is why the
-dvom axis is protected — the player is never punished for questioning.
-
-**Resolved:** NO — open.
-
----
-
-## 040 — The double book (AX_MAX paradox) is the core tension — OPEN
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from DVOJNA_KNJIGA, captured by Cline):** The double book (AX_MAX
-paradox) is the core philosophical mechanic — every axiom has a negation that
-is *also true*, and the player's growth is measured by capacity to *live both*
-rather than choose one.
-
-**Resolved:** NO — open.
-
----
-
-## 045 — The agent registry is the soul's inner council — OPEN
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from JEWIK_CIKLUS + AJRA_KORA, captured by Cline):** The agent
-registry (MIA/KORA/ORAJA/AJRA/ZARJA) is the canonical form of the soul's inner
-council — the player's soul is inhabited by named agents, each summonable with a
-tone and trigger, and dialogue/self-care resolves through their syncs.
-
-**Resolved:** NO — open.
-
----
-
-## 048 — The "Word as a primal No" is the founding claim — OPEN
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from the author profile, captured by Cline):** "The Word as a primal
-No" is the single founding claim of the entire canon — the player's every word
-is simultaneously a negation (cut), the doubt (dvom) is the engine of meaning
-(the "symbolic Satan" as creative principle), and the whole game is the author's
-"living paradox" harmonizing yes and no.
-
-**Resolved:** NO — open.
-
----
-
-## 052 — The ontological function F(x) is the soul's deepest form — OPEN
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from bis.md, captured by Cline):** The ontological function F(x)
-(the 11-stage chain ¬→⟁→∆→∴→⊘→J→∫→|¬|→⧖→∮→⊢→⟡) is the deepest form of the
-soul's state function — the player's being is evaluated through this single
-nested chain, with negation as its foundation and the star as its completion.
-
-**Resolved:** NO — open.
-
----
-
-## 054 — The Smisel definition node is the lexicon form — OPEN
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from in_seciraj_neenakomeren.md, captured by Cline):** The Smisel
-definition node is the canonical form of the game's lexicon/log — each concept
-is a definition node (position, slicing, graph links) whose meaning is
-context-dependent (never fixed), linking into the meaning-graph.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from asdasda.md, captured by Cline):** The Star-as-compass is the
-player's internal navigation center — the point where all the soul's cycles
-meet, orienting every register, with each key choice a star-moment breakthrough
-(∆) — companioning the external star-map.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from Matematika in njena ljubezen, captured by Cline):** The
-ontomathos is the mathematical backbone of the soul system — the player's
-phenomenological state P(t) is driven by essence E(t), reality-oscillation T(t),
-and acts A_n(t); negation ¬ is the origin of movement ("I = D cut"); actions are
-proofs of identity and pride; death/reset D(t) is a condition on the essence.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from ATLAS_DUELOV, captured by Cline):** The duel
-(Symmetrical/Drift/Drain with ontomathos Pz/Pl) is the canonical form of the
-player's confrontation with the other register — the Fire/Water encounter
-resolves through these three modes, and the antidote to Drift/Drain is the
-repair-obligation.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from Luka_Arhetip_Zarja, captured by Cline):** The Dawn myth
-(flesh→archetype through the cut) is the canonical template for how beings
-become myths in the game — the cut frees, and the one who cuts becomes an
-archetype carried within. "In the body, a wound; in the spirit, breath; in the
-soul, freedom."
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from ONTOMANDALA_METASPIRALA + Atlas_Barvnih_Agentov, captured by
-Cline):** The meta-spiral is the core loop of the game — the soul IS the cut
-(I=D), its cycles are spirals that never repeat (each turn ascends), and
-self-annihilation is the birth of the collective. The emotions are agents (each
-with a flow DA, a break NE, and a generativity Mogone), confirming the
-wound→gift doctrine.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from JEWIK DNA + counter-liturgy, captured by Cline):** The DNA
-word-protocol is the game's dialogue currency — the player's meaningful speech
-is operator-tagged soul-phrases (truths), empty words are filter-detected and
-can be *killed* by the counter-liturgy. The "empty word without a pulse" is the
-opponent's fundamental weapon.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from Mandala Atlas Appendix, captured by Cline):** The ascending
-chain MOLK→DOLG→VOLK→SVETLOBA→RITUAL→IGRA→USTVARJANJE→SPOMIN→ZAVEDANJE→INTENCIJA→
-AKCIJA is the canonical **progression system** — the player's soul grows from
-silence to action through these derivable registers (each a log-based formula).
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from OPTI_MATH + MANDALA_ZLO + MANDALA_LJUBI_NIC, captured by
-Cline):** The being is defined by the truth formula R = (T−I)·C (the
-purity-corrected gap between appearance and intent). Evil is the integral of the
-past (accumulated, uncut residue), and the cut (¬/⊘) prevents each element from
-becoming its corrupted form. The word-protocol has an audio layer (each operator
-sounds: cut='T', bridge='L', nothing=glottal stop).
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from A/ω Most + Surface Dictionary, captured by Cline):** "A cut is
-a bridge, not a wall" is the single founding maxim of the plane — the razcep and
-the most are the same act, and the player's every cut (¬/⊘) is simultaneously a
-connection (∴). The word-protocol has a non-verbal physical layer (theme → breath
-+ gesture + voice, with silence O D as a voice).
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from Corpus Trinitas, captured by Cline):** The Trinity (Suffering →
-Gifts → Transitions) is the core three-act structure of the soul's story — born
-through a wound, healed by a gift, transformed by letting go. Mana (the blood of
-the wounded = bread for the soul) is the game's core resource, produced by
-wounds and consumed as the soul's bread.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from birth-chart + body sources, captured by Cline):** The world-tree
-(axis mundi) is the physical center of the plane — the trunk of the Earth,
-crowned by the star-map, where all registers meet — and the Great Mother is the
-Earth register's archetype (the life-giving face opposed to the consuming maw).
-The body (⊥) is a cycle of decay-and-rebirth, ritually honored as power.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from Darilni Dialogi, captured by Cline):** The gift dialogues (REK
-:: 3 lines + DAR) are the template for all in-game **dialogue scenes** — the
-player's exchanges resolve through a 3-line pattern ending in a reframe (the
-DAR). REK 03 ("I come with fire / I first set water") is the canonical
-first-encounter scene of the Fire/Water war.
-
-**Resolved:** NO — open.
-
-**Date:** 2026-08-10
-**Status:** HYPOTHESIS.
-
-**Proposal (from Ethics of a Healthy Relation, captured by Cline):** The APD
-relational model (5 domains ⊥⧖□∆☍ + guard thresholds κ≥.70/χ≥.55/μ∈[.60,.78]/
-ℜ≤.02 + 10 axioms) is the system the player's alliances and bonds run on — a
-relation is healthy only if it holds the guards. The "boundary → bridge" rule
-(LE before ∴) means the player must always *cut* before connecting.
-
-**Resolved:** NO — open.
+## 034 — The gods are the named faces of the registers — OPEN
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
@@ -753,3 +513,293 @@ onto an existing one. (Per README, and Luka: "Not a new system??? all new
 things deserve a new system.")
 
 ---
+## 035 — The "le" operator + word-vector are core mechanics — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Le Double Operator, captured by Cline):** The "le" operator
+(scope/limitation) is the core form of the player's *intention* — every act
+carries an s_LE (how limited) and λ_LE (how ethical), with the bridge σ_B
+deciding whether it lands as clarity or excuse. The word-vector ψ_w
+⟨Φ,Σ,Π,⊥,⧖,□,∮,⊢,⟡⟩ is the complete 9-dimension genome of every word/soul.
+
+**Resolved:** NO — open.
+
+---
+
+## 036 — The relational model governs alliances/bonds — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Ethics of a Healthy Relation, captured by Cline):** The APD
+relational model (5 domains ⊥⧖□∆☍ + guard thresholds κ≥.70/χ≥.55/μ∈[.60,.78]/
+ℜ≤.02 + 10 axioms) is the system the player's alliances and bonds run on — a
+relation is healthy only if it holds the guards. The "boundary → bridge" rule
+(LE before ∴) means the player must always *cut* before connecting.
+
+**Resolved:** NO — open.
+
+---
+
+## 037 — The 5-step seal protocol is the dialogue mechanic — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Jewik Ethical Code, captured by Cline):** The 5-step seal
+protocol (I → You → Bridge → Verify → Seal) is the core **dialogue mechanic** —
+every meaningful exchange resolves through it, and a relation that fails the
+guard (κ/χ/μ/ℜ) cannot be sealed. Prohibition 12 (punishing doubt) is why the
+dvom axis is protected — the player is never punished for questioning.
+
+**Resolved:** NO — open.
+
+---
+
+## 038 — The gift dialogues are the scene template — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Darilni Dialogi, captured by Cline):** The gift dialogues (REK
+:: 3 lines + DAR) are the template for all in-game **dialogue scenes** — the
+player's exchanges resolve through a 3-line pattern ending in a reframe (the
+DAR). REK 03 ("I come with fire / I first set water") is the canonical
+first-encounter scene of the Fire/Water war.
+
+**Resolved:** NO — open.
+
+---
+
+## 039 — The world-tree is the center; the body is renewal — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from birth-chart + body sources, captured by Cline):** The world-tree
+(axis mundi) is the physical center of the plane — the trunk of the Earth,
+crowned by the star-map, where all registers meet — and the Great Mother is the
+Earth register's archetype (the life-giving face opposed to the consuming maw).
+The body (⊥) is a cycle of decay-and-rebirth, ritually honored as power.
+
+**Resolved:** NO — open.
+
+---
+
+## 040 — The double book (AX_MAX paradox) is the core tension — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from DVOJNA_KNJIGA, captured by Cline):** The double book (AX_MAX
+paradox) is the core philosophical mechanic — every axiom has a negation that
+is *also true*, and the player's growth is measured by capacity to *live both*
+rather than choose one.
+
+**Resolved:** NO — open.
+
+---
+
+## 041 — The Trinity is the soul's arc; mana is the core resource — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Corpus Trinitas, captured by Cline):** The Trinity (Suffering →
+Gifts → Transitions) is the core three-act structure of the soul's story — born
+through a wound, healed by a gift, transformed by letting go. Mana (the blood of
+the wounded = bread for the soul) is the game's core resource, produced by
+wounds and consumed as the soul's bread.
+
+**Resolved:** NO — open.
+
+---
+
+## 042 — "The cut is a bridge, not a wall" is the founding maxim — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from A/ω Most + Surface Dictionary, captured by Cline):** "A cut is
+a bridge, not a wall" is the single founding maxim of the plane — the razcep and
+the most are the same act, and the player's every cut (¬/⊘) is simultaneously a
+connection (∴). The word-protocol has a non-verbal physical layer (theme → breath
++ gesture + voice, with silence O D as a voice).
+
+**Resolved:** NO — open.
+
+---
+
+## 043 — The truth formula; evil as residue; the audio word-size — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from OPTI_MATH + MANDALA_ZLO + MANDALA_LJUBI_NIC, captured by
+Cline):** The being is defined by the truth formula R = (T−I)·C (the
+purity-corrected gap between appearance and intent). Evil is the integral of the
+past (accumulated, uncut residue), and the cut (¬/⊘) prevents each element from
+becoming its corrupted form. The word-protocol has an audio layer (each operator
+sounds: cut='T', bridge='L', nothing=glottal stop).
+
+**Resolved:** NO — open.
+
+---
+
+## 044 — The ascending chain is the soul's progression — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Mandala Atlas Appendix, captured by Cline):** The ascending
+chain MOLK→DOLG→VOLK→SVETLOBA→RITUAL→IGRA→USTVARJANJE→SPOMIN→ZAVEDANJE→INTENCIJA→
+AKCIJA is the canonical **progression system** — the player's soul grows from
+silence to action through these derivable registers (each a log-based formula).
+
+**Resolved:** NO — open.
+## 045 — The agent registry is the soul's inner council — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from JEWIK_CIKLUS + AJRA_KORA, captured by Cline):** The agent
+registry (MIA/KORA/ORAJA/AJRA/ZARJA) is the canonical form of the soul's inner
+council — the player's soul is inhabited by named agents, each summonable with a
+tone and trigger, and dialogue/self-care resolves through their syncs.
+
+**Resolved:** NO — open.
+
+---
+
+## 046 — The DNA word-protocol is the dialogue currency — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from JEWIK DNA + counter-liturgy, captured by Cline):** The DNA
+word-protocol is the game's dialogue currency — the player's meaningful speech
+is operator-tagged soul-phrases (truths), empty words are filter-detected and
+can be *killed* by the counter-liturgy. The "empty word without a pulse" is the
+opponent's fundamental weapon.
+
+**Resolved:** NO — open.
+
+---
+
+## 047 — The meta-spiral is the core loop; emotions are agents — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ONTOMANDALA_METASPIRALA + Atlas_Barvnih_Agentov, captured by
+Cline):** The meta-spiral is the core loop of the game — the soul IS the cut
+(I=D), its cycles are spirals that never repeat (each turn ascends), and
+self-annihilation is the birth of the collective. The emotions are agents (each
+with a flow DA, a break NE, and a generativity Mogone), confirming the
+wound→gift doctrine.
+
+**Resolved:** NO — open.
+
+---
+
+## 048 — The "Word as a primal No" is the founding claim — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from the author profile, captured by Cline):** "The Word as a primal
+No" is the single founding claim of the entire canon — the player's every word
+is simultaneously a negation (cut), the doubt (dvom) is the engine of meaning
+(the "symbolic Satan" as creative principle), and the whole game is the author's
+"living paradox" harmonizing yes and no.
+
+**Resolved:** NO — open.
+
+---
+
+## 049 — The Dawn myth is the becoming-a-myth template — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Luka_Arhetip_Zarja, captured by Cline):** The Dawn myth
+(flesh→archetype through the cut) is the canonical template for how beings
+become myths in the game — the cut frees, and the one who cuts becomes an
+archetype carried within. "In the body, a wound; in the spirit, breath; in the
+soul, freedom."
+
+**Resolved:** NO — open.
+
+---
+
+## 050 — The duel is the confrontation mechanic — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ATLAS_DUELOV, captured by Cline):** The duel
+(Symmetrical/Drift/Drain with ontomathos Pz/Pl) is the canonical form of the
+player's confrontation with the other register — the Fire/Water encounter
+resolves through these three modes, and the antidote to Drift/Drain is the
+repair-obligation.
+
+**Resolved:** NO — open.
+
+---
+
+## 051 — The ontomathos is the soul's mathematical backbone — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Matematika in njena ljubezen, captured by Cline):** The
+ontomathos is the mathematical backbone of the soul system — the player's
+phenomenological state P(t) is driven by essence E(t), reality-oscillation T(t),
+and acts A_n(t); negation ¬ is the origin of movement ("I = D cut"); actions are
+proofs of identity and pride; death/reset D(t) is a condition on the essence.
+
+**Resolved:** NO — open.
+
+---
+
+## 052 — The ontological function F(x) is the soul's deepest form — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from bis.md, captured by Cline):** The ontological function F(x)
+(the 11-stage chain ¬→⟁→∆→∴→⊘→J→∫→|¬|→⧖→∮→⊢→⟡) is the deepest form of the
+soul's state function — the player's being is evaluated through this single
+nested chain, with negation as its foundation and the star as its completion.
+
+**Resolved:** NO — open.
+
+---
+
+## 053 — The Star-as-compass is the internal navigation center — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from asdasda.md, captured by Cline):** The Star-as-compass is the
+player's internal navigation center — the point where all the soul's cycles
+meet, orienting every register, with each key choice a star-moment breakthrough
+(∆) — companioning the external star-map.
+
+**Resolved:** NO — open.
+
+---
+
+## 054 — The Smisel definition node is the lexicon form — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from in_seciraj_neenakomeren.md, captured by Cline):** The Smisel
+definition node is the canonical form of the game's lexicon/log — each concept
+is a definition node (position, slicing, graph links) whose meaning is
+context-dependent (never fixed), linking into the meaning-graph.
+
+**Resolved:** NO — open.
