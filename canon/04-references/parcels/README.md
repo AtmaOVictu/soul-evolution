@@ -31,6 +31,8 @@
 | Darilni Dialogi | DriveG/ABSOLUTNO | the gift dialogues (3 lines + DAR); REK 03 = Fire/Water boundary |
 | World-Tree & Great Mother | DriveG/ABSOLUTNO | the axis mundi / Earth center; the Earth archetypes |
 | Body as Renewal | DriveG/ABSOLUTNO | the ⊥ body axis as cycle of decay-and-rebirth; "red tents" |
+| Double Book | DriveG/ABSOLUTNO | the AX_MAX paradox; every axiom has its true negation |
+| Corpus Trinitas | DriveG/ABSOLUTNO | the Trinity (Suffering→Gifts→Transitions); mana = blood as bread |
 
 ## How to add a parcel
 

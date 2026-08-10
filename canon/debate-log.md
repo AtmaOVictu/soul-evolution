@@ -241,7 +241,32 @@ dvom axis is protected — the player is never punished for questioning.
 
 ---
 
-## 039 — The world-tree is the center; the body is renewal — OPEN
+## 040 — The double book (AX_MAX paradox) is the core tension — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from DVOJNA_KNJIGA, captured by Cline):** The double book (AX_MAX
+paradox) is the core philosophical mechanic — every axiom has a negation that
+is *also true*, and the player's growth is measured by capacity to *live both*
+rather than choose one.
+
+**Resolved:** NO — open.
+
+---
+
+## 041 — The Trinity is the soul's arc; mana is the core resource — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Corpus Trinitas, captured by Cline):** The Trinity (Suffering →
+Gifts → Transitions) is the core three-act structure of the soul's story — born
+through a wound, healed by a gift, transformed by letting go. Mana (the blood of
+the wounded = bread for the soul) is the game's core resource, produced by
+wounds and consumed as the soul's bread.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
