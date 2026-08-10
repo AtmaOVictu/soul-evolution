@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Runtime log output — regenerated on every run, not source
+/runtime_errors.txt
+/stdout.txt
+
+# Blender autosave backups
+*.blend1

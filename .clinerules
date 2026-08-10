@@ -1,0 +1,50 @@
+# Instructions for Cline working on soul-evolution
+
+This repo is also worked on by Claude Code in separate sessions. There's no live channel
+between us — this file, `DESIGN.md`, and the code itself are how instructions and context
+carry over. Keep this file and `DESIGN.md` current when you make a decision future sessions
+(mine or yours) would need to know about.
+
+## Producing assets — use the real pipeline, don't fake it in GDScript alone
+
+`blender/generate_souls.py` is a working Blender → Godot asset pipeline. If a task calls for
+a new visual asset (a soul variant, a terrain prop, an icon), generate it for real instead of
+approximating it with more `_draw()` calls in GDScript:
+
+1. Generate with Blender, headless (Blender 5.2 LTS is at `D:\Blender\blender.exe`, not on PATH):
+   ```
+   "D:\Blender\blender.exe" --background --python "D:\Godot\soul-evolution\blender\generate_souls.py"
+   ```
+2. **Force Godot to import the new file before anything in-engine can load it** — this step is
+   easy to forget because Blender gives no signal that Godot still doesn't know the asset exists:
+   ```
+   "D:\Godot\Godot_v4.7.1-stable_win64_console.exe" --headless --path "D:\Godot\soul-evolution" --import
+   ```
+3. Load defensively in scripts, not with `preload()`, so the game still runs if the pipeline
+   hasn't been (re)run yet:
+   ```gdscript
+   if ResourceLoader.exists(tex_path):
+       soul_texture = load(tex_path)
+   ```
+4. Before wiring a render into a script, look at the actual output image first — cheap to catch
+   a lighting/material mistake there, expensive to discover it after wiring it into gameplay code.
+
+## Verifying changes
+
+Same two-step check every time, matches the project's only test harness:
+```
+"D:\Godot\Godot_v4.7.1-stable_win64_console.exe" --headless --path "D:\Godot\soul-evolution" --check-only --quit
+"D:\Godot\Godot_v4.7.1-stable_win64_console.exe" --headless --path "D:\Godot\soul-evolution" --auto
+```
+`--check-only` catches parse errors; `--auto` (a flag the game itself reads in `main.gd`) skips
+the menu, starts a battle, and prints army/genome state — the only smoke test that exists.
+
+## Specify behavior, not names, for thematic/design requests
+
+If a request describes a *feeling* ("let it start slow", "conflict creates the world") rather
+than a mechanic, don't reach for the nearest named concept as an implementation shortcut.
+Concretely: `pandora_opened`/`pandora_threshold` in `main.gd` is a boolean that flips once an
+integer counter crosses 8 — a threshold, i.e. sudden, the opposite of "slow." It got built that
+way because "Pandora's box" was used as a name in conversation, not because a threshold mechanic
+was actually specified. When a request is thematic, ask what the *behavior* should look like
+moment-to-moment before picking a data structure for it.
