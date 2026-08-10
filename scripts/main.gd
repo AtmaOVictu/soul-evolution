@@ -162,6 +162,28 @@ func _auto_test() -> void:
 	else:
 		print("[TEST]  (skipped: no neutron remnant existed yet at the 15s mark)")
 
+	print("[TEST] --- Force field push on neutron remnant (direct verification) ---")
+	# Same reasoning as the block above: --auto never holds SPACE, so the
+	# force-field push added to _check_force_field() is otherwise
+	# unexercised. Set the force-field state directly on active_body and
+	# call _check_force_field() once rather than waiting for real input.
+	var ff_target: Node2D = null
+	for r in neutron_remnants:
+		if is_instance_valid(r):
+			ff_target = r
+			break
+	if ff_target and active_body and is_instance_valid(active_body):
+		active_body.position = ff_target.position - Vector2(40.0, 0.0)
+		active_body.force_field_active = true
+		active_body.force_field_strength = 1.0
+		var ff_pos_before: Vector2 = ff_target.position
+		_check_force_field()
+		active_body.force_field_active = false
+		active_body.force_field_strength = 0.0
+		_t_assert(ff_target.position != ff_pos_before, "force field push moved the neutron remnant's position")
+	else:
+		print("[TEST]  (skipped: no valid neutron remnant existed at this point)")
+
 	print("[TEST] --- Soul Vault ---")
 	var dust_before_pull := dust
 	_open_gumball_machine()
@@ -862,6 +884,23 @@ func _check_force_field() -> void:
 			var vp: Vector2 = get_viewport_rect().size
 			rect.position.x = clampf(rect.position.x, 0.0, vp.x - rect.size.x)
 			rect.position.y = clampf(rect.position.y, 0.0, vp.y - rect.size.y)
+	# Wreckage verb 3/3: push. Reclaim (_crack_open_nearby_remnants) and
+	# degrade (_check_neutron_remnant_collisions) already exist elsewhere;
+	# this closes the loop so force fields shove neutron remnants around
+	# like any other mass, not just obstacles. Not clamped to the viewport:
+	# remnants are world-space wreckage positioned within the hex arena
+	# (HexGrid.ARENA_SIZE), not viewport-relative UI rects like obstacle_rects,
+	# and the push magnitudes here mirror the obstacle loop above, which
+	# in practice keeps remnants well inside the arena.
+	for rem in neutron_remnants:
+		if not is_instance_valid(rem):
+			continue
+		var dist2: float = soul.position.distance_to(rem.position)
+		if dist2 < ff_range and dist2 > 1.0:
+			var mass2: float = 2.0 + float(rem.max_hp) * 1.5
+			var push_dir2: Vector2 = (rem.position - soul.position).normalized()
+			var push_force2: float = soul.force_field_strength * 60.0 / (mass2 * maxf(dist2 * 0.01, 0.5))
+			rem.position += push_dir2 * push_force2 * dt
 
 
 func _check_soul_obstacle_collision() -> void:
