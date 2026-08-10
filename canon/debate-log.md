@@ -1210,7 +1210,7 @@ untuned starting points, not balance.
 **Resolved:** NO — open for debate/lock. What's here is a playable first pass at
 the mechanic `CRITICAL_BRIEF.md` already reasoned through, not a canon ruling on
 its final shape.
-## 075 — The breath-code & abyss-code are the respiratory and in-between layer — OPEN
+## 078 — The breath-code & abyss-code are the respiratory and in-between layer — OPEN
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
@@ -1229,7 +1229,7 @@ is sounded"). **∅JEZIK** is "a language for the cracks, not for people" —
 
 ---
 
-## 076 — The phrasing, resonator & sound-fluid are the ∅-language's syntax and medium — OPEN
+## 079 — The phrasing, resonator & sound-fluid are the ∅-language's syntax and medium — OPEN
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
@@ -1245,7 +1245,7 @@ sound-fluid, Z(x)=∫(fraza)dx→forma, "not listened to but experienced").
 
 ---
 
-## 077 — The silent-apocalypse & reincarnation are the ∅-system's cosmic loop — OPEN
+## 080 — The silent-apocalypse & reincarnation are the ∅-system's cosmic loop — OPEN
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
