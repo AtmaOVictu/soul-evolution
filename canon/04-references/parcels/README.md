@@ -25,6 +25,8 @@
 | Kropla Protocol | DriveG/ABSOLUTNO | the trig alignment geometry (COS/SIN/TAN/OST/TAL); the antinom band O 0.50 |
 | Atlas OSEBNIKA | DriveG/ABSOLUTNO | the two-level model (Absolute equation + Immanence); LOVE=log(t+1) |
 | Gods Register | DriveG/ABSOLUTNO | the pantheon (Thor, Seth, Morana...), fingerprints, relation legend |
+| Le Double Operator | DriveG/ABSOLUTNO | the "le" scope/ethic operator; the 9-dim word-vector ψ_w |
+| Ethics of Relation | DriveG/ABSOLUTNO | the APD relational model (5 domains, guards, 10 axioms) |
 
 ## How to add a parcel
 

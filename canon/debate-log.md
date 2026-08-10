@@ -211,7 +211,33 @@ relation grows logarithmically with the shared "we."
 
 ---
 
-## 034 — The gods are the named faces of the registers — OPEN
+## 035 — The "le" operator + word-vector are core mechanics — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Le Double Operator, captured by Cline):** The "le" operator
+(scope/limitation) is the core form of the player's *intention* — every act
+carries an s_LE (how limited) and λ_LE (how ethical), with the bridge σ_B
+deciding whether it lands as clarity or excuse. The word-vector ψ_w
+⟨Φ,Σ,Π,⊥,⧖,□,∮,⊢,⟡⟩ is the complete 9-dimension genome of every word/soul.
+
+**Resolved:** NO — open.
+
+---
+
+## 036 — The relational model governs alliances/bonds — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Ethics of a Healthy Relation, captured by Cline):** The APD
+relational model (5 domains ⊥⧖□∆☍ + guard thresholds κ≥.70/χ≥.55/μ∈[.60,.78]/
+ℜ≤.02 + 10 axioms) is the system the player's alliances and bonds run on — a
+relation is healthy only if it holds the guards. The "boundary → bridge" rule
+(LE before ∴) means the player must always *cut* before connecting.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
