@@ -17,6 +17,8 @@
 | Manifest of Non-Neutrality | DriveG/ABSOLUTNO | the ethics of speech; narrator's charter; "speech is no and therefore ∫ possibility" |
 | Operativni List Absolut | DriveG/ABSOLUTNO | the Absolute's five positions (VEnNO, LE, SAMO, ENO, PRISOTNO) as master registers |
 | Topological Networks | DriveG/ABSOLUTNO | the DNK spiral + crack topology; the register-flow (Time → Personal Gate); the ring releases |
+| Antinom (Critical Retro) | DriveG/ABSOLUTNO | every statement carries its antinom; the paradox as structural form |
+| Liturgy (DeltaJ) | DriveG/ABSOLUTNO | each register speaks its `I am`; the narrator as polyphony |
 
 ## How to add a parcel
 

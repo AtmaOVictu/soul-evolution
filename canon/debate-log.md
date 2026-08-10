@@ -147,7 +147,34 @@ is a position, not a bystander.
 
 ---
 
-## 026 — The higher registers: Aether, Paradoxes, Metatime — OPEN
+## 027 — The antinom: every truth carries its hidden opposite — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from the Critical Retro Edition, captured by Cline):** Every canon
+truth in the game carries a hidden **antinom** (the paired opposite truth) —
+the structural form of the paradox register. Finding the antinom could be a
+core discovery mechanic (the character sheet's opaque symbols each carry a
+hidden opposite truth). Grounds the antinom as the structural form of the
+paradox.
+
+**Resolved:** NO — open.
+
+---
+
+## 028 — The narrator is a polyphony, not a single voice — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Manifest DeltaJ, captured by Cline):** Each register speaks its
+own `I am` line (Guardian of Time: "I was before time existed"; Witness: "I
+witness, even if it is not understood"). The narrator may be a **polyphony** —
+the narration shifts voice by register — rather than a single Time-voice. This
+is the liturgical layer of the plane.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS (canon fragment from Luka, `[OPEN/LUKA]`).
