@@ -879,10 +879,12 @@ func _refresh_camera() -> void:
 func _update_army_ai(delta: float) -> void:
 	if not battle_active:
 		return
-	var enemies: Array = black_army if soul_stream.current_body and soul_stream.current_body.polarity == 0 else white_army
-	var allies: Array = white_army if soul_stream.current_body and soul_stream.current_body.polarity == 0 else black_army
-	# Update each alive soul
+	# Enemies must be relative to each army's OWN side, not the player's side —
+	# a single global "enemies" reused for both armies meant black souls were
+	# handed black_army as their own enemy list (searching for "nearest enemy"
+	# within their own side), and their targeting was effectively meaningless.
 	for army in [white_army, black_army]:
+		var enemies: Array = black_army if army == white_army else white_army
 		for i in range(army.size() - 1, -1, -1):
 			var sn: Node2D = army[i]
 			if not is_instance_valid(sn):
@@ -946,11 +948,16 @@ func _ai_think(sn: Node2D, enemies: Array, delta: float) -> void:
 		if army[i] == sn:
 			sn_index = i
 			break
-	var is_companion: bool = sn_index >= 1 and sn_index <= 3
-	var is_tactical: bool = sn_index > 3
+	# A soul is only a "companion" (follows the player as leader) if it's on
+	# the player's own side — there is no player-analog on the enemy side for
+	# them to rally around, so opposite-polarity index-1..3 souls fall through
+	# to tactical behavior instead of sitting idle.
+	var same_side_as_player: bool = active_body and is_instance_valid(active_body) and sn.polarity == active_body.polarity
+	var is_companion: bool = sn_index >= 1 and sn_index <= 3 and same_side_as_player
+	var is_tactical: bool = sn_index > 3 or (sn_index >= 1 and sn_index <= 3 and not same_side_as_player)
 
 	# --- COMPANIONS: follow player closely, fight when enemies near ---
-	if is_companion and active_body and is_instance_valid(active_body) and sn != active_body:
+	if is_companion and sn != active_body:
 		var to_player: Vector2 = active_body.position - sn.position
 		var dist: float = to_player.length()
 		# Find nearest enemy

@@ -111,6 +111,25 @@ fabric when neither mode sees the other; color is its resonance made visible.
 
 *(Full mapping in `07-fabric.md`.)*
 
+## The Star Map
+
+The plane is a **moving system around a star**. Light comes from directions,
+not from everywhere. The Fire (Illumination) system is a **directional-light
+map**: entities in space amplify or diminish the light that sweeps them. The
+light is an **aftershock** — the resonance of how it was before Time traded
+the sand and breathed time into clay.
+
+*(Full mapping in `08-star-map.md`.)*
+
+## Earth — the third playable element
+
+Beneath Light and Dark, there is **Earth** — the clay Time gave life. Earth
+holds; it is the stable ground the forces engulf. The player may align as
+Earth and play **against the engulfing** — resisting, enduring, being the
+ground the war is fought over.
+
+*(Full mapping in `09-earth.md`.)*
+
 ---
 
 ## OPEN QUESTIONS (for debate)
@@ -124,3 +143,4 @@ fabric when neither mode sees the other; color is its resonance made visible.
 - [ ] What does Time hoard as its own treasure beyond duration?
 - [ ] Is access to the six systems gated by alignment, or open to all?
 - [ ] Is the fabric a playable system or pure substrate?
+- [ ] Is Earth's system Steadiness/Grounding, and is Water (fourth) to come?

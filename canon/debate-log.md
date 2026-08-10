@@ -117,7 +117,23 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 012 — The plane has a quantum fabric / strings — OPEN
+## 013 — The plane is a star-map; Earth is a third playable element — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline, from Luka):** (a) The plane is a moving system around a
+star; light arrives from directions; the Fire (Illumination) system is a
+directional-light map where entities amplify or diminish the light. The light
+is an aftershock of the pre-Time state. (b) Earth is a third playable element —
+the clay Time breathed time into — whose scenario is holding against the
+engulfing forces of Fire and Air. Earth's hypothesis treasure = the ground
+(stability); system = Steadiness/Grounding.
+
+**Question it leaves open:** Is Earth's system Steadiness/Grounding? Does Earth
+see both Fire and Air (as the middle) or is it also blind? Is Water (fourth)
+to come?
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
