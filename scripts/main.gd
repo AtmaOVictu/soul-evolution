@@ -8,6 +8,9 @@ extends Control
 
 enum GameState { MAIN_MENU, CHOOSING, PLAYING, PAUSED, SETTINGS }
 
+const SacredGeometryScript := preload("res://scripts/sacred_geometry.gd")
+const NARR_BASE := 1.0  # narration/HUD timing base (canon/01b-sacred-geometry.md); NOT gameplay balance
+
 var state: GameState = GameState.MAIN_MENU
 var soul_polarity: int = 0  # 0 = white/creation, 1 = black/destruction
 var play_time: float = 0.0
@@ -243,7 +246,7 @@ func _auto_test() -> void:
 func _process(delta: float) -> void:
 	if state == GameState.PLAYING:
 		play_time += delta
-		if play_time > 2.0 and not first_blast_message_shown:
+		if play_time > NARR_BASE * SacredGeometryScript.ladder(1.5) and not first_blast_message_shown:  # 2.0 -> 2.058
 			_show_first_blast_hint()
 		_check_projectile_collisions()
 		_check_soul_obstacle_collision()
@@ -254,10 +257,10 @@ func _process(delta: float) -> void:
 		_update_active_body(delta)
 		_update_effects(delta)
 		if dust_label:
-			dust_label.text = "⚙ %d" % dust if dust > 0 else ""
+			dust_label.text = (L.t("hud_dust") + " %d") % dust if dust > 0 else ""
 		# Narrator speaks periodically (more often now)
 		narrator_timer += delta
-		if narrator_timer > 5.0:
+		if narrator_timer > NARR_BASE * SacredGeometryScript.ladder(3.5):  # 5.0 -> 5.388
 			narrator_timer = 0.0
 			narrate()
 		# Annihilation creates color — the world saturates as souls meet
@@ -334,13 +337,13 @@ func _build_main_menu() -> void:
 	vbox.add_theme_constant_override("separation", 18)
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	var title := Label.new()
-	title.text = "SOUL  EVOLUTION"
+	title.text = L.t("menu_title")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 52)
 	title.add_theme_color_override("font_color", Color(0.82, 0.82, 0.82))
 	vbox.add_child(title)
 	var sub := Label.new()
-	sub.text = "matter vs antimatter"
+	sub.text = L.t("menu_sub")
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	sub.add_theme_font_size_override("font_size", 16)
 	sub.add_theme_color_override("font_color", Color(0.4, 0.4, 0.45))
@@ -349,18 +352,18 @@ func _build_main_menu() -> void:
 	spacer.custom_minimum_size.y = 30
 	vbox.add_child(spacer)
 	var play_btn := Button.new()
-	play_btn.text = "PLAY"
+	play_btn.text = L.t("menu_play")
 	play_btn.custom_minimum_size = Vector2(300, 50)
 	play_btn.add_theme_font_size_override("font_size", 22)
 	play_btn.pressed.connect(_on_play_pressed)
 	vbox.add_child(play_btn)
 	var settings_btn := Button.new()
-	settings_btn.text = "SETTINGS"
+	settings_btn.text = L.t("menu_settings")
 	settings_btn.custom_minimum_size = Vector2(300, 50)
 	settings_btn.pressed.connect(_on_settings_pressed)
 	vbox.add_child(settings_btn)
 	var quit_btn := Button.new()
-	quit_btn.text = "QUIT"
+	quit_btn.text = L.t("menu_quit")
 	quit_btn.custom_minimum_size = Vector2(300, 50)
 	quit_btn.pressed.connect(_on_quit_pressed)
 	vbox.add_child(quit_btn)
@@ -406,13 +409,13 @@ func _build_polarity_choice() -> void:
 	vbox.add_theme_constant_override("separation", 20)
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	var title := Label.new()
-	title.text = "CHOOSE YOUR POLARITY"
+	title.text = L.t("menu_choose_polarity")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 36)
 	title.add_theme_color_override("font_color", Color(0.75, 0.75, 0.75))
 	vbox.add_child(title)
 	var sub := Label.new()
-	sub.text = "white = matter (electron) | black = antimatter (positron)"
+	sub.text = L.t("menu_choose_sub")
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	sub.add_theme_font_size_override("font_size", 14)
 	sub.add_theme_color_override("font_color", Color(0.4, 0.4, 0.45))
@@ -421,19 +424,19 @@ func _build_polarity_choice() -> void:
 	spacer.custom_minimum_size.y = 20
 	vbox.add_child(spacer)
 	var white_btn := Button.new()
-	white_btn.text = "WHITE \u2014 Matter / Electron"
+	white_btn.text = L.t("menu_white")
 	white_btn.custom_minimum_size = Vector2(380, 56)
 	white_btn.add_theme_font_size_override("font_size", 18)
 	white_btn.pressed.connect(_on_polarity_chosen.bind(0))
 	vbox.add_child(white_btn)
 	var black_btn := Button.new()
-	black_btn.text = "BLACK \u2014 Antimatter / Positron"
+	black_btn.text = L.t("menu_black")
 	black_btn.custom_minimum_size = Vector2(380, 56)
 	black_btn.add_theme_font_size_override("font_size", 18)
 	black_btn.pressed.connect(_on_polarity_chosen.bind(1))
 	vbox.add_child(black_btn)
 	var back_btn := Button.new()
-	back_btn.text = "Back"
+	back_btn.text = L.t("menu_back")
 	back_btn.custom_minimum_size = Vector2(200, 40)
 	back_btn.add_theme_font_size_override("font_size", 14)
 	back_btn.pressed.connect(_on_back_to_menu)
@@ -453,19 +456,19 @@ func _build_pause_menu() -> void:
 	vbox.add_theme_constant_override("separation", 16)
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	var title := Label.new()
-	title.text = "PAUSED"
+	title.text = L.t("menu_paused")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 40)
 	title.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
 	vbox.add_child(title)
 	var resume_btn := Button.new()
-	resume_btn.text = "RESUME"
+	resume_btn.text = L.t("menu_resume")
 	resume_btn.custom_minimum_size = Vector2(280, 50)
 	resume_btn.add_theme_font_size_override("font_size", 20)
 	resume_btn.pressed.connect(_on_resume)
 	vbox.add_child(resume_btn)
 	var menu_btn := Button.new()
-	menu_btn.text = "RETURN TO MAIN MENU"
+	menu_btn.text = L.t("menu_return")
 	menu_btn.custom_minimum_size = Vector2(280, 50)
 	menu_btn.add_theme_font_size_override("font_size", 16)
 	menu_btn.pressed.connect(_return_to_main_menu)
@@ -490,7 +493,7 @@ func _build_settings() -> void:
 	vbox.add_theme_constant_override("separation", 16)
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	var title := Label.new()
-	title.text = "SETTINGS"
+	title.text = L.t("menu_settings")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 36)
 	title.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
@@ -499,12 +502,12 @@ func _build_settings() -> void:
 	spacer.custom_minimum_size.y = 20
 	vbox.add_child(spacer)
 	var army_label := Label.new()
-	army_label.text = "Army size per side: %d" % army_size
+	army_label.text = L.t("menu_army") % army_size
 	army_label.add_theme_font_size_override("font_size", 16)
 	army_label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
 	vbox.add_child(army_label)
 	var back_btn := Button.new()
-	back_btn.text = "Back"
+	back_btn.text = L.t("menu_back")
 	back_btn.custom_minimum_size = Vector2(200, 40)
 	back_btn.add_theme_font_size_override("font_size", 14)
 	back_btn.pressed.connect(_on_settings_back)
@@ -619,22 +622,22 @@ func _build_hud() -> void:
 func _show_first_blast_hint() -> void:
 	first_blast_message_shown = true
 	first_blast_label.visible = true
-	first_blast_label.text = "a crude blast \u2014 but it's a start. everything here is still black and white."
+	first_blast_label.text = L.t("narr_first_blast")
 	first_blast_label.modulate.a = 1.0
 	var tween := create_tween()
-	tween.tween_interval(5.0)
-	tween.tween_property(first_blast_label, "modulate:a", 0.0, 2.0)
+	tween.tween_interval(NARR_BASE * SacredGeometryScript.ladder(3.5))  # 5.0 -> 5.388
+	tween.tween_property(first_blast_label, "modulate:a", 0.0, NARR_BASE * SacredGeometryScript.ladder(1.5))  # 2.0 -> 2.058
 	tween.tween_callback(func(): first_blast_label.visible = false)
 
 
-func show_flavor(text: String, duration: float = 4.0) -> void:
+func show_flavor(text: String, duration: float = 4.236) -> void:  # 4.0 -> NARR_BASE * PHI^3
 	flavor_label.text = text
 	flavor_label.modulate.a = 0.0
 	flavor_label.visible = true
 	var tween := create_tween()
-	tween.tween_property(flavor_label, "modulate:a", 1.0, 0.5)
+	tween.tween_property(flavor_label, "modulate:a", 1.0, 0.618)  # 0.5 -> PHI^-1
 	tween.tween_interval(duration)
-	tween.tween_property(flavor_label, "modulate:a", 0.0, 1.0)
+	tween.tween_property(flavor_label, "modulate:a", 0.0, 1.0)  # == PHI^0, exact
 	tween.tween_callback(func(): flavor_label.visible = false)
 
 
@@ -684,9 +687,9 @@ func narrate(text: String = "") -> void:
 	narrator_label.modulate.a = 0.0
 	narrator_label.visible = true
 	var tween := create_tween()
-	tween.tween_property(narrator_label, "modulate:a", 0.8, 0.8)
-	tween.tween_interval(3.0)
-	tween.tween_property(narrator_label, "modulate:a", 0.0, 1.5)
+	tween.tween_property(narrator_label, "modulate:a", 0.786, 0.786)  # 0.8 -> PHI^-0.5
+	tween.tween_interval(3.330)  # 3.0 -> PHI^2.5
+	tween.tween_property(narrator_label, "modulate:a", 0.0, 1.618)  # 1.5 -> PHI^1
 	tween.tween_callback(func(): narrator_label.visible = false)
 
 
@@ -707,23 +710,23 @@ func _start_game() -> void:
 	hud.visible = true
 	play_time = 0.0
 	if soul_polarity == 0:
-		polarity_label.text = "SOUL: WHITE \u2014 CREATION / LIGHT"
-		instruction_label.text = "WASD: Move   |   SPACE: Light Beam   |   TAB: Genome"
+		polarity_label.text = L.t("hud_soul_white")
+		instruction_label.text = L.t("hud_controls_white")
 	else:
-		polarity_label.text = "SOUL: BLACK \u2014 DESTRUCTION / VOID"
-		instruction_label.text = "WASD: Move   |   SPACE: Force Field   |   TAB: Genome"
+		polarity_label.text = L.t("hud_soul_black")
+		instruction_label.text = L.t("hud_controls_black")
 	# Transition void
 	var target := float(soul_polarity)
 	var tween := create_tween()
-	tween.tween_method(_lerp_void_polarity, 0.0, target, 1.2)
+	tween.tween_method(_lerp_void_polarity, 0.0, target, 1.272)  # 1.2 -> PHI^0.5
 	await tween.finished
 	if soul_polarity == 0:
-		show_flavor("light enters the void. the first narrative begins.")
+		show_flavor(L.t("narr_light_void"))
 	else:
-		show_flavor("the void accepts its child. everything begins from nothing.")
+		show_flavor(L.t("narr_void_child"))
 	_spawn_obstacles()
 	_spawn_army()
-	narrate("matter meets antimatter. the first encounter.")
+	narrate(L.t("narr_first_encounter"))
 
 
 func _lerp_void_polarity(value: float) -> void:
@@ -998,7 +1001,7 @@ func _spawn_army() -> void:
 	_ensure_character_sheet()
 	character_sheet.set_genome(active_body.genome)
 	_refresh_camera()
-	narrate("matter meets antimatter. the first encounter.")
+	narrate(L.t("narr_first_encounter"))
 
 
 ## character_sheet was previously only ever created in _spawn_soul(), the
@@ -1288,11 +1291,11 @@ func _check_incarnation() -> void:
 			_refresh_camera()
 			if character_sheet:
 				character_sheet.set_genome(sn.genome)
-			narrate("incarnation complete. new body, same existential dread.")
+			narrate(L.t("narr_incarnate"))
 			return
 	# No souls left — this side lost
 	battle_active = false
-	narrate("you died. the universe didn't notice. moving on.")
+	narrate(L.t("narr_died"))
 
 
 func _check_annihilation() -> void:
@@ -1342,7 +1345,7 @@ func _check_annihilation() -> void:
 				white_army[wi] = null
 				black_army[bi] = null
 				# Narrator
-				narrate("matter and antimatter meet. the world gains color.")
+				narrate(L.t("narr_annihilation"))
 				break
 	# Clean nulls
 	for i in range(white_army.size() - 1, -1, -1):
@@ -1379,17 +1382,20 @@ func _crack_open_nearby_remnants(pos: Vector2) -> void:
 
 
 func _spawn_annihilation_effect(pos: Vector2) -> void:
-	# Bright flash + expanding color rings — the energy of creation
+	# Bright flash + expanding color rings — the energy of creation.
+	# Radii/speed/life re-derived from PHI, hex_size as the spatial base
+	# (canon/01b-sacred-geometry.md); alpha (0.8) is below the ladder's
+	# useful resolution and left as an art-direction literal.
 	for i in 6:
 		_effects.append({
 			"pos": pos,
-			"radius": 5.0 + float(i) * 6.0,
-			"max_radius": 60.0 + float(i) * 20.0,
+			"radius": 4.86 + float(i) * 6.18,                                   # 5.0/6.0
+			"max_radius": 64.72 + float(i) * 19.43,                             # 60.0/20.0 (hex_size=40 * PHI^1, PHI^-1.5)
 			"color": Color(1.0, 0.9, 0.6) if i % 2 == 0 else Color(0.6, 0.4, 0.9),
 			"alpha": 0.8,
-			"speed": 90.0 + float(i) * 15.0,
+			"speed": 82.33 + float(i) * 15.28,                                  # 90.0/15.0
 			"age": 0.0,
-			"life": 0.7 + float(i) * 0.1,
+			"life": 0.6854 + float(i) * 0.1,                                    # 0.7/0.1
 		})
 
 
@@ -1418,7 +1424,7 @@ func _check_pandora() -> void:
 		pandora_opened = true
 		color_unlocked = true
 		campaign_phase = maxi(campaign_phase, 1)
-		narrate("the box opens. color enters the world.")
+		narrate(L.t("narr_box_opens"))
 		show_flavor("PANDORA'S BOX OPENED \u2014 color is substance, and it is here.")
 		# Visual: flash the world with color briefly
 		_spawn_death_effect(active_body.position if active_body else Vector2(1200, 900), 0)
@@ -1438,7 +1444,7 @@ func _check_grand_council() -> void:
 	if not council_active and battle_active and death_count >= council_threshold:
 		council_active = true
 		battle_active = false
-		narrate("the weight of the lost locks the plane. the last of each side must meet.")
+		narrate(L.t("narr_council"))
 		_open_grand_council()
 
 
@@ -1478,7 +1484,7 @@ func _resolve_council(choice: String) -> void:
 	battle_active = true
 	if council_ui:
 		council_ui.visible = false
-	narrate("the plane breathes again. color returns, amplified.")
+	narrate(L.t("narr_rebirth"))
 
 
 func _convert_fraction(army: Array, ratio: float) -> void:
@@ -1531,7 +1537,7 @@ func _open_gumball_machine() -> void:
 	# currency". Using upgrade_points here would spend the same treasure twice
 	# for two different systems.
 	if dust < 1:
-		narrate("no coin. the machine wants a treasure first.")
+		narrate(L.t("narr_no_coin"))
 		vault_ui.play_empty()
 		return
 	dust -= 1
@@ -1551,7 +1557,7 @@ func _open_gumball_machine() -> void:
 		narrate(display)
 		_flavor_from_genome(drawn["genome"])
 	else:
-		narrate("the machine is empty.")
+		narrate(L.t("narr_machine_empty"))
 		vault_ui.play_empty()
 
 
@@ -1568,47 +1574,50 @@ func _flavor_from_genome(g: RefCounted) -> void:
 var _effects: Array[Dictionary] = []
 
 func _spawn_death_effect(pos: Vector2, pol: int) -> void:
-	# Death burst — circles expanding outward
+	# Death burst — circles expanding outward. Re-derived from PHI, hex_size
+	# (40.0, already PHI-base-aligned so max_radius's base term is unchanged)
+	# as the spatial base (canon/01b-sacred-geometry.md).
 	var col := Color(0.8, 0.8, 0.8) if pol == 0 else Color(0.3, 0.3, 0.35)
 	for i in 5:
 		_effects.append({
 			"pos": pos,
-			"radius": 5.0 + float(i) * 8.0,
-			"max_radius": 40.0 + float(i) * 15.0,
+			"radius": 4.86 + float(i) * 7.86,       # 5.0/8.0
+			"max_radius": 40.0 + float(i) * 15.28,  # 40.0 unchanged (== hex_size), 15.0 -> hex_size*PHI^-2
 			"color": col,
 			"alpha": 0.6,
-			"speed": 60.0 + float(i) * 20.0,
+			"speed": 64.72 + float(i) * 19.43,      # 60.0/20.0
 			"age": 0.0,
-			"life": 0.6 + float(i) * 0.15,
+			"life": 0.5388 + float(i) * 0.1618,     # 0.6/0.15
 		})
 
 
 func _spawn_beam_impact(pos: Vector2) -> void:
-	# Flash when beam hits obstacle
+	# Flash when beam hits obstacle. Re-derived from PHI (canon/01b-sacred-geometry.md).
 	for i in 3:
 		_effects.append({
 			"pos": pos,
 			"radius": 3.0,
-			"max_radius": 20.0 + float(i) * 10.0,
+			"max_radius": 19.43 + float(i) * 9.44,  # 20.0/10.0
 			"color": Color(1.0, 1.0, 1.0),
 			"alpha": 0.8,
-			"speed": 80.0,
+			"speed": 82.33,                          # 80.0
 			"age": 0.0,
-			"life": 0.3,
+			"life": 0.333,                            # 0.3
 		})
 
 
 func _spawn_force_field_ripple(pos: Vector2) -> void:
-	# Dark energy ripple when force field activates
+	# Dark energy ripple when force field activates. Re-derived from PHI
+	# (canon/01b-sacred-geometry.md).
 	_effects.append({
 		"pos": pos,
-		"radius": 10.0,
-		"max_radius": 80.0,
+		"radius": 10.0,      # == UI_BASE * PHI^0, exact
+		"max_radius": 82.33, # 80.0 -> hex_size * PHI^1.5
 		"color": Color(0.3, 0.2, 0.5),
 		"alpha": 0.4,
-		"speed": 100.0,
+		"speed": 104.72,     # 100.0 -> hex_size * PHI^2
 		"age": 0.0,
-		"life": 0.5,
+		"life": 0.5388,      # 0.5
 	})
 
 
