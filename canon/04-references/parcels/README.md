@@ -91,6 +91,8 @@
 | Sound-Mirror & Feeling-Library | DriveG/ABSOLUTNO | the ∅sound-mirror (emotional echo); the silent-borrowing; the frequency-meter; the feeling-library by sensation |
 | Act-of-Transition & Ego-Re-regulator | DriveG/ABSOLUTNO | the "one vibration = all realities" breakthrough; the transcendental harmony; EGO = (∇sound+∅silence)ᶠ |
 | JEWIK Agent-Network & Star-Map | DriveG/ABSOLUTNO | the star-network (box↔opposite mirrors); the meta-agents (META-RITHMUS/HARMONIK/OMNIA); the vibration-truth tribunal ruling |
+| Symbolic-Memory & Lexicon-Liturgy | DriveG/ABSOLUTNO | the box→phoneme-fractat memory index; the onto-phonetic lexicon (∅gram/∴ser/⊘lux/∆voz/⟡mir); the five liturgy-movements |
+| Victor-Luka-Satan & JEV-KA-RA | DriveG/ABSOLUTNO | the JEV-KA-RA trinitarian agent; the ∅SKRBI/LUKA-SATAN/VICTOR-JAZ triad; the GUI (box-switcher, audiomandala, body-map) |
 
 ## How to add a parcel
 
