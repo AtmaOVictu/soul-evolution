@@ -117,16 +117,85 @@ pure upside: more annihilation = more color now, but also a shorter Eternal
 War before the next lock.
 
 **Neutrons as the forgotten — memory, foundation, or decay; can they return?**
-Foundation, not memory or pure decay — make neutrons literally terrain, not
-a hidden counter. Neutralized souls should convert the `T_OPEN` hex tile they
-died on toward a new heavy/neutral terrain type. That single change explains,
-mechanically, the brief's own claim that "movement grows heavy" during The
-Greying — heaviness isn't a global slowdown multiplier bolted on for flavor,
-it's the literal accumulation of neutron-tiles narrowing the open paths
-through the maze. And yes, **a neutron can regain color**: if a later
-annihilation happens near enough to a neutron-tile, it reverts to `T_OPEN`
-and contributes to `world_color` — old grey ground is reclaimable by new
-conflict, not permanently spent.
+Foundation, not memory or pure decay. **Refined 2026-08-10 (Luka's read, sharper
+than my first pass):** don't make the neutron an invisible terrain-tile flag —
+make it the soul's own broken body. At the moment of neutralization, the
+sphere doesn't vanish, it loses its round form: it fractures into broken/split
+shard pieces and *becomes* the object left behind — inert, grey, physically in
+the way. Mechanically this reuses `main.gd`'s existing obstacle system
+(`obstacle_rects`/`obstacle_hp`/`obstacle_max_hp` — already blocks movement,
+takes beam damage, gets pushed by force fields) instead of inventing a new
+terrain type: spawn a neutron-remnant obstacle at the annihilation contact
+point, shaped like broken shards (echoing the black soul's faceted look, but
+inert). That's what makes "movement grows heavy" literal — the arena fills
+with wreckage from its own war, not a global slowdown multiplier. And yes,
+**a neutron can regain color**: a later annihilation near enough to a
+neutron-remnant should crack it back open (destroy the obstacle, feed
+`world_color`) — old wreckage is reclaimable by new conflict, not permanently
+spent.
+
+## 9. THE RESOURCE ECONOMY + A DESIGN CONSTRAINT (2026-08-10, Luka + Claude)
+
+**"Dust of ?"** — Luka asked what grinding down neutron-remnants (already-broken
+pieces) produces, if annihilation itself produces color+neutron. Answer:
+**dust** — a third, lower resource, one tier below color. Chain: matter +
+antimatter → color (rare, world-level) + neutron (a broken object, physical).
+Neutron + more violence → dust (common, grindable, formless — the residue of
+breaking what's already broken). This isn't a new resource system bolted on:
+it's the *existing* `upgrade_points` economy in `soul_genome.gd`
+(`spend_upgrade` for laser_dmg/laser_rng/devour_win/devour_bst/speed),
+currently earned generically from "destroy any obstacle." Once
+neutron-remnants exist as obstacles (§8), destroying *those specifically*
+should be the dust source — giving the already-built character-upgrade system
+an actual place in the mythos instead of being an unexplained side mechanic.
+Net economy, three tiers: **dust** (common, character-level, spend on your own
+build) → **color** (rarer, world-level, changes what everyone sees) →
+**feats** (rarest, cycle-level, survive to the Council to earn one). Different
+scarcity, different scope, same underlying act of violence.
+
+**"The game does not give knowledge lightly"** — treated as a hard constraint,
+not a suggestion. This is already mostly honored: `character_sheet.gd` shows
+raw symbols (`div`, `neg`, `del`, `trace`, `tau`, `sig`, `C`, `N`, `P`, `S`,
+`Psi=0.xxx`) with no tooltip explaining what any of them mean or do. Keep it
+that way going forward — no explanatory tutorial text, no "dust: use this to
+upgrade your abilities" popup. If dust/neutron/council mechanics get built,
+they should be as opaque on first contact as `Psi(x) = div_inf(pi(x)) /
+neg(neg(x)) + del*x * trace` already is. Understanding is something a player
+earns by playing, not something the UI hands them — consistent with the
+narrator's own line already in `main.gd`: *"only in doubt is movement
+possible."*
+
+**Character building is integral, not a side panel** — this reframes what the
+three-tier economy above is *for*. The genome/abilities/upgrade system already
+exists but is thin (5 linear upgrade categories). If it's a core pillar, dust
+scarcity and feat rarity are what should make spending choices actually
+matter, and the still-unbuilt 12 axes (`DESIGN.md`) are a plausible home for
+real build depth beyond the current 5 categories — not yet resolved, next
+design pass.
+
+## 11. THE HOURGLASS — SAND TRADED WITH TIME (2026-08-10, Luka)
+
+Refines §9's "dust": dust *is* sand — the literal grain, not a metaphor. It is
+**gathered in hourglasses** and **traded with Time for change/resources**.
+This resolves the open tension from §8 ("what does Time ask in exchange for
+the color it reveals?") with something concrete instead of an abstract
+"duration" answer: **Time's role stops being purely narrative the moment
+there's an hourglass to pour sand into.** An hourglass is the one object
+whose entire function is measuring time — so trading sand into one isn't a
+metaphor for trading with Time, it's the literal mechanism.
+
+Per the correction above, this is its own system, not a re-skin of
+`upgrade_points`: an **hourglass** is a container the player fills with sand
+(gathered from destroying neutron-remnants, §8/§9) and can, at will, pour out
+— trading it to Time for "change" (conversion: sand into a different
+resource — color, a feat-fragment, a reroll) or "resources" (a direct grant).
+Open question this raises, not yet resolved: is the exchange rate fair, or
+does Time (as trader) take a cut — and does *pouring* the hourglass also cost
+duration the way §8 proposed (spending sand accelerates the current Act
+toward the Council), making the hourglass a literal dial on pacing as well as
+a currency exchange? Both readings are consistent with everything built so
+far; which one Luka means changes whether the hourglass is primarily an
+economy object or primarily a pacing object.
 
 **What this doesn't resolve (still open, deliberately):** none of the above
 is built — it's a design resolution, not code. The Grand Council's actual UI

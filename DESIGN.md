@@ -78,6 +78,19 @@ DEX→speed · LUK→probability.
 - Fixed a real bug where every soul in both armies read the player's raw
   WASD/SPACE input (not just the controlled one) — movement/abilities are now
   gated behind `is_active`, set only on the player's current body
+- **Neutron remnants + dust (the third state, built for real, not just
+  designed)** — `scripts/neutron_remnant.gd`: annihilation now spawns a
+  broken-shard physical object at the contact point, not just an abstract
+  counter. It blocks movement (wreckage narrows the arena — "movement grows
+  heavy" is now literal, not a slowdown multiplier), takes beam damage, and
+  yields **dust** on destruction — a new resource, its own system, not folded
+  into `substance`/`upgrade_points` (see CRITICAL_BRIEF.md §9's correction on
+  this). A later annihilation near an existing remnant cracks it back open,
+  feeding `world_color` again — reclaimed, not permanently spent. Verified
+  end-to-end via `--auto`: annihilation → remnant spawns → beam destroys it →
+  dust flows (`neutron_remnants=1` → fire → `neutron_remnants=0, dust=2`).
+  Status: CANDIDATE — shipped and proven once, not yet reused/reinforced by a
+  second, independent play session.
 
 ## THE CYCLE, THE THIRD STATE, AND THE META (see `CRITICAL_BRIEF.md`)
 Distilled 2026-08-10 (Cline) and re-reasoned (Claude, same date) — full detail,
@@ -99,13 +112,18 @@ doesn't get lost to context; short version:
   Time takes in the perception-trade, and what a neutron is.
 
 ## NOT YET BUILT (the narrative heart — next priority)
-1. **Time as narrator/trader** — the narrator gains a trading role.
+1. **Time as narrator/trader** — the narrator gains a trading role; the
+   hourglass (`CRITICAL_BRIEF.md` §11) is the concrete mechanic proposed.
 2. **Monochrome-as-blindness** — light and dark literally cannot see each
    other's substance until color emerges.
-3. **Three-state physics** — annihilation produces neutrons as well as color;
-   grey accumulates from neutralized pairs instead of being a default state.
-4. **The Grand Council** — movement-lock at high neutron density, last-members
+3. **The Grand Council** — movement-lock at high neutron-remnant density
+   (built, §above — remnants already block movement), last-members
    negotiation, domination/splitting choice, rebirth with a feat each.
-5. **The 12 axes** as realms/mechanics from the corpus.
-6. **The windows** — art from the corpus, hoarded/upgraded/traded by Time.
-7. **Word-protocol** — each soul carries a word from the corpus.
+4. **Tile-color protection** — souls above 90% health deepen the color of the
+   hex they occupy; deeper tiles protect/buff whoever stands on them.
+5. **Fire/Air/Spirit/alignment** — an elemental layer alongside polarity;
+   Spirit as an always-present (not event-triggered) field; player alignment
+   (separate from polarity) determines whether it's a boon or a detriment.
+6. **The 12 axes** as realms/mechanics from the corpus.
+7. **The windows** — art from the corpus, hoarded/upgraded/traded by Time.
+8. **Word-protocol** — each soul carries a word from the corpus.

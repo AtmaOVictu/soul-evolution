@@ -1,0 +1,87 @@
+# 00 — The Master Mythos
+
+> **STATUS: OPEN FOR REVIEW** — v0.01. Map the operators→elements→spirit before
+> treating any of this as load-bearing. See `debate-log.md` entry 001.
+
+## The primeval division
+
+Before the plane, there was **Light** and **Dark**, and they fought for space.
+Neither could hold the whole; space had to be divided. So the **Grand
+Compromise** was struck:
+
+- **Light gained FIRE.** *(ref: `04-references/eng-shit.md` — "As LIGHT — I
+  shine in the cracks, not to heal, but to reveal, to slice through the dark.")*
+- **Dark gained AIR.** *(ref: `04-references/zlo.md` — "evil doesn't originate
+  from him directly, but arises in his silence" — the air is the medium of
+  absence.)*
+
+Fire and Air are the two faces of the plane's substance. Neither alone is
+whole; neither can exist without the other.
+
+## Spirit
+
+**Both Light and Dark make SPIRIT, and Spirit is always present.**
+
+Spirit is the *third* thing that neither produces alone — what arises in the
+space between Fire and Air when they act upon each other. This is the
+load-bearing wall: the game's "one cannot exist without the other" is not
+narration, it is the physics of Spirit.
+
+*(ref: `04-references/operators.md` — the LE axiom: "the word is not a means
+but an ontological cut"; Spirit is the LE cut between Fire and Air.)*
+
+## Time — the narrator and the trader
+
+Time facilitated the fight. Time did not take a side. Time is:
+
+- **The narrator** — the voice that names what Fire and Air do to each other.
+- **The trader** — the hand that exchanges value between them.
+
+Time never creates; it reveals and it prices. What it reveals is **color
+(substance)**. What it prices is **duration** — the faster you reveal color,
+the faster the current age ends. *(ref: `CRITICAL_BRIEF.md` §8, "Time as
+trader — it takes duration.")*
+
+## The blindness
+
+**Light notices only what is Light's. Dark notices only what is Dark's.**
+
+Each side is structurally blind to the other's value. This blindness *is* the
+monochrome: the plane is grey not because color is absent, but because neither
+side can perceive what belongs to the other. Color appears when Time
+facilitates perception — when Light finally sees Dark's value, and vice versa.
+
+## The eternal cycle
+
+The cosmos breathes in four acts:
+
+1. **The Eternal War** — Fire and Air clash; annihilation produces **color**
+   (substance) and **neutrons** (the broken, neutral residue).
+2. **The Greying** — neutrons accumulate; the plane becomes heavy with its own
+   wreckage. Movement slows.
+3. **The Grand Council** — the accumulated weight locks motion. The last of
+   each side are forced to meet. They choose — domination or splitting — and
+   both fail against the truth: one cannot exist without the other.
+4. **The Rebirth** — color reappears on the grand map. Each side gains a
+   **feat**. The fight amplifies. The grind continues.
+
+## Alignment
+
+The player chooses an alignment (White/Light/Fire or Black/Dark/Air). Alignment
+is **not** good-vs-evil. It is a modifier: an act aligned with the moment is
+**good**, an act that harmonizes both is **better**, an act against the moment
+is a **detriment**. The same act changes value by alignment and circumstance.
+
+*(ref: `04-references/txt.md` axiom — "space is the condition of exchange;
+time is the condition of change.")*
+
+---
+
+## OPEN QUESTIONS (for debate)
+
+- [ ] Does Spirit map to a *resource* (third currency), or to the *perception*
+      that ends the blindness?
+- [ ] Fire=∇/✡ and Air=¬/∆ — is this the right operator mapping, or do the
+      elements map differently?
+- [ ] Is the player's alignment a *static choice* or a *drift* that can shift
+      across cycles?

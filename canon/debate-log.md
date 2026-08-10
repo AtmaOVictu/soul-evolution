@@ -1,0 +1,84 @@
+# Debate Log — canon decisions
+
+> **STATUS: append-only.** Every canon decision is recorded here. A claim is not
+> canon until it has an entry. Entries are dated. Nothing is deleted; revisions
+> are new entries.
+
+---
+
+## 001 — The primeval division (Fire/Air) — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS, not locked.
+
+**Proposal (Cline):** Light gained FIRE, Dark gained AIR, as the Grand
+Compromise for space. Fire maps to operators ∇ + ✡; Air maps to ¬ + ∆;
+Spirit is the LE cut between them.
+
+**Grounded in:** `04-references/eng-shit.md` ("As LIGHT — I shine in the
+cracks..."), `04-references/zlo.md` ("evil... arises in his silence"),
+`04-references/operators.md` (the ∇ ¬ ∆ ✡ equation).
+
+**Opposed by:** (pending Luka's reading)
+**Resolved:** NO — open for debate.
+
+---
+
+## 002 — Spirit is always present — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline):** "Both Light and Dark make Spirit" means Spirit is the
+third register neither alone produces — the shared output of Fire and Air
+acting together. Spirit is always present (not generated, not destroyed —
+manifest).
+
+**Question it leaves open:** Is Spirit a *resource* (a third currency) or the
+*perception* that ends the mutual blindness?
+
+**Resolved:** NO — open.
+
+---
+
+## 003 — Alignment is a modifier, not morality — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline):** The player's alignment (White/Fire or Black/Air) is not
+good-vs-evil. It is a modifier: an act that matches the moment is **good**; one
+that harmonizes both elements is **better**; one against the moment is a
+**detriment**. The same act changes value by alignment and circumstance.
+
+**Grounded in:** the standing design — "the player's alignment makes it good
+better or a detriment" (Luka), and the mythos that one cannot exist without
+the other.
+
+**Question:** Is alignment a static choice or a drift across cycles?
+
+**Resolved:** NO — open.
+
+---
+
+## 004 — Reference rule — LOCKED
+
+**Date:** 2026-08-10
+**Status:** LOCKED (working rule).
+
+**Rule:** Every canon claim must trace to a reference in
+`04-references/`. If it cannot be linked, it is flagged `[OPEN]`, not canon.
+Slovenian originals are preserved; English is the translation. (Per README.)
+
+---
+
+## 005 — New systems, not reuse — LOCKED (working rule)
+
+**Date:** 2026-08-10
+**Status:** LOCKED (working rule).
+
+**Rule:** A genuinely new canon concept gets its own system. It is not bolted
+onto an existing one. (Per README, and Luka: "Not a new system??? all new
+things deserve a new system.")
+
+---
