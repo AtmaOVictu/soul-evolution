@@ -9,22 +9,66 @@ var grid_rows: int = 0
 var _time: float = 0.0
 var dark_zone_positions: Array = []  # Vector2, world-space centers of T_DARK hexes
 
+const ARENA_SIZE := Vector2(2400.0, 1800.0)
 const T_OPEN := 0
 const T_WALL := 1
 const T_DARK := 2
 const T_LIGHT := 3
 const T_COVER := 4
 
+# The lattice itself is rendered by shaders/hex_grid.gdshader — real per-pixel
+# GPU math (a hex SDF) instead of ~1100 CPU-drawn polygons redrawn every
+# frame. Terrain is static after generation, so the lookup texture is baked
+# once; only world_color_ratio/color_balance update per frame.
+var hex_lattice_rect: ColorRect = null
+var hex_shader_material: ShaderMaterial = null
+
 
 func _ready() -> void:
 	_generate_terrain()
+	_build_hex_lattice_shader()
 	queue_redraw()
+
+
+func _build_hex_lattice_shader() -> void:
+	var img := Image.create(grid_cols, grid_rows, false, Image.FORMAT_RF)
+	for r in grid_rows:
+		for c in grid_cols:
+			img.set_pixel(c, r, Color(float(get_terrain(c, r)), 0.0, 0.0, 1.0))
+	var tex := ImageTexture.create_from_image(img)
+
+	hex_shader_material = ShaderMaterial.new()
+	hex_shader_material.shader = preload("res://shaders/hex_grid.gdshader")
+	hex_shader_material.set_shader_parameter("terrain_tex", tex)
+	hex_shader_material.set_shader_parameter("grid_size", Vector2(grid_cols, grid_rows))
+	hex_shader_material.set_shader_parameter("hex_size", hex_size)
+	hex_shader_material.set_shader_parameter("arena_size", ARENA_SIZE)
+
+	hex_lattice_rect = ColorRect.new()
+	hex_lattice_rect.name = "HexLattice"
+	hex_lattice_rect.position = Vector2.ZERO
+	hex_lattice_rect.size = ARENA_SIZE
+	hex_lattice_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hex_lattice_rect.material = hex_shader_material
+	hex_lattice_rect.show_behind_parent = true
+	add_child(hex_lattice_rect)
 
 
 func _process(delta: float) -> void:
-	# Redraw continuously — the grid ripples like a liquid (see _draw_hex_grid).
 	_time += delta
-	queue_redraw()
+	queue_redraw()  # only _draw_effects() now — the lattice is the shader above
+	if not hex_shader_material:
+		return
+	var parent := get_parent()
+	var color_ratio := 0.0
+	var balance := 0.0
+	if parent and "world_color" in parent and "army_size" in parent:
+		var max_color: float = float(parent.army_size) * 2.0
+		color_ratio = clampf(float(parent.world_color) / maxf(max_color, 1.0), 0.0, 1.0)
+	if parent and "color_balance" in parent:
+		balance = parent.color_balance
+	hex_shader_material.set_shader_parameter("world_color_ratio", color_ratio)
+	hex_shader_material.set_shader_parameter("color_balance", balance)
 
 
 ## Nearest-hex lookup for a world position — approximate (nearest center,
@@ -173,70 +217,11 @@ func get_terrain(c: int, r: int) -> int:
 
 
 func _draw() -> void:
-	_draw_hex_grid()
+	# The lattice itself is the shader (shaders/hex_grid.gdshader, applied to
+	# hex_lattice_rect in _build_hex_lattice_shader). Only the transient
+	# effects (annihilation flashes, death bursts) are still CPU-drawn — few
+	# in number, short-lived, don't need per-pixel math.
 	_draw_effects()
-
-
-func _draw_hex_grid() -> void:
-	var hex_h: float = hex_size * sqrt(3.0)
-	var col_sp: float = hex_size * 1.5
-	var row_sp: float = hex_h
-	# How much color has entered the world through annihilation (main.gd) —
-	# the grid's ripple carries that color instead of staying purely decorative.
-	var color_ratio := 0.0
-	var balance := 0.0
-	var parent := get_parent()
-	if parent and "world_color" in parent and "army_size" in parent:
-		var max_color: float = float(parent.army_size) * 2.0
-		color_ratio = clampf(float(parent.world_color) / maxf(max_color, 1.0), 0.0, 1.0)
-	if parent and "color_balance" in parent:
-		balance = parent.color_balance
-	for c in grid_cols:
-		for r in grid_rows:
-			var center := Vector2(
-				float(c) * col_sp + hex_size,
-				float(r) * row_sp + (hex_h * 0.5 if c % 2 == 1 else 0.0) + hex_h * 0.5
-			)
-			var points := PackedVector2Array()
-			for i in 6:
-				var angle: float = TAU * float(i) / 6.0
-				points.append(center + Vector2(cos(angle), sin(angle)) * hex_size * 0.92)
-			var t: int = get_terrain(c, r)
-			var fill_col: Color
-			var line_col: Color
-			match t:
-				T_OPEN:
-					fill_col = Color(0.05, 0.05, 0.08, 0.12)
-					line_col = Color(0.1, 0.1, 0.15, 0.18)
-				T_WALL:
-					fill_col = Color(0.15, 0.15, 0.2, 0.55)
-					line_col = Color(0.25, 0.25, 0.3, 0.45)
-				T_DARK:
-					fill_col = Color(0.02, 0.02, 0.04, 0.3)
-					line_col = Color(0.06, 0.06, 0.1, 0.25)
-				T_LIGHT:
-					fill_col = Color(0.12, 0.12, 0.1, 0.2)
-					line_col = Color(0.2, 0.2, 0.18, 0.25)
-				T_COVER:
-					fill_col = Color(0.08, 0.08, 0.12, 0.3)
-					line_col = Color(0.15, 0.15, 0.2, 0.35)
-			# Liquid ripple: a slow travelling wave across the grid (position-phased,
-			# not per-hex random) so it reads as one body of "fluid", not noise.
-			var wave: float = sin(_time * 0.6 + float(c) * 0.35 + float(r) * 0.22) * 0.5 + 0.5
-			fill_col.a *= 0.7 + wave * 0.5
-			if color_ratio > 0.0:
-				var tint := Color(0.5, 0.3, 0.6) if t != T_DARK else Color(0.4, 0.22, 0.5)
-				# Balance skews the tint's hue, not its amount: white ahead
-				# warms it, black ahead cools it. 0.0 (neutral middle) leaves
-				# the base tint untouched.
-				if balance > 0.0:
-					tint = tint.lerp(Color(0.75, 0.55, 0.4), balance * 0.5)
-				elif balance < 0.0:
-					tint = tint.lerp(Color(0.3, 0.28, 0.55), -balance * 0.5)
-				fill_col = fill_col.lerp(tint, color_ratio * wave * 0.4)
-			draw_colored_polygon(points, fill_col)
-			for i in 6:
-				draw_line(points[i], points[(i + 1) % 6], line_col, 1.0, false)
 
 
 func _draw_effects() -> void:
