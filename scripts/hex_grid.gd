@@ -7,6 +7,7 @@ var terrain: Array = []
 var grid_cols: int = 0
 var grid_rows: int = 0
 var _time: float = 0.0
+var dark_zone_positions: Array = []  # Vector2, world-space centers of T_DARK hexes
 
 const T_OPEN := 0
 const T_WALL := 1
@@ -43,6 +44,30 @@ func get_terrain_at(pos: Vector2) -> int:
 	return get_terrain(hc.x, hc.y)
 
 
+func hex_to_world(c: int, r: int) -> Vector2:
+	var hex_h: float = hex_size * sqrt(3.0)
+	var col_sp: float = hex_size * 1.5
+	var row_sp: float = hex_h
+	return Vector2(
+		float(c) * col_sp + hex_size,
+		float(r) * row_sp + (hex_h * 0.5 if c % 2 == 1 else 0.0) + hex_h * 0.5
+	)
+
+
+## Nearest T_DARK hex center to a world position, or Vector2.INF if none exist.
+func get_nearest_dark_zone(pos: Vector2) -> Vector2:
+	if dark_zone_positions.is_empty():
+		return Vector2.INF
+	var best: Vector2 = dark_zone_positions[0]
+	var best_dist: float = pos.distance_to(best)
+	for p in dark_zone_positions:
+		var d: float = pos.distance_to(p)
+		if d < best_dist:
+			best_dist = d
+			best = p
+	return best
+
+
 func _generate_terrain() -> void:
 	var hex_h: float = hex_size * sqrt(3.0)
 	var col_sp: float = hex_size * 1.5
@@ -71,6 +96,7 @@ func _generate_terrain() -> void:
 	# Dark zones (black ambush spots)
 	for p in [Vector2i(2,3), Vector2i(2,4), Vector2i(7,3), Vector2i(7,4), Vector2i(1,5), Vector2i(9,5)]:
 		_set_t(p.x, p.y, T_DARK)
+		dark_zone_positions.append(hex_to_world(p.x, p.y))
 	# Light zones (white advantage)
 	for p in [Vector2i(5,2), Vector2i(6,2), Vector2i(5,6), Vector2i(6,6), Vector2i(4,1), Vector2i(7,1)]:
 		_set_t(p.x, p.y, T_LIGHT)

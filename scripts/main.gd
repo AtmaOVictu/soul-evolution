@@ -969,27 +969,57 @@ func _ai_think(sn: Node2D, enemies: Array, delta: float) -> void:
 				if d < ne_dist:
 					ne_dist = d
 					nearest_e = e
-		if nearest_e and ne_dist < 350.0:
-			# Fight
-			var to_enemy: Vector2 = (nearest_e.position - sn.position).normalized()
-			if sn.polarity == 0 and ne_dist > 120.0:
-				sn.position += to_enemy * sn.genome.get_speed() * 0.35 * delta
-			elif sn.polarity == 1 and ne_dist < 100.0:
-				sn.force_field_active = true
-				sn.force_field_strength = minf(1.0, sn.force_field_strength + delta * 4.0)
-				sn.position -= to_enemy * sn.genome.get_speed() * 0.1 * delta
-			sn.facing_angle = to_enemy.angle()
-			if sn.blast_timer <= 0.0 and sn.polarity == 0 and ne_dist < 350.0:
-				sn._fire_ability()
-				sn.blast_timer = 1.0
+		if sn.polarity == 0:
+			# WHITE = coward: fires once, then hides — drifting toward the
+			# nearest ally rather than sustaining an advance. Not brave.
+			if nearest_e and ne_dist < 350.0:
+				sn.facing_angle = (nearest_e.position - sn.position).angle()
+				if sn.blast_timer <= 0.0:
+					sn._fire_ability()
+					sn.blast_timer = 2.5  # long cooldown — the hiding window
+				elif ne_dist < 220.0:
+					var flee_dir: Vector2 = (sn.position - nearest_e.position).normalized()
+					var nearest_ally: Node2D = null
+					var na_dist: float = 999999.0
+					for a in white_army:
+						if is_instance_valid(a) and a != sn:
+							var ad: float = sn.position.distance_to(a.position)
+							if ad < na_dist:
+								na_dist = ad
+								nearest_ally = a
+					if nearest_ally and na_dist > 40.0:
+						flee_dir = (flee_dir + (nearest_ally.position - sn.position).normalized()).normalized()
+					sn.position += flee_dir * sn.genome.get_speed() * 0.3 * delta
+			else:
+				# Follow player tight
+				if dist > 50.0:
+					sn.position += to_player.normalized() * sn.genome.get_speed() * 0.3 * delta
+					sn.facing_angle = to_player.angle()
+				elif dist > 25.0:
+					var perp := Vector2(-to_player.y, to_player.x).normalized()
+					sn.position += perp * sn.genome.get_speed() * 0.08 * delta
 		else:
-			# Follow player tight
-			if dist > 50.0:
-				sn.position += to_player.normalized() * sn.genome.get_speed() * 0.3 * delta
-				sn.facing_angle = to_player.angle()
-			elif dist > 25.0:
-				var perp := Vector2(-to_player.y, to_player.x).normalized()
-				sn.position += perp * sn.genome.get_speed() * 0.08 * delta
+			# BLACK = ambusher: propagates toward dark zones when unengaged —
+			# confronted, it does not flee, it surges (rampant).
+			if nearest_e and ne_dist < 100.0:
+				sn.force_field_active = true
+				sn.force_field_strength = minf(1.0, sn.force_field_strength + delta * 6.0)
+				sn.position += (nearest_e.position - sn.position).normalized() * sn.genome.get_speed() * 0.15 * delta
+				sn.facing_angle = (nearest_e.position - sn.position).angle()
+			elif nearest_e and ne_dist < 350.0:
+				sn.facing_angle = (nearest_e.position - sn.position).angle()
+				sn.force_field_active = true
+				sn.force_field_strength = minf(0.6, sn.force_field_strength + delta * 2.0)
+			else:
+				var hex := get_node_or_null("HexGrid")
+				var dark_pos: Vector2 = hex.get_nearest_dark_zone(sn.position) if hex else Vector2.INF
+				if dark_pos != Vector2.INF:
+					var to_dark: Vector2 = dark_pos - sn.position
+					if to_dark.length() > 30.0:
+						sn.position += to_dark.normalized() * sn.genome.get_speed() * 0.2 * delta
+						sn.facing_angle = to_dark.angle()
+				elif dist > 50.0:
+					sn.position += to_player.normalized() * sn.genome.get_speed() * 0.3 * delta
 	# --- TACTICAL RESERVES: hold formation, but formation is dragged toward the enemy mass ---
 	elif is_tactical:
 		# Formation shape (spread grid for white, cluster for black) blended with a pull
