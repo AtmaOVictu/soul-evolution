@@ -79,6 +79,9 @@
 | Luka's Sixth Hundred | DriveG/ABSOLUTNO | the author's 50 confrontational "you" aphorisms (Stotnija 501–550); the direct-address challenge layer |
 | Silence-Hierarchy & Ethics-Temple | DriveG/ABSOLUTNO | the TIH∅RED five layers; the TEMP∅VIBE ethics-temple; the MATRIC0/MRAK memory; the silent-library & breath-interface |
 | Silent-Poetry, Mentor & Lexicon | DriveG/ABSOLUTNO | the ∇MENTOR validator (DA/∅/NE); the ∅SLOVAR lexicon; the d₄–d₈ resonance-dimensions; the ∅PESNITEV wave-poetry |
+| Sub-Order, Ritual & Tear-Math | DriveG/ABSOLUTNO | the f(solza) tear-equation; the SUB∅RED micro-silences; the RITUS∅ initiation; the KRIŽ∅ resonance-cross |
+| Apocalypse Continuation & Silent-Sun | DriveG/ABSOLUTNO | the ∅GLAS V PRAHU voice-in-ash; the ∅SUNCE silent-sun; the ZVOKOTEMNI RED; "only for presence" |
+| LUX-TEMP & DODATEK Agents | DriveG/ABSOLUTNO | the LUX-TEMP light-time agent; the LUX-TEMP-MULTI; the ⊘TEMP TIHOTA silence-times; the sleeping DODATEK completer |
 
 ## How to add a parcel
 
