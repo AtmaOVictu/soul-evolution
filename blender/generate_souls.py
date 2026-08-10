@@ -146,8 +146,49 @@ def render_black_sprite() -> None:
 	bpy.ops.render.render(write_still=True)
 
 
+def _setup_top_down_camera_and_lights(ortho_scale: float, key_energy: float = 500.0, rim_energy: float = 200.0) -> None:
+	bpy.ops.object.camera_add(location=(0, 0, 4.0), rotation=(0, 0, 0))
+	cam = bpy.context.object
+	cam.data.type = 'ORTHO'
+	cam.data.ortho_scale = ortho_scale
+	bpy.context.scene.camera = cam
+	bpy.ops.object.light_add(type='AREA', location=(-2.0, -3.0, 3.0))
+	key = bpy.context.object
+	key.data.energy = key_energy
+	key.data.size = 3.0
+	bpy.ops.object.light_add(type='AREA', location=(2.5, -2.0, -1.5))
+	rim = bpy.context.object
+	rim.data.energy = rim_energy
+	rim.data.size = 2.0
+
+
+def render_glass_hex_tile() -> None:
+	# Baked glass-material detail for the hex lattice shader (shaders/hex_grid.gdshader):
+	# one flat top-down render of a glass hex prism, sampled per-tile at runtime so the
+	# lattice keeps its single per-pixel SDF pass instead of gaining ~1100 draw calls back.
+	# Dynamic color (world_color_ratio/color_balance) stays computed in-shader; this asset
+	# only contributes the static clean-glass rim/refraction highlight on top of it.
+	clear_scene()
+	bpy.ops.mesh.primitive_cylinder_add(vertices=6, radius=1.0, depth=0.15)
+	obj = bpy.context.object
+	obj.name = "GlassHex"
+	bpy.ops.object.shade_smooth()
+	mat = bpy.data.materials.new("GlassHexMat")
+	mat.use_nodes = True
+	bsdf = mat.node_tree.nodes["Principled BSDF"]
+	bsdf.inputs["Base Color"].default_value = (0.9, 0.95, 1.0, 1.0)
+	bsdf.inputs["Transmission Weight"].default_value = 1.0
+	bsdf.inputs["Roughness"].default_value = 0.05
+	bsdf.inputs["IOR"].default_value = 1.45
+	obj.data.materials.append(mat)
+	_setup_top_down_camera_and_lights(ortho_scale=2.2, key_energy=400.0, rim_energy=300.0)
+	_setup_sprite_render("glass_hex_tile")
+	bpy.ops.render.render(write_still=True)
+
+
 build_reference_scene()
 render_white_sprite()
 render_black_sprite()
+render_glass_hex_tile()
 print("=== SOUL ASSET PIPELINE COMPLETE ===")
-print("Sprites: white_soul.png, black_soul.png")
+print("Sprites: white_soul.png, black_soul.png, glass_hex_tile.png")

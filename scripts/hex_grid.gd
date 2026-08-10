@@ -43,6 +43,8 @@ func _build_hex_lattice_shader() -> void:
 	hex_shader_material.set_shader_parameter("grid_size", Vector2(grid_cols, grid_rows))
 	hex_shader_material.set_shader_parameter("hex_size", hex_size)
 	hex_shader_material.set_shader_parameter("arena_size", ARENA_SIZE)
+	if ResourceLoader.exists("res://assets/glass_hex_tile.png"):
+		hex_shader_material.set_shader_parameter("glass_tex", load("res://assets/glass_hex_tile.png"))
 
 	hex_lattice_rect = ColorRect.new()
 	hex_lattice_rect.name = "HexLattice"
