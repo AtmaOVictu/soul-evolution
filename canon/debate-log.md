@@ -117,7 +117,19 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 016 — "Ownership nullifies knowledge" vs the treasury — OPEN
+## 017 — The soul as a living vector — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Mithjos, captured by Cline):** The soul is a **living state
+vector over time** (Z, J, E, N) — consciousness, ego-relation, ethics,
+paradox — each with its own dynamic. The soul is always *becoming*, never
+fixed. Question raised: do the four forces mirror the foundational quartet
+(space/time/movement/doubt) — the same four-shaped root that any soul must
+carry?
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
