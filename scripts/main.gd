@@ -128,6 +128,15 @@ func _auto_test() -> void:
 	print("[TEST]  dust before pull: ", dust)
 	_open_gumball_machine()
 	print("[TEST]  dust after pull: ", dust, "  vault: ", soul_vault.get_vault_summary() if soul_vault else "NO VAULT")
+	# Verify the character sheet actually exists now (was never created in the
+	# real battle flow before this session's fix) and its new fields populate.
+	print("[TEST]  character_sheet exists: ", character_sheet != null)
+	if character_sheet:
+		character_sheet.visible = true
+		character_sheet._refresh()
+		print("[TEST]  sheet dust=%s balance=%s vault=%s mods=%s" % [
+			character_sheet.dust_val_label.text, character_sheet.balance_val_label.text,
+			character_sheet.vault_val_label.text, character_sheet.mods_val_label.text])
 	print("[TEST] === AUTO TEST COMPLETE ===")
 
 
@@ -637,12 +646,7 @@ func _spawn_soul() -> void:
 	soul_node.polarity = soul_polarity
 	soul_node.genome = soul_genome
 	soul_node._apply_polarity()
-	if not character_sheet:
-		var sheet_script = preload("res://scripts/character_sheet.gd")
-		character_sheet = Control.new()
-		character_sheet.name = "CharacterSheet"
-		character_sheet.set_script(sheet_script)
-		hud.add_child(character_sheet)
+	_ensure_character_sheet()
 	character_sheet.set_genome(soul_genome)
 
 
@@ -874,8 +878,27 @@ func _spawn_army() -> void:
 	active_body.is_active = true
 	soul_stream.incarnate(active_body.genome)
 	battle_active = true
+	_ensure_character_sheet()
+	character_sheet.set_genome(active_body.genome)
 	_refresh_camera()
 	narrate("matter meets antimatter. the first encounter.")
+
+
+## character_sheet was previously only ever created in _spawn_soul(), the
+## Phase-0 path that nothing in the battle flow calls — meaning TAB has never
+## actually opened anything in real gameplay (_toggle_character_sheet and the
+## incarnation update both silently no-op on a null character_sheet). This is
+## the real creation point.
+func _ensure_character_sheet() -> void:
+	if character_sheet:
+		return
+	var sheet_script = preload("res://scripts/character_sheet.gd")
+	character_sheet = Control.new()
+	character_sheet.name = "CharacterSheet"
+	character_sheet.set_script(sheet_script)
+	character_sheet.main_ref = self
+	character_sheet.visible = false
+	hud.add_child(character_sheet)
 
 
 func _refresh_camera() -> void:

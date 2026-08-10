@@ -3,6 +3,10 @@ extends Control
 ## Press TAB to open/close.
 
 var genome: RefCounted
+# World-level state (dust/balance/vault) lives on main.gd, not the genome —
+# it's not soul-intrinsic. Read via duck-typed access, same pattern
+# hex_grid.gd already uses for world_color/color_balance.
+var main_ref: Node = null
 var title_label: Label
 var polar_label: Label
 var ability_vals: Dictionary = {}
@@ -14,6 +18,10 @@ var power_vals: Dictionary = {}
 var mithjos_vals: Dictionary = {}
 var upgrade_points_label: Label
 var upgrade_list_label: Label
+var dust_val_label: Label
+var balance_val_label: Label
+var vault_val_label: Label
+var mods_val_label: Label
 
 
 func _ready() -> void:
@@ -145,6 +153,23 @@ func _build_panel() -> void:
 	vbox.add_child(skull_label)
 	_sep(vbox)
 
+	# --- World (dust, color balance, vault, modifications) — not soul-intrinsic ---
+	var world_title := Label.new()
+	world_title.text = "— WORLD —"
+	world_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	world_title.add_theme_font_size_override("font_size", 11)
+	world_title.add_theme_color_override("font_color", Color(0.4, 0.4, 0.5))
+	vbox.add_child(world_title)
+	dust_val_label = _add_row(vbox, "⚙ dust")
+	balance_val_label = _add_row(vbox, "⚖ balance")
+	vault_val_label = _add_row(vbox, "◉ vault")
+	mods_val_label = Label.new()
+	mods_val_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	mods_val_label.add_theme_font_size_override("font_size", 12)
+	mods_val_label.add_theme_color_override("font_color", Color(0.6, 0.55, 0.65))
+	vbox.add_child(mods_val_label)
+	_sep(vbox)
+
 	# --- Upgrades ---
 	upgrade_points_label = Label.new()
 	upgrade_points_label.add_theme_font_size_override("font_size", 14)
@@ -197,6 +222,22 @@ func _sep(parent: Control) -> void:
 	parent.add_child(HSeparator.new())
 
 
+func _add_row(parent: Control, label_text: String) -> Label:
+	var row := HBoxContainer.new()
+	parent.add_child(row)
+	var lbl := Label.new()
+	lbl.text = label_text
+	lbl.add_theme_font_size_override("font_size", 14)
+	lbl.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
+	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(lbl)
+	var val := Label.new()
+	val.add_theme_font_size_override("font_size", 14)
+	val.add_theme_color_override("font_color", Color(0.8, 0.8, 0.85))
+	row.add_child(val)
+	return val
+
+
 func _refresh() -> void:
 	if not genome:
 		return
@@ -216,6 +257,21 @@ func _refresh() -> void:
 	for i in maxi(0, 10 - genome.skulls):
 		skull_str += "\u2591"
 	skull_label.text = "%s  %d" % [skull_str, genome.skulls]
+	if main_ref:
+		if "dust" in main_ref:
+			dust_val_label.text = str(main_ref.dust)
+		if "color_balance" in main_ref:
+			var b: float = main_ref.color_balance
+			var b_desc := "neutral"
+			if b > 0.15:
+				b_desc = "white-leaning"
+			elif b < -0.15:
+				b_desc = "black-leaning"
+			balance_val_label.text = "%.2f (%s)" % [b, b_desc]
+		if "soul_vault" in main_ref and main_ref.soul_vault:
+			vault_val_label.text = main_ref.soul_vault.get_vault_summary()
+	if genome.has_method("get_modification_summary"):
+		mods_val_label.text = "mods: %s" % genome.get_modification_summary()
 	psi_val_label.text = "div %.2f  neg %.2f  del %.2f  trace %.2f  tau %.2f  sig %.2f  C %.2f  N %.2f  P %.2f  S %.2f  Psi=%.3f" % [
 		genome.divergence, genome.negation, genome.delta, genome.trace,
 		genome.tau, genome.sigma, genome.carbon, genome.nitrogen,
