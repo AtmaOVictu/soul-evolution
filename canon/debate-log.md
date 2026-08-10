@@ -117,7 +117,22 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 015 — The foundational quartet: space · time · movement · doubt — OPEN
+## 016 — "Ownership nullifies knowledge" vs the treasury — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Prirocnik Jaszu, captured by Cline):** The manual states
+"Lastnina izniči spoznanje, več me dela manj" (ownership nullifies
+knowledge; more makes me less). This raises a tension with the treasury
+doctrine (`05-treasures.md`): is hoarding treasure the plane's error — the
+thing that reproduces the mutual blindness — or a necessary evil Time alone
+can mediate? The treasury may be the *mechanism of the blindness*, not its
+cure.
+
+**Question it leaves open:** Should the canon frame hoarding as a trap (the
+vault reproduces the blindness) — with Time's trade as the only release?
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
