@@ -269,7 +269,19 @@ tone and trigger, and dialogue/self-care resolves through their syncs.
 
 ---
 
-## 046 — The DNA word-protocol is the dialogue currency — OPEN
+## 047 — The meta-spiral is the core loop; emotions are agents — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ONTOMANDALA_METASPIRALA + Atlas_Barvnih_Agentov, captured by
+Cline):** The meta-spiral is the core loop of the game — the soul IS the cut
+(I=D), its cycles are spirals that never repeat (each turn ascends), and
+self-annihilation is the birth of the collective. The emotions are agents (each
+with a flow DA, a break NE, and a generativity Mogone), confirming the
+wound→gift doctrine.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

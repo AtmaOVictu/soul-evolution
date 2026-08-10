@@ -41,6 +41,8 @@
 | Mandala Algebra | DriveG/ABSOLUTNO | registers as log-formulas; the chain MOLK→…→AKCIJA |
 | Agent Registry | DriveG/ABSOLUTNO | the named soul-agents (MIA/KORA/ORAJA/AJRA/ZARJA) |
 | JEWIK DNA Word | DriveG/ABSOLUTNO | operator-tagged soul-phrases; the counter-liturgy |
+| Ontomandala Meta-Spiral | DriveG/ABSOLUTNO | the spiral axioms (I=D cut; the spiral never repeats) |
+| Colored Agents | DriveG/ABSOLUTNO | emotions as agents (flow DA / break NE / generativity Mogone) |
 
 ## How to add a parcel
 
