@@ -497,6 +497,38 @@ func _refresh_vault_grid(souls: Array) -> void:
 		glyph.draw.connect(_draw_vault_glyph.bind(glyph, rec))
 		entry.add_child(glyph)
 
+		# Blender-rendered soul portrait inside the window — real gallery art,
+		# replacing the procedural placeholder. Picked deterministically from
+		# the soul's genome + quality.
+		var portrait_path := "res://assets/portrait_%s.png" % _portrait_for(rec)
+		if ResourceLoader.exists(portrait_path):
+			var portrait := TextureRect.new()
+			portrait.texture = load(portrait_path)
+			portrait.set_anchors_preset(Control.PRESET_FULL_RECT)
+			portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			portrait.modulate = _color_for_quality(rec.get("quality", ""))
+			portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			entry.add_child(portrait)
+
+
+## Deterministically pick a Blender soul-portrait for a vault record, from the
+## soul's genome (psi + polarity) and quality. Same soul → same portrait.
+func _portrait_for(rec: Dictionary) -> String:
+	var portraits := ["sphere", "shard", "torus", "crystal", "ring", "twin", "hexstar",
+		"drop", "spire", "orb", "facet", "veil"]
+	var g = rec.get("genome")
+	var seed := 0
+	if g:
+		seed = int(clampf(g.psi, 0.0, 1.0) * 100.0) + (g.polarity * 7)
+	match rec.get("quality", ""):
+		"good":
+			seed += 3
+		"poor":
+			seed -= 2
+	seed = posmod(seed, portraits.size())
+	return portraits[seed]
+
 
 ## The gold/silver/dull palette, duplicated from vault_machine_ui.gd's
 ## _color_for_quality() (not shared as a singleton — this file already

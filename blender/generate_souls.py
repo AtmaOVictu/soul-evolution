@@ -306,11 +306,70 @@ def render_operator_sigils() -> None:
 		bpy.ops.render.render(write_still=True)
 
 
+def render_soul_portraits() -> None:
+	# SOUL PORTRAITS — a set of distinct emissive soul-visuals for the vault
+	# GALLERY (character_sheet.gd's vault grid). Each portrait is a different
+	# shell silhouette with a neutral shell + a distinct emissive FILL, so the
+	# gallery has real art variety instead of the procedural placeholder glyph.
+	portraits = ["sphere", "shard", "torus", "crystal", "ring", "twin", "hexstar", "drop",
+	             "spire", "orb", "facet", "veil"]
+	fill_colors = {
+		"sphere": (0.95, 0.65, 0.3, 1.0), "shard": (0.5, 0.25, 0.4, 1.0),
+		"torus": (0.3, 0.7, 0.6, 1.0), "crystal": (0.4, 0.5, 0.9, 1.0),
+		"ring": (0.9, 0.8, 0.3, 1.0), "twin": (0.7, 0.4, 0.8, 1.0),
+		"hexstar": (0.8, 0.55, 0.2, 1.0), "drop": (0.3, 0.6, 0.9, 1.0),
+		"spire": (0.85, 0.35, 0.35, 1.0), "orb": (0.6, 0.8, 0.4, 1.0),
+		"facet": (0.5, 0.7, 0.8, 1.0), "veil": (0.75, 0.5, 0.6, 1.0),
+	}
+	for name in portraits:
+		clear_scene()
+		bpy.ops.mesh.primitive_uv_sphere_add(radius=PHI ** 0.5, location=(0, 0, 0))
+		obj = bpy.context.object
+		obj.name = name + "_soul"
+		if name == "shard":
+			bpy.ops.mesh.primitive_cone_add(vertices=5, radius1=PHI, radius2=0.0, depth=PHI * 2, location=(0, 0, 0))
+			obj = bpy.context.object
+			obj.name = name + "_soul"
+		elif name == "torus":
+			bpy.ops.object.delete()
+			bpy.ops.mesh.primitive_torus_add(major_radius=PHI, minor_radius=PHI ** -1, location=(0, 0, 0))
+			obj = bpy.context.object
+			obj.name = name + "_soul"
+		elif name == "crystal":
+			bpy.ops.object.delete()
+			bpy.ops.mesh.primitive_cylinder_add(vertices=6, radius=PHI, depth=PHI * 2, location=(0, 0, 0))
+			obj = bpy.context.object
+			obj.name = name + "_soul"
+		elif name == "ring":
+			bpy.ops.object.delete()
+			bpy.ops.mesh.primitive_torus_add(major_radius=PHI, minor_radius=PHI ** -2, location=(0, 0, 0))
+			obj = bpy.context.object
+			obj.name = name + "_soul"
+		elif name == "twin":
+			bpy.ops.mesh.primitive_uv_sphere_add(radius=PHI ** -0.5, location=(-PHI * 0.5, 0, 0))
+			bpy.ops.mesh.primitive_uv_sphere_add(radius=PHI ** -0.5, location=(PHI * 0.5, 0, 0))
+			obj = bpy.context.object
+			obj.name = name + "_soul"
+		bpy.ops.object.mode_set(mode='OBJECT')
+		mat = bpy.data.materials.new(name + "_Mat")
+		mat.use_nodes = True
+		bsdf = mat.node_tree.nodes["Principled BSDF"]
+		bsdf.inputs["Base Color"].default_value = (0.12, 0.12, 0.15, 1.0)
+		bsdf.inputs["Emission Strength"].default_value = PHI ** 2
+		bsdf.inputs["Emission Color"].default_value = fill_colors[name]
+		obj.data.materials.append(mat)
+		bpy.ops.object.shade_smooth()
+		_setup_sprite_camera_and_lights(ortho_scale=PHI ** 2.5, key_energy=100.0 * PHI ** 3, rim_energy=100.0 * PHI ** 2.5)
+		_setup_sprite_render("portrait_" + name)
+		bpy.ops.render.render(write_still=True)
+
+
 build_reference_scene()
 render_white_sprite()
 render_black_sprite()
 render_glass_hex_tile()
 render_window_frame()
 render_operator_sigils()
+render_soul_portraits()
 print("=== SOUL ASSET PIPELINE COMPLETE ===")
-print("Sprites: white_soul.png, black_soul.png, glass_hex_tile.png, window_frame.png, sigil_*.png")
+print("Sprites: white_soul.png, black_soul.png, glass_hex_tile.png, window_frame.png, sigil_*.png, portrait_*.png")
