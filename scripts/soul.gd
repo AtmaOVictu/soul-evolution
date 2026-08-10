@@ -292,15 +292,29 @@ func _draw() -> void:
 				draw_line(sstart, send, sc, maxf(sw, 1.0), false)
 
 
+## The soul filled with its color/soul/lifeforce, expressed as % — a level,
+## not a flat tint. Reuses the life ring's %-as-arc convention (start at
+## -PI/2, sweep clockwise by TAU * pct) so the visual language is consistent.
+func _draw_color_fill(fill_col: Color, fill_pct: float) -> void:
+	if fill_pct <= 0.001:
+		return
+	var points := PackedVector2Array([Vector2.ZERO])
+	var segs: int = maxi(2, int(ceil(40.0 * fill_pct)))
+	for s in range(segs + 1):
+		var a: float = -PI / 2.0 + TAU * fill_pct * float(s) / float(segs)
+		points.append(Vector2(cos(a), sin(a)) * radius)
+	draw_colored_polygon(points, fill_col)
+
+
 func _draw_white_soul(life_pct: float, flash: float) -> void:
-	# WHITE = electron = SOLID bright sphere, light palette, clean
-	var soul_col := Color(0.92, 0.92, 0.97)
+	# WHITE = electron. Shell holds no color (see blender/generate_souls.py) —
+	# it's shading only. Color lives in the fill below, sized by life_pct.
+	var fill_col := Color(0.6, 0.6, 0.63)
 	if genome:
 		var seep_amt: float = genome.trace * (0.5 if color_unlocked else 0.2)
-		soul_col = soul_col.lerp(Color(0.95, 0.65, 0.3), seep_amt)
-	soul_col = soul_col.lerp(Color(0.5, 0.5, 0.5), 1.0 - life_pct)
+		fill_col = fill_col.lerp(Color(0.95, 0.65, 0.3), seep_amt)
 	if flash > 0.0:
-		soul_col = soul_col.lerp(Color.WHITE, flash)
+		fill_col = fill_col.lerp(Color.WHITE, flash)
 
 	# Halo glow — light bleeds outward (this is a radiation source)
 	for i in range(3):
@@ -308,32 +322,30 @@ func _draw_white_soul(life_pct: float, flash: float) -> void:
 		var halo_a: float = (0.22 - float(i) * 0.06) * (0.5 + life_pct * 0.5)
 		draw_circle(Vector2.ZERO, halo_r, Color(1.0, 0.97, 0.85, halo_a))
 
+	_draw_color_fill(fill_col, life_pct)
+
 	if soul_texture:
 		var tex_size := radius * 2.15
-		draw_texture_rect(soul_texture, Rect2(Vector2(-tex_size, -tex_size) * 0.5, Vector2(tex_size, tex_size)), false, soul_col)
+		# Shell drawn translucent — shading modulates the fill instead of
+		# hiding it under an opaque colored surface.
+		draw_texture_rect(soul_texture, Rect2(Vector2(-tex_size, -tex_size) * 0.5, Vector2(tex_size, tex_size)), false, Color(1.0, 1.0, 1.0, 0.55))
 	else:
 		# Fallback (asset pipeline not run — see blender/generate_souls.py)
-		draw_circle(Vector2.ZERO, radius + 2.0, Color(0.12, 0.12, 0.15))
-		draw_circle(Vector2.ZERO, radius, soul_col)
-		var shadow := Color(soul_col.r * 0.5, soul_col.g * 0.5, soul_col.b * 0.55, 0.35)
-		draw_circle(Vector2(radius * 0.15, radius * 0.15), radius * 0.5, shadow)
-		var hl := Color(soul_col.r * 1.1, soul_col.g * 1.1, soul_col.b * 1.1, 0.4)
-		draw_circle(Vector2(-radius * 0.2, -radius * 0.2), radius * 0.35, hl)
-		draw_circle(Vector2(-radius * 0.15, -radius * 0.15), radius * 0.12, Color(1.0, 1.0, 1.0, 0.5))
+		draw_circle(Vector2.ZERO, radius + 2.0, Color(0.12, 0.12, 0.15, 0.4))
 	# Facing dot
 	var fi := Vector2(cos(facing_angle), sin(facing_angle)) * (radius - 2.0)
 	draw_circle(fi, 2.0, Color(0.3, 0.3, 0.35))
 
 
 func _draw_black_soul(life_pct: float, flash: float) -> void:
-	# BLACK = antimatter = SOLID dark sphere, dark palette, heavy
-	var soul_col := Color(0.08, 0.08, 0.1)
+	# BLACK = antimatter. Shell holds no color, shading only — same rule as
+	# white. Color lives in the fill below, sized by life_pct.
+	var fill_col := Color(0.32, 0.32, 0.36)
 	if genome:
 		var seep_amt: float = genome.trace * (0.4 if color_unlocked else 0.15)
-		soul_col = soul_col.lerp(Color(0.5, 0.25, 0.4), seep_amt)
-	soul_col = soul_col.lerp(Color(0.35, 0.35, 0.38), 1.0 - life_pct)
+		fill_col = fill_col.lerp(Color(0.5, 0.25, 0.4), seep_amt)
 	if flash > 0.0:
-		soul_col = soul_col.lerp(Color(0.5, 0.5, 0.55), flash)
+		fill_col = fill_col.lerp(Color(0.5, 0.5, 0.55), flash)
 
 	# Void tendrils — jagged dark spikes reaching outward (this is a void source, not a glow)
 	var tendril_count := 7
@@ -344,18 +356,14 @@ func _draw_black_soul(life_pct: float, flash: float) -> void:
 		var tip_pt := Vector2(cos(ang), sin(ang)) * (radius + 9.0 + wobble)
 		draw_line(base_pt, tip_pt, Color(0.02, 0.01, 0.04, 0.55), 2.5, false)
 
+	_draw_color_fill(fill_col, life_pct)
+
 	if soul_texture:
 		var tex_size := radius * 2.15
-		draw_texture_rect(soul_texture, Rect2(Vector2(-tex_size, -tex_size) * 0.5, Vector2(tex_size, tex_size)), false, soul_col)
+		draw_texture_rect(soul_texture, Rect2(Vector2(-tex_size, -tex_size) * 0.5, Vector2(tex_size, tex_size)), false, Color(1.0, 1.0, 1.0, 0.6))
 	else:
 		# Fallback (asset pipeline not run — see blender/generate_souls.py)
-		draw_circle(Vector2.ZERO, radius + 2.0, Color(0.3, 0.3, 0.35))
-		draw_circle(Vector2.ZERO, radius, soul_col)
-		var shadow := Color(soul_col.r * 1.8, soul_col.g * 1.8, soul_col.b * 1.8, 0.25)
-		draw_circle(Vector2(radius * 0.15, radius * 0.15), radius * 0.5, shadow)
-		var hl := Color(soul_col.r * 2.5, soul_col.g * 2.5, soul_col.b * 2.5, 0.2)
-		draw_circle(Vector2(-radius * 0.2, -radius * 0.2), radius * 0.35, hl)
-		draw_circle(Vector2(-radius * 0.15, -radius * 0.15), radius * 0.1, Color(0.4, 0.4, 0.45, 0.25))
+		draw_circle(Vector2.ZERO, radius + 2.0, Color(0.3, 0.3, 0.35, 0.4))
 	# Facing dot
 	var fi := Vector2(cos(facing_angle), sin(facing_angle)) * (radius - 2.0)
 	draw_circle(fi, 2.0, Color(0.5, 0.5, 0.55))

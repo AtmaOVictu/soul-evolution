@@ -197,6 +197,21 @@ a currency exchange? Both readings are consistent with everything built so
 far; which one Luka means changes whether the hourglass is primarily an
 economy object or primarily a pacing object.
 
+## 12. THE SHELL/FILL SPLIT (2026-08-10, Luka)
+
+Two-layer soul rendering, replacing the flat-colored sprites built earlier
+today: **the shell holds no color, just shading** (a neutral grey/shadow
+model — being rebuilt now in `blender/generate_souls.py`), and **the soul is
+filled with its color/soul/lifeforce, expressed as a percentage** — a level,
+like liquid in a glass, not a flat surface tint. Further: **the shell holds
+experience translated into intuition/magic** — its shading isn't just cosmetic,
+it's where accumulated experience should read. `soul_stream.incarnations` and
+`memory_fragments` (`scripts/soul_stream.gd`) already track real experience
+across a lineage's deaths; the natural (not yet built) connection is the
+shell's shading quality scaling with that count rather than being static per
+soul. Intuition/magic as their own stat — not yet resolved whether that's a
+new derived value or a direct reading of incarnation count.
+
 **What this doesn't resolve (still open, deliberately):** none of the above
 is built — it's a design resolution, not code. The Grand Council's actual UI
 / negotiation flow, the exact feat list, and the neutron-tile conversion

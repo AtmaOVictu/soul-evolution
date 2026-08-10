@@ -94,7 +94,11 @@ def _setup_sprite_render(name: str) -> None:
 
 
 def render_white_sprite() -> None:
-	# WHITE = electron: smooth, radiant, soft — a light source with no sharp edges.
+	# WHITE = electron: smooth sphere, shading only — zero hue. This is the
+	# shell; color lives in the "fill" soul.gd draws underneath it at runtime
+	# (life/substance %), not in this asset. Perfectly neutral grey in, grey
+	# emission out — any warmth previously here was a color the model should
+	# not be holding.
 	clear_scene()
 	bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=48, ring_count=32)
 	obj = bpy.context.object
@@ -103,10 +107,10 @@ def render_white_sprite() -> None:
 	mat = bpy.data.materials.new("WhiteMat")
 	mat.use_nodes = True
 	bsdf = mat.node_tree.nodes["Principled BSDF"]
-	bsdf.inputs["Base Color"].default_value = (0.92, 0.93, 0.98, 1.0)
-	bsdf.inputs["Roughness"].default_value = 0.2
-	bsdf.inputs["Emission Color"].default_value = (1.0, 0.97, 0.85, 1.0)
-	bsdf.inputs["Emission Strength"].default_value = 0.4
+	bsdf.inputs["Base Color"].default_value = (0.85, 0.85, 0.85, 1.0)
+	bsdf.inputs["Roughness"].default_value = 0.25
+	bsdf.inputs["Emission Color"].default_value = (1.0, 1.0, 1.0, 1.0)
+	bsdf.inputs["Emission Strength"].default_value = 0.15
 	obj.data.materials.append(mat)
 	_setup_sprite_camera_and_lights(ortho_scale=2.6)
 	_setup_sprite_render("white_soul")
@@ -114,9 +118,10 @@ def render_white_sprite() -> None:
 
 
 def render_black_sprite() -> None:
-	# BLACK = antimatter: faceted, jagged, angular — a void that fractures light, not a sphere.
-	# Kept genuinely dark: low-energy lights, near-zero emission (a hint of color in the
-	# facet edges only), so it reads as "dark stone" rather than "bright gem".
+	# BLACK = antimatter: faceted, jagged shard cluster — a void that
+	# fractures light, not a sphere. Shell only, zero hue: no emission at all
+	# (pure shadow, lit only by the scene lights) — a "dark gem" reads as
+	# holding color; a shadow model shouldn't.
 	clear_scene()
 	bpy.ops.mesh.primitive_ico_sphere_add(radius=1.0, subdivisions=2)
 	obj = bpy.context.object
@@ -132,12 +137,11 @@ def render_black_sprite() -> None:
 	mat = bpy.data.materials.new("BlackMat")
 	mat.use_nodes = True
 	bsdf = mat.node_tree.nodes["Principled BSDF"]
-	bsdf.inputs["Base Color"].default_value = (0.02, 0.02, 0.03, 1.0)
-	bsdf.inputs["Roughness"].default_value = 0.75
-	bsdf.inputs["Emission Color"].default_value = (0.3, 0.12, 0.45, 1.0)
-	bsdf.inputs["Emission Strength"].default_value = 0.08
+	bsdf.inputs["Base Color"].default_value = (0.035, 0.035, 0.035, 1.0)
+	bsdf.inputs["Roughness"].default_value = 0.8
+	bsdf.inputs["Emission Strength"].default_value = 0.0
 	obj.data.materials.append(mat)
-	_setup_sprite_camera_and_lights(ortho_scale=2.9, key_energy=90.0, rim_energy=40.0)
+	_setup_sprite_camera_and_lights(ortho_scale=2.9, key_energy=110.0, rim_energy=55.0)
 	_setup_sprite_render("black_soul")
 	bpy.ops.render.render(write_still=True)
 

@@ -100,6 +100,17 @@ these systems; the player constructs the reality by acting through them.
 
 *(Full mapping in `06-systems.md`.)*
 
+## The Quantum Fabric
+
+Beneath all of this is the **quantum fabric / strings** — the substrate the
+elements are patterns of, the medium the souls vibrate on. The hex grid is its
+visible lattice; the liquid wave is its living vibration. The souls are
+different vibration modes of the same strings; Spirit is the resonance when
+Fire and Air meet; Time is the fabric's own extension. Monochrome is the
+fabric when neither mode sees the other; color is its resonance made visible.
+
+*(Full mapping in `07-fabric.md`.)*
+
 ---
 
 ## OPEN QUESTIONS (for debate)
@@ -112,3 +123,4 @@ these systems; the player constructs the reality by acting through them.
       across cycles?
 - [ ] What does Time hoard as its own treasure beyond duration?
 - [ ] Is access to the six systems gated by alignment, or open to all?
+- [ ] Is the fabric a playable system or pure substrate?

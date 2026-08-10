@@ -17,10 +17,11 @@
 | 008 | The Alignment of the Act | smisel × beseda | alignment as good/better/detriment modifier | txt, mythos |
 | 009 | The Exchange of Treasures | beseda × čas | trade between designated currencies (Time the broker) | treasures, txt |
 | 010 | The Hand That Works the System | um × prostor | the player interacts with each entity's system | systems |
+| 011 | The Fabric Breathes | prostor × telo | the plane is a living quantum substrate | fabric |
 
 ## The narrative arc they build
 
-The ten seed scenarios form a spine:
+The eleven seed scenarios form a spine:
 
 1. **003** — the three-state physics (annihilation leaves a body).
 2. **001** — the first meeting that produces the plane's substance.
@@ -32,6 +33,7 @@ The ten seed scenarios form a spine:
 8. **008** — the alignment that tunes every act.
 9. **009** — the exchange of treasures (the economy of the plane).
 10. **010** — the hand that works the systems (the player's agency).
+11. **011** — the fabric that breathes (the substrate beneath all).
 
 A scene can be built from one scenario, or from a crossing of two (e.g. a scene
 that is both `002` blindness and `005` time-price).

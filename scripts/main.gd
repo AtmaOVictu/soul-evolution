@@ -42,6 +42,22 @@ var active_body: Node2D = null
 var battle_active: bool = false
 var army_size: int = 20
 
+# --- Neutron remnants (the third state) + dust ---
+# Its own system, not folded into obstacle_rects/substance: a neutron is a
+# conceptually different thing from a destructible wall, and dust is a
+# conceptually different resource from substance. See CRITICAL_BRIEF.md §8-9.
+var neutron_remnants: Array = []
+var dust: int = 0
+
+# --- Color balance (its own system — a rubber-band signal, not world_color) ---
+# -1.0 = all black, 0.0 = neutral middle, +1.0 = all white. Currently expressed
+# via the background only; the "disadvantaged side deals more damage" half
+# has nowhere to attach yet — there is no soul-vs-soul combat damage system at
+# all (beam/force-field only ever hit obstacles/neutron_remnants; souls only
+# fight each other via contact-annihilation, which is binary, not damage-based).
+var color_balance: float = 0.0
+var dust_label: Label = null
+
 var void_bg: ColorRect
 var hud: CanvasLayer
 var polarity_label: Label
@@ -86,9 +102,25 @@ func _auto_test() -> void:
 				active_body.genome.STR, active_body.genome.STA,
 				active_body.genome.WIS, active_body.genome.DEX])
 			print("[TEST]  ego=%.2f psi=%.3f" % [active_body.genome.ego, active_body.genome.psi])
-	# Wait and observe
-	await get_tree().create_timer(5.0).timeout
-	print("[TEST]  After 5s: active alive? ", active_body.get_life_pct() if active_body and is_instance_valid(active_body) else "dead/gone")
+	# Wait and observe — long enough for armies to actually close distance
+	# and annihilate at least once (they start ~1500-2000px apart)
+	await get_tree().create_timer(15.0).timeout
+	print("[TEST]  After 15s: active alive? ", active_body.get_life_pct() if active_body and is_instance_valid(active_body) else "dead/gone")
+	print("[TEST]  world_color: ", world_color, "  death_count: ", death_count)
+	print("[TEST]  neutron_remnants: ", neutron_remnants.size(), "  dust: ", dust)
+	# Verify dust actually flows from destroying a neutron remnant. --auto never
+	# simulates a SPACE press (same reason obstacle-beam collision is also
+	# unexercised here), so teleport next to one and fire directly to prove
+	# the collision path itself, not just assert it by analogy.
+	if neutron_remnants.size() > 0 and active_body and is_instance_valid(active_body):
+		var target: Node2D = neutron_remnants[0]
+		if is_instance_valid(target):
+			active_body.position = target.position - Vector2(100.0, 0.0)
+			active_body.facing_angle = 0.0
+			for i in 6:
+				active_body._fire_ability()
+				await get_tree().create_timer(0.35).timeout
+			print("[TEST]  after firing at remnant: neutron_remnants=", neutron_remnants.size(), " dust=", dust)
 	print("[TEST] === AUTO TEST COMPLETE ===")
 
 
@@ -100,9 +132,13 @@ func _process(delta: float) -> void:
 		_check_projectile_collisions()
 		_check_soul_obstacle_collision()
 		_check_force_field()
+		_check_neutron_remnant_collisions()
+		_check_neutron_remnant_blocking()
 		_update_army_ai(delta)
 		_update_active_body(delta)
 		_update_effects(delta)
+		if dust_label:
+			dust_label.text = "⚙ %d" % dust if dust > 0 else ""
 		# Narrator speaks periodically (more often now)
 		narrator_timer += delta
 		if narrator_timer > 5.0:
@@ -400,6 +436,10 @@ func _cleanup_battle() -> void:
 	obstacle_rects.clear()
 	obstacle_hp.clear()
 	obstacle_max_hp.clear()
+	for rem in neutron_remnants:
+		if is_instance_valid(rem):
+			rem.queue_free()
+	neutron_remnants.clear()
 
 
 # --- HUD ---
@@ -433,6 +473,11 @@ func _build_hud() -> void:
 	first_blast_label.add_theme_color_override("font_color", Color(0.55, 0.5, 0.4))
 	first_blast_label.visible = false
 	vbox.add_child(first_blast_label)
+	dust_label = Label.new()
+	dust_label.text = ""
+	dust_label.add_theme_font_size_override("font_size", 13)
+	dust_label.add_theme_color_override("font_color", Color(0.5, 0.48, 0.42))
+	vbox.add_child(dust_label)
 	flavor_label = Label.new()
 	flavor_label.text = ""
 	flavor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -685,6 +730,55 @@ func _check_projectile_collisions() -> void:
 			projectiles.remove_at(pi)
 
 
+func _check_neutron_remnant_collisions() -> void:
+	# Beam vs. wreckage — its own check, not merged into the obstacle-beam
+	# logic above, because breaking a neutron yields dust, a resource
+	# conceptually distinct from substance/upgrade_points.
+	var soul := active_body
+	if not soul or not is_instance_valid(soul) or not soul.has_method("get_active_projectiles"):
+		return
+	var projectiles: Array[Dictionary] = soul.get_active_projectiles()
+	for pi in range(projectiles.size() - 1, -1, -1):
+		var proj: Dictionary = projectiles[pi]
+		if proj.get("type") != "beam":
+			continue
+		var beam_start: Vector2 = soul.position + proj["start"]
+		var beam_end: Vector2 = soul.position + proj["end"]
+		var beam_hit := false
+		for ri in range(neutron_remnants.size() - 1, -1, -1):
+			var rem: Node2D = neutron_remnants[ri]
+			if not is_instance_valid(rem):
+				neutron_remnants.remove_at(ri)
+				continue
+			var closest := Geometry2D.get_closest_point_to_segment(rem.position, beam_start, beam_end)
+			if closest.distance_to(rem.position) < rem.radius * 0.7:
+				var destroyed: bool = rem.take_beam_damage(int(proj["damage"]))
+				_spawn_beam_impact(rem.position)
+				beam_hit = true
+				if destroyed:
+					dust += randi_range(2, 4)
+					rem.queue_free()
+					neutron_remnants.remove_at(ri)
+				break
+		if beam_hit and pi < projectiles.size():
+			projectiles.remove_at(pi)
+
+
+func _check_neutron_remnant_blocking() -> void:
+	# Wreckage is solid — the arena narrows as its own war fills it with
+	# debris ("movement grows heavy", CRITICAL_BRIEF.md §3/§8).
+	if not active_body or not is_instance_valid(active_body):
+		return
+	for rem in neutron_remnants:
+		if not is_instance_valid(rem):
+			continue
+		var min_dist: float = active_body.radius + rem.radius
+		var dist: float = active_body.position.distance_to(rem.position)
+		if dist < min_dist and dist > 0.01:
+			var push_dir: Vector2 = (active_body.position - rem.position).normalized()
+			active_body.position += push_dir * (min_dist - dist)
+
+
 func _check_force_field() -> void:
 	var soul := active_body
 	if not soul or not is_instance_valid(soul) or not soul.has_method("get_force_field_range"):
@@ -807,8 +901,15 @@ func _update_army_ai(delta: float) -> void:
 			if sn != active_body:
 				_ai_think(sn, enemies, delta)
 	_update_concealment(delta)
+	_update_color_balance()
 	_check_annihilation()
 	_check_battle_end()
+
+
+func _update_color_balance() -> void:
+	# -1.0 = all black, 0.0 = neutral middle, +1.0 = all white.
+	var total := white_army.size() + black_army.size()
+	color_balance = float(white_army.size() - black_army.size()) / float(maxi(total, 1))
 
 
 func _update_concealment(delta: float) -> void:
@@ -904,7 +1005,12 @@ func _ai_think(sn: Node2D, enemies: Array, delta: float) -> void:
 			final_target = formation_target.lerp(enemy_centroid, 0.4)
 		var to_target: Vector2 = final_target - sn.position
 		if to_target.length() > 20.0:
-			sn.position += to_target.normalized() * sn.genome.get_speed() * 0.15 * delta
+			# 0.15 (was the value before the WASD-input bug fix) turned out to be
+			# too slow to ever close the ~1800px starting gap between armies in
+			# reasonable time — that was previously masked by every soul also
+			# drifting with the player's raw input. Real AI-only speed needs to
+			# be faster now that masking is gone.
+			sn.position += to_target.normalized() * sn.genome.get_speed() * 0.35 * delta
 		if sn.polarity == 1 and sn.force_field_strength < 0.3:
 			# Black: keep force field warm to control territory
 			sn.force_field_active = true
@@ -968,12 +1074,18 @@ func _get_black_tactical_pos(sn: Node2D) -> Vector2:
 func _check_incarnation() -> void:
 	if not soul_stream:
 		return
-	# Find next alive soul on the same side
+	# The dying body — captured before we search, and explicitly excluded
+	# below. Annihilation kills via queue_free() without ever touching HP, so
+	# at this point the dying soul can still read get_life_pct() > 0.0 and
+	# still be sitting in the army array: without this exclusion the search
+	# picks the very soul that's about to be freed two lines later, and no
+	# real incarnation happens.
+	var dying := active_body
 	if active_body and is_instance_valid(active_body):
 		active_body.is_active = false
 	var army: Array = white_army if soul_stream.current_body and soul_stream.current_body.polarity == 0 else black_army
 	for sn in army:
-		if is_instance_valid(sn) and sn.has_method("get_life_pct") and sn.get_life_pct() > 0.0:
+		if sn != dying and is_instance_valid(sn) and sn.has_method("get_life_pct") and sn.get_life_pct() > 0.0:
 			# The reserve gains ego (but less than the original)
 			sn.genome.ego = 0.8
 			sn.genome.set_ego(0.8)
@@ -1013,9 +1125,13 @@ func _check_annihilation() -> void:
 				continue
 			var dist: float = white_soul.position.distance_to(black_soul.position)
 			if dist < white_soul.radius + black_soul.radius + 4.0:
-				# ANNIHILATION! Both destroyed, color released
+				# ANNIHILATION! Both destroyed, color released — AND a third
+				# state: the pair neutralizes into a broken physical remnant,
+				# not just an abstract counter. See CRITICAL_BRIEF.md §8.
 				var contact_point: Vector2 = (white_soul.position + black_soul.position) * 0.5
 				_spawn_annihilation_effect(contact_point)
+				_crack_open_nearby_remnants(contact_point)
+				_spawn_neutron_remnant(contact_point)
 				# Release substance (color) into the world
 				substance += 2
 				world_color += 1
@@ -1042,6 +1158,31 @@ func _check_annihilation() -> void:
 	for i in range(black_army.size() - 1, -1, -1):
 		if black_army[i] == null or not is_instance_valid(black_army[i]):
 			black_army.remove_at(i)
+
+
+func _spawn_neutron_remnant(pos: Vector2) -> void:
+	var remnant_script = preload("res://scripts/neutron_remnant.gd")
+	var remnant := Node2D.new()
+	remnant.name = "Neutron_%d" % neutron_remnants.size()
+	remnant.set_script(remnant_script)
+	remnant.position = pos
+	add_child(remnant)
+	neutron_remnants.append(remnant)
+
+
+func _crack_open_nearby_remnants(pos: Vector2) -> void:
+	# New violence near old wreckage reclaims it — reverts to color instead
+	# of staying permanently spent. See CRITICAL_BRIEF.md §8.
+	for i in range(neutron_remnants.size() - 1, -1, -1):
+		var rem: Node2D = neutron_remnants[i]
+		if not is_instance_valid(rem):
+			neutron_remnants.remove_at(i)
+			continue
+		if rem.position.distance_to(pos) < 90.0:
+			world_color += 1
+			_spawn_annihilation_effect(rem.position)
+			rem.queue_free()
+			neutron_remnants.remove_at(i)
 
 
 func _spawn_annihilation_effect(pos: Vector2) -> void:

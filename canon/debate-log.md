@@ -117,7 +117,22 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 011 — Every entity has a player-interactive system — OPEN
+## 012 — The plane has a quantum fabric / strings — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline, from Luka):** The plane is woven from an underlying quantum
+fabric / strings. Elements are patterns in it; souls are different vibration
+modes of the same strings; Spirit is the resonance when Fire and Air meet;
+Time is the fabric's extension; Monochrome is the fabric when neither mode sees
+the other; color is its resonance made visible. Grounded in the liquid/wave
+hex-grid (already built) and the operators-as-threads.
+
+**Question it leaves open:** Is the fabric a playable system (weave/tear/sense)
+or pure substrate? Does it have its own treasure? Does a neutron (inert mode)
+dampen the fabric nearby (the mechanism of "movement grows heavy")?
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

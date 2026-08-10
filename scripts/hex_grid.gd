@@ -158,10 +158,13 @@ func _draw_hex_grid() -> void:
 	# How much color has entered the world through annihilation (main.gd) —
 	# the grid's ripple carries that color instead of staying purely decorative.
 	var color_ratio := 0.0
+	var balance := 0.0
 	var parent := get_parent()
 	if parent and "world_color" in parent and "army_size" in parent:
 		var max_color: float = float(parent.army_size) * 2.0
 		color_ratio = clampf(float(parent.world_color) / maxf(max_color, 1.0), 0.0, 1.0)
+	if parent and "color_balance" in parent:
+		balance = parent.color_balance
 	for c in grid_cols:
 		for r in grid_rows:
 			var center := Vector2(
@@ -197,6 +200,13 @@ func _draw_hex_grid() -> void:
 			fill_col.a *= 0.7 + wave * 0.5
 			if color_ratio > 0.0:
 				var tint := Color(0.5, 0.3, 0.6) if t != T_DARK else Color(0.4, 0.22, 0.5)
+				# Balance skews the tint's hue, not its amount: white ahead
+				# warms it, black ahead cools it. 0.0 (neutral middle) leaves
+				# the base tint untouched.
+				if balance > 0.0:
+					tint = tint.lerp(Color(0.75, 0.55, 0.4), balance * 0.5)
+				elif balance < 0.0:
+					tint = tint.lerp(Color(0.3, 0.28, 0.55), -balance * 0.5)
 				fill_col = fill_col.lerp(tint, color_ratio * wave * 0.4)
 			draw_colored_polygon(points, fill_col)
 			for i in 6:
