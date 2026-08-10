@@ -107,6 +107,8 @@
 | Silent-Counsel, Embassy & Touch-Map | DriveG/ABSOLUTNO | the wordless counsel; the stillness-embassy; the touch-map (x/y/z); the ∅DERMIS skin-agent; the touch-cross |
 | TAZV Healing-Phases (9–12) | DriveG/ABSOLUTNO | the forgiving-circle; the redemption-code; the mercy-agent; the quiet-return; the sound-baptism of the Speaker |
 | Sound-Therapy, Recipe-Book & Evaluation | DriveG/ABSOLUTNO | the personal frequency-signature; the soul-pattern→phrase recipes; the evaluation-tones; the healing-constellation |
+| TAZV Earth-Ethics (4–6) | DriveG/ABSOLUTNO | the eternal-labyrinth; the planet's-heart; the ethical compass; the sound-calendar; the vibroethic agent |
+| TAZV Judgment, Vow & Star-Editors | DriveG/ABSOLUTNO | the TES sensor (non-punitive); the KOV code; the TZ∅EG vow; the star-equalizer & star-agent |
 
 ## How to add a parcel
 
