@@ -86,57 +86,95 @@ func _ready() -> void:
 		call_deferred("_auto_test")
 
 
+## Integration smoke test — drives the real running game (not isolated like
+## scripts/tests/unit_tests.gd) and asserts on the results instead of just
+## printing numbers for a human to eyeball. Some values are inherently
+## noisy (concurrent AI/annihilation keeps running during every await), so
+## assertions are written to hold regardless of that noise — see comments.
+var _t_pass := 0
+var _t_fail := 0
+var _t_failures: Array[String] = []
+
+
+func _t_assert(cond: bool, desc: String) -> void:
+	if cond:
+		_t_pass += 1
+	else:
+		_t_fail += 1
+		_t_failures.append(desc)
+		print("[TEST]  FAIL: ", desc)
+
+
 func _auto_test() -> void:
 	print("[TEST] Auto-choosing WHITE polarity...")
 	_on_polarity_chosen(0)
 	await get_tree().create_timer(3.0).timeout
-	print("[TEST] Checking game state...")
-	print("[TEST]  white_army: ", white_army.size())
-	print("[TEST]  black_army: ", black_army.size())
-	print("[TEST]  active_body: ", active_body.name if active_body else "NONE")
-	print("[TEST]  battle_active: ", battle_active)
-	print("[TEST]  hex terrain cells: ", $HexGrid.terrain.size() if $HexGrid else "NO HEXGRID")
-	# Check a soul
+
+	print("[TEST] --- Spawn state ---")
+	_t_assert(white_army.size() == army_size, "white_army spawns at army_size (got %d, want %d)" % [white_army.size(), army_size])
+	_t_assert(black_army.size() == army_size, "black_army spawns at army_size (got %d, want %d)" % [black_army.size(), army_size])
+	_t_assert(active_body != null and is_instance_valid(active_body), "active_body is set and valid")
+	_t_assert(battle_active == true, "battle_active is true after spawn")
+	var hex := get_node_or_null("HexGrid")
+	_t_assert(hex != null and hex.terrain.size() > 0, "hex terrain is generated")
 	if active_body:
-		print("[TEST]  active polarity: ", active_body.polarity)
-		print("[TEST]  active position: ", active_body.position)
-		if active_body.genome:
-			print("[TEST]  genome STR=%d STA=%d WIS=%d DEX=%d" % [
-				active_body.genome.STR, active_body.genome.STA,
-				active_body.genome.WIS, active_body.genome.DEX])
-			print("[TEST]  ego=%.2f psi=%.3f" % [active_body.genome.ego, active_body.genome.psi])
+		_t_assert(active_body.polarity == 0, "active_body matches the chosen polarity (white)")
+		_t_assert(active_body.is_active == true, "active_body has is_active set (movement/ability input gate)")
+		_t_assert(active_body.genome != null, "active_body has a genome")
+
 	# Wait and observe — long enough for armies to actually close distance
 	# and annihilate at least once (they start ~1500-2000px apart)
 	await get_tree().create_timer(15.0).timeout
-	print("[TEST]  After 15s: active alive? ", active_body.get_life_pct() if active_body and is_instance_valid(active_body) else "dead/gone")
-	print("[TEST]  world_color: ", world_color, "  death_count: ", death_count)
-	print("[TEST]  neutron_remnants: ", neutron_remnants.size(), "  dust: ", dust)
-	# Verify dust actually flows from destroying a neutron remnant. --auto never
-	# simulates a SPACE press (same reason obstacle-beam collision is also
-	# unexercised here), so teleport next to one and fire directly to prove
-	# the collision path itself, not just assert it by analogy.
+
+	print("[TEST] --- After 15s of battle ---")
+	_t_assert(active_body != null and is_instance_valid(active_body), "active_body still exists after 15s (incarnation kept it alive)")
+	_t_assert(world_color >= 0 and death_count >= 0, "world_color/death_count are non-negative")
+	_t_assert(dust >= 0, "dust is never negative")
+	# Not asserting world_color > 0 here: whether an annihilation has landed
+	# in exactly 15s is itself timing-dependent, tested more directly below.
+
+	print("[TEST] --- Neutron remnant + dust (direct verification) ---")
+	# --auto never simulates a SPACE press, so obstacle/remnant beam collision
+	# is otherwise unexercised — teleport onto a remnant and fire directly to
+	# prove the collision path itself, not just assert it by analogy.
 	if neutron_remnants.size() > 0 and active_body and is_instance_valid(active_body):
 		var target: Node2D = neutron_remnants[0]
+		var dust_before_fire := dust
 		if is_instance_valid(target):
 			active_body.position = target.position - Vector2(100.0, 0.0)
 			active_body.facing_angle = 0.0
 			for i in 6:
 				active_body._fire_ability()
 				await get_tree().create_timer(0.35).timeout
-			print("[TEST]  after firing at remnant: neutron_remnants=", neutron_remnants.size(), " dust=", dust)
-	# Verify the vault machine. --auto never presses G, so call it directly.
-	print("[TEST]  dust before pull: ", dust)
+			_t_assert(dust >= dust_before_fire, "dust never decreases from firing at a remnant")
+			if not is_instance_valid(target):
+				_t_assert(dust > dust_before_fire, "destroying the targeted remnant increased dust (got +%d)" % [dust - dust_before_fire])
+	else:
+		print("[TEST]  (skipped: no neutron remnant existed yet at the 15s mark)")
+
+	print("[TEST] --- Soul Vault ---")
+	var dust_before_pull := dust
 	_open_gumball_machine()
-	print("[TEST]  dust after pull: ", dust, "  vault: ", soul_vault.get_vault_summary() if soul_vault else "NO VAULT")
-	# Verify the character sheet actually exists now (was never created in the
-	# real battle flow before this session's fix) and its new fields populate.
-	print("[TEST]  character_sheet exists: ", character_sheet != null)
+	if dust_before_pull >= 1:
+		_t_assert(dust == dust_before_pull - 1, "a successful pull spends exactly 1 dust (had %d, now %d)" % [dust_before_pull, dust])
+		_t_assert(soul_vault != null and soul_vault.souls.size() > 0, "a successful pull records a soul in the vault")
+	else:
+		_t_assert(dust == dust_before_pull, "a refused pull (no dust) does not spend anything")
+
+	print("[TEST] --- Character sheet ---")
+	_t_assert(character_sheet != null, "character_sheet exists (was never created in the real battle flow before this fix)")
 	if character_sheet:
 		character_sheet.visible = true
 		character_sheet._refresh()
-		print("[TEST]  sheet dust=%s balance=%s vault=%s mods=%s" % [
-			character_sheet.dust_val_label.text, character_sheet.balance_val_label.text,
-			character_sheet.vault_val_label.text, character_sheet.mods_val_label.text])
+		_t_assert(not character_sheet.dust_val_label.text.is_empty(), "sheet's dust field populates")
+		_t_assert(not character_sheet.balance_val_label.text.is_empty(), "sheet's balance field populates")
+		_t_assert(not character_sheet.vault_val_label.text.is_empty(), "sheet's vault field populates")
+		_t_assert(character_sheet.dust_val_label.text == str(dust), "sheet's dust field matches the real dust value")
+
+	print("[TEST] === RESULTS: %d passed, %d failed ===" % [_t_pass, _t_fail])
+	if _t_fail > 0:
+		for f in _t_failures:
+			print("[TEST]  - ", f)
 	print("[TEST] === AUTO TEST COMPLETE ===")
 
 
