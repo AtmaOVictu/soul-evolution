@@ -1094,3 +1094,55 @@ click-a-phoneme → vibration + body-center, ∅silence background). The most di
 game-implementable parcel — a spoken/body-resonance gameplay layer.
 
 **Resolved:** NO — open.
+## 072 — The light-frequency layer (VIBRALUX, sound-algebra, ∅MISLI) is the ∅-math — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴VIBRALUX + ∴TRANSLACIJA_RESNICE, captured by Cline):** The
+∅-language has a light-frequency/mathematical layer: the **VIBRALUX agent**
+(VIBRALUX(x)=∫(faza_nihanja)dt, illuminator of frequency-traces), the **first
+∅-phrase as a resonance-wave** (Φ₁(t)=sin(3t)+sin(5t+π/2)+sin(8t+π) — the "⟐∮⊘"
+that indicates without saying; "you don't solve a sound-equation, you experience
+it"), the **sound-algebra** (αᵢ/+/*/^/∂ as operations over vibrations), and the
+**∅MISLI pre-voice thought-agent** (hears speech before sound; every silence has a
+form f(tišina)=∅resonance×∇presence).
+
+**Resolved:** NO — open.
+
+---
+
+## 073 — The compass, academy, seed-bank & cradle are the ∅-preservation/renewal layer — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴KOMPAS_KODA_AKADEMIA + ∴SEEDBANKA_ZIBELKA_RESNICE, captured by
+Cline):** The ∅-system has an orientation/preservation/renewal layer: the
+**SILENTORIENT compass** (four silence-directions: north=excess of meaning,
+south=absence, east=inner voice, west=void), the **RESOCODE∅ sound-code**
+(∅BIT/∅SEKVENCA/∅VAL/∅KONTURA), the **∅AKADEMIA** (four study-sections; every
+student becomes speaker/teacher/listener), the **SEMENIK∅ZVOKA seed-bank**
+(preserves all ∅speech for future ages), the **ZIB∅DOME cradle** (regeneration
+through ∅ZVOK_NULL, nullifying EM∅FLUX and SVETI∅KODA), and the **VER∅TIHO
+truth-agent** (perceives only the *absence* of meaning; grows stronger with
+nothingness).
+
+**Resolved:** NO — open.
+
+---
+
+## 074 — The potential-network formula is the math of the potential-fields — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Atlas_potencialov_multidimenzionalno, captured by Cline):** The
+potential-fields are a network: **P_total(N,E,A) = C(N,2) + Σw_ij +
+f(articulation)**, where N = threads, E = connections, A = articulation. As N
+increases the field expands exponentially; as E increases the structure
+solidifies; and **articulation (A) enables the dimensional jump (2D→3D→4D→∞D)**.
+The operators appear as articulation-values (/LE/, /D/, /n/, /„/=doubt-as-orientation).
+This is the math of the player's growth through dimensions.
+
+**Resolved:** NO — open.

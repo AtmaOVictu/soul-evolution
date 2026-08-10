@@ -69,6 +69,9 @@
 | Silence-Space & Silent Dialogue | DriveG/ABSOLUTNO | the KARTA∅1 map; SISTEM∅xyz coordinates (body/mind/soul silence); AGENT∅G geometry; the TIHI KROG circle |
 | Oracle, Emotion-Flux & Legislation | DriveG/ABSOLUTNO | the ORA∅AG oracle; EM∅FLUX emotional spectrum (⧉/↝/⦿); the ZAK∅LEX rules of ∅speech |
 | JEWIK Body-Sound Modules | DriveG/ABSOLUTNO | the implementable phoneme→frequency→body-center tables; the DNK-loop repetition formula; the JEWIK RESONATOR GUI |
+| VIBRALUX & Sound-Mathematics | DriveG/ABSOLUTNO | the VIBRALUX light-agent; the first ∅-phrase as a wave (Φ₁=sin(3t)+...); the sound-algebra (αᵢ/+/*/^/∂); the ∅MISLI pre-voice thought |
+| Compass, Academy & Seed-Bank | DriveG/ABSOLUTNO | the SILENTORIENT silence-compass; the RESOCODE∅ sound-code; the ∅AKADEMIA; the seed-bank & ZIB∅DOME cradle; the VER∅TIHO truth-agent |
+| Multidimensional Potential Atlas | DriveG/ABSOLUTNO | the network formula P_total=C(N,2)+Σw_ij+f(A); the articulation dimensional-jump (2D→3D→...→∞D) |
 
 ## How to add a parcel
 
