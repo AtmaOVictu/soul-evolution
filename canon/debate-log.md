@@ -284,7 +284,31 @@ is simultaneously a negation (cut), the doubt (dvom) is the engine of meaning
 
 ---
 
-## 051 — The ontomathos is the soul's mathematical backbone — OPEN
+## 052 — The ontological function F(x) is the soul's deepest form — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from bis.md, captured by Cline):** The ontological function F(x)
+(the 11-stage chain ¬→⟁→∆→∴→⊘→J→∫→|¬|→⧖→∮→⊢→⟡) is the deepest form of the
+soul's state function — the player's being is evaluated through this single
+nested chain, with negation as its foundation and the star as its completion.
+
+**Resolved:** NO — open.
+
+---
+
+## 053 — The Star-as-compass is the internal navigation center — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from asdasda.md, captured by Cline):** The Star-as-compass is the
+player's internal navigation center — the point where all the soul's cycles
+meet, orienting every register, with each key choice a star-moment breakthrough
+(∆) — companioning the external star-map.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

@@ -48,6 +48,8 @@
 | Atlas of Duels | DriveG/ABSOLUTNO | the 3 duel modes (Symmetrical/Drift/Drain); the Fire/Water confrontation |
 | Phoneme-OSEBNIK | DriveG/ABSOLUTNO | the phoneme→agent→field→operator word; the mandala method; Victor Tamal |
 | Ontomathos | Obsidian/Matematika | the soul's formal model (P(t), E(t), T(t), A_n(t), D(t)) |
+| Ontological Function F(x) | Obsidian/Bistvo | the 11-stage chain ¬→⟁→…→⟡; every being as a nested function |
+| Star-as-Compass | Obsidian/Bistvo | the ZVEZDA center (∴⟡∆⟡⊚⟡π⟡∞); the internal navigation |
 
 ## How to add a parcel
 
