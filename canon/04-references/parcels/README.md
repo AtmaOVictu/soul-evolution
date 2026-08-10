@@ -95,6 +95,8 @@
 | Victor-Luka-Satan & JEV-KA-RA | DriveG/ABSOLUTNO | the JEV-KA-RA trinitarian agent; the ∅SKRBI/LUKA-SATAN/VICTOR-JAZ triad; the GUI (box-switcher, audiomandala, body-map) |
 | Somatic Body-Language | DriveG/ABSOLUTNO | the organs as ∅phrases; the touch-book; the muscle-language; the ∅TIPA touch-agent; LE (ŠKATLJA 15) completes the agent-boxes |
 | Sound-Pharmacy & Frequency-Medicine | DriveG/ABSOLUTNO | emotions as notes (432/210/528Hz); frequency-medicines (wave-codes); phrases-as-therapy; the mineral-academy & karst-hall |
+| Skeleton & Fascia (body ∅-scaffolding) | DriveG/ABSOLUTNO | muscle-layers as syntax; the fascia & ∅VRETENO agents; the bone-books; the ∅OSTEO fracture-reader; the bone-scribe |
+| Transdermal & Neuro-Mineral | DriveG/ABSOLUTNO | the transdermal silence; the fono-skin syntax; the vibration-clinic; the crystal-nerve; the neuro-mineral network |
 
 ## How to add a parcel
 
