@@ -36,6 +36,7 @@ var world_color: int = 0  # color accumulated from annihilation — saturates th
 
 # --- Battle system ---
 var soul_stream: RefCounted = null
+var soul_vault: RefCounted = null
 var white_army: Array = []
 var black_army: Array = []
 var active_body: Node2D = null
@@ -57,6 +58,7 @@ var dust: int = 0
 # fight each other via contact-annihilation, which is binary, not damage-based).
 var color_balance: float = 0.0
 var dust_label: Label = null
+var vault_ui: Control = null
 
 var void_bg: ColorRect
 var hud: CanvasLayer
@@ -70,6 +72,7 @@ var void_shader: ShaderMaterial
 
 
 func _ready() -> void:
+	soul_vault = SoulVault.new()
 	_build_void()
 	_build_hex_grid()
 	_build_hud()
@@ -121,6 +124,10 @@ func _auto_test() -> void:
 				active_body._fire_ability()
 				await get_tree().create_timer(0.35).timeout
 			print("[TEST]  after firing at remnant: neutron_remnants=", neutron_remnants.size(), " dust=", dust)
+	# Verify the vault machine. --auto never presses G, so call it directly.
+	print("[TEST]  dust before pull: ", dust)
+	_open_gumball_machine()
+	print("[TEST]  dust after pull: ", dust, "  vault: ", soul_vault.get_vault_summary() if soul_vault else "NO VAULT")
 	print("[TEST] === AUTO TEST COMPLETE ===")
 
 
@@ -173,6 +180,8 @@ func _input(event: InputEvent) -> void:
 				_on_resume()
 		if event.keycode == KEY_TAB:
 			_toggle_character_sheet()
+		if event.keycode == KEY_G:
+			_open_gumball_machine()
 		if event.keycode == KEY_SPACE and soul_genome and soul_polarity == 0:
 			var soul := get_node_or_null("Soul")
 			if soul and soul.has_method("_fire_ability"):
@@ -1280,6 +1289,56 @@ func _update_active_body(delta: float) -> void:
 		_check_incarnation()
 	if character_sheet and character_sheet.visible:
 		character_sheet._refresh()
+
+
+# ===================================================================
+# SOUL VAULT — gumball machine (luck-driven, perception reads odds)
+# ===================================================================
+
+func _open_gumball_machine() -> void:
+	if not soul_vault or not active_body or not active_body.genome:
+		return
+	var g: RefCounted = active_body.genome
+	if not vault_ui:
+		var ui_script = preload("res://scripts/vault_machine_ui.gd")
+		vault_ui = Control.new()
+		vault_ui.name = "VaultMachine"
+		vault_ui.set_script(ui_script)
+		hud.add_child(vault_ui)
+	# The coin is dust, not upgrade_points — upgrade_points already has its own
+	# purpose (soul_genome.gd's 5 ability-upgrade categories), and per the
+	# canon debate-log (007), dust is specifically "the character-builder
+	# currency". Using upgrade_points here would spend the same treasure twice
+	# for two different systems.
+	if dust < 1:
+		narrate("no coin. the machine wants a treasure first.")
+		vault_ui.play_empty()
+		return
+	dust -= 1
+	# WIS is vision, not perception — DESIGN.md documents INT -> perception,
+	# WIS -> vision. The odds-reading roll belongs to INT.
+	var result: Dictionary = soul_vault.draw_from_machine(1, dust + 1, g.LUK, g.INT)
+	if result.get("ok", false):
+		var drawn: Dictionary = result["soul"]
+		var quality: String = result["quality"]
+		var chance: float = result["perceived_chance"]
+		vault_ui.play_draw(quality)
+		var display := "the machine turns. you drew a %s soul." % quality
+		if chance < 0.3:
+			display += " (you barely saw the odds)"
+		elif chance > 0.7:
+			display += " (you read the odds clearly)"
+		narrate(display)
+		_flavor_from_genome(drawn["genome"])
+	else:
+		narrate("the machine is empty.")
+		vault_ui.play_empty()
+
+
+func _flavor_from_genome(g: RefCounted) -> void:
+	if g.has_method("get_modification_summary"):
+		var mods: String = g.get_modification_summary()
+		show_flavor("vault holds %s \u2014 %s" % [soul_vault.get_vault_summary(), mods])
 
 
 # ===================================================================

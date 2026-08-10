@@ -42,6 +42,81 @@ var skulls: int = 0
 var story_lines: PackedStringArray = PackedStringArray()
 var fragments_touched: PackedStringArray = PackedStringArray()
 
+# === MODIFICATIONS (mutations / upgrades / blessings / curses) ===
+# Each modification is a Dictionary: {type, name, stat, value, desc, permanent}
+#   type: "mutation" | "upgrade" | "blessing" | "curse"
+#   stat: the genome/ability field it affects (e.g. "STR", "divergence", "psi")
+#   value: the modifier amount
+#   permanent: whether it persists across incarnation
+var modifications: Array[Dictionary] = []
+
+
+## Add a modification (mutation/upgrade/blessing/curse) to the soul.
+func add_modification(type: String, name: String, stat: String, value: float, desc: String = "", permanent: bool = false) -> void:
+	modifications.append({
+		"type": type,
+		"name": name,
+		"stat": stat,
+		"value": value,
+		"desc": desc,
+		"permanent": permanent,
+	})
+	# Apply the effect immediately if it's an ability or genome stat
+	if stat in ["STR", "STA", "INT", "WIS", "CHA", "LUK", "DEX"]:
+		set(stat, clampi(get(stat) + int(value), 1, 100))
+		_compute_pools()
+	elif stat in ["divergence", "negation", "delta", "trace", "tau", "sigma", "carbon", "nitrogen", "phosphorus", "sulfur"]:
+		set(stat, clampf(get(stat) + value, 0.0, 1.0))
+		_compute_abilities()
+		_compute_psi()
+	# Track in story
+	if desc.is_empty():
+		desc = "%s: %s" % [type.capitalize(), name]
+	story_lines.append("%s \u2014 %s" % [type.capitalize(), name])
+
+
+## True if the soul carries a curse.
+func has_curse() -> bool:
+	for m in modifications:
+		if m["type"] == "curse":
+			return true
+	return false
+
+
+## True if the soul carries a blessing.
+func has_blessing() -> bool:
+	for m in modifications:
+		if m["type"] == "blessing":
+			return true
+	return false
+
+
+## Count of a given modification type.
+func count_modifications(type: String) -> int:
+	var count := 0
+	for m in modifications:
+		if m["type"] == type:
+			count += 1
+	return count
+
+
+## Remove a modification by name (e.g. a curse cleansed by a blessing).
+func remove_modification(name: String) -> void:
+	for i in range(modifications.size() - 1, -1, -1):
+		if modifications[i]["name"] == name:
+			modifications.remove_at(i)
+			break
+
+
+## The soul's modification summary (for the sheet / vault).
+func get_modification_summary() -> String:
+	if modifications.is_empty():
+		return "unmodified"
+	var parts: PackedStringArray = PackedStringArray()
+	for m in modifications:
+		parts.append("%s:%s" % [m["type"][0].to_upper(), m["name"]])
+	return ", ".join(parts)
+
 
 static func create_random(id: int, pol: int) -> SoulGenome:
 	var g := SoulGenome.new()
