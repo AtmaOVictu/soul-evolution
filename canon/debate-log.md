@@ -241,7 +241,18 @@ dvom axis is protected — the player is never punished for questioning.
 
 ---
 
-## 038 — The gift dialogues are the scene template — OPEN
+## 039 — The world-tree is the center; the body is renewal — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from birth-chart + body sources, captured by Cline):** The world-tree
+(axis mundi) is the physical center of the plane — the trunk of the Earth,
+crowned by the star-map, where all registers meet — and the Great Mother is the
+Earth register's archetype (the life-giving face opposed to the consuming maw).
+The body (⊥) is a cycle of decay-and-rebirth, ritually honored as power.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

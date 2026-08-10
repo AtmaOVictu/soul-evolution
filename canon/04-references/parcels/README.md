@@ -29,6 +29,8 @@
 | Ethics of Relation | DriveG/ABSOLUTNO | the APD relational model (5 domains, guards, 10 axioms) |
 | Jewik Ethical Code | DriveG/ABSOLUTNO | the ethics engine (guards, 8 axioms, 12 obligations, P(5) seal protocol) |
 | Darilni Dialogi | DriveG/ABSOLUTNO | the gift dialogues (3 lines + DAR); REK 03 = Fire/Water boundary |
+| World-Tree & Great Mother | DriveG/ABSOLUTNO | the axis mundi / Earth center; the Earth archetypes |
+| Body as Renewal | DriveG/ABSOLUTNO | the ⊥ body axis as cycle of decay-and-rebirth; "red tents" |
 
 ## How to add a parcel
 
