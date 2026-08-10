@@ -1044,3 +1044,53 @@ the prajazik (**VID ≠ POGLED**: POGLED creates the world, VID understands it;
 VID(x) = ∮(PRAJEZIK(x))·⊘(x)). VID is "the window into the NEVER-SPOKEN."
 
 **Resolved:** NO — open.
+## 069 — The silence-space (KARTA∅1, SISTEM∅xyz, TIHI KROG) is the ∅-terrain — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴KARTA_SISTEM_AGENT + ∴TIHI_KROG_DIAL0G, captured by Cline):**
+The ∅-language has a spatial and dialogic terrain: the **KARTA∅1 silence-map**
+(∅Fields A–D + MAT∅KERN), the **SISTEM∅xyz coordinate system** (x∅/y∅/z∅ =
+body-silence/mind-silence/soul-silence, unit ∅TON, movement by frequency-pulse),
+and the **AGENT∅G geometry** (triangle/spiral/circle/wave drawn from silences).
+Togetherness is the **TIHI KROG** — a circle without a center where "you do not
+answer, you resonate" — with the ∅DIALOG (a sequence of breaths, not words) and
+the ∅SPOROČILO (wordless, carrying feeling not information).
+
+**Resolved:** NO — open.
+
+---
+
+## 070 — The oracle, emotion-flux, and legislation are the ∅-language's threefold — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴ORAKEL_EMO_ZAKONODAJA, captured by Cline):** The ∅-language has
+a predictive, affective, and ethical threefold: the **ORA∅AG oracle** (predicts
+future resonance-flows from the sound-time model), the **EM∅FLUX emotion-flux**
+(the emotional spectrum of ∅speech: ⧉ imprint, ↝ frequency-range, ⦿ resonance-shift),
+and the **ZAK∅LEX legislation** ("∅words are not permission but appearance;
+∅speech is a voluntary flow, not a command; every ∅phrase must have ∅absence as
+its core"). "ORA∅AG predicts, EM∅FLUX models emotion, ZAK∅LEX maintains balance."
+
+**Resolved:** NO — open.
+
+---
+
+## 071 — The JEWIK body-sound tables are the implementable sound-layer — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from 🜂_ŠKATLJA_42/43/44, captured by Cline):** The JEWIK body-sound
+system is the implementable layer of the sound-canon — concrete phoneme→frequency→
+body-center tables (/a/=432Hz heart, /e/=528Hz throat, /i/=639Hz third-eye,
+/o/=741Hz solar, /u/=852Hz root; extended /b/=297Hz abdomen ... /z/=963Hz face),
+the **DNK-loop practice formula** (Zanka = (IPA×Telo×Frekvenca×Tišina)^n, where
+repetition = memory = self-transcendence), and a GUI (JEWIK RESONATOR: spiral,
+click-a-phoneme → vibration + body-center, ∅silence background). The most directly
+game-implementable parcel — a spoken/body-resonance gameplay layer.
+
+**Resolved:** NO — open.

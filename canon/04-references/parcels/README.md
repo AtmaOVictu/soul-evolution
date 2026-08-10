@@ -66,6 +66,9 @@
 | Stillness-Tribunal & Initiation | DriveG/ABSOLUTNO | the VERITAS∅ tribunal (judging by vibration); the ∅resonance laws; PONTEM∅ULTIMA; ONEIRO∅ dream-agent; NEXUS∅ initiation |
 | Silence-Initiation & Institutions | DriveG/ABSOLUTNO | the INITIA∅ exam; INTRALEX body-writing; CONAUDIA/SENAT∅ONTO senates; AG∅BOG whole-consciousness; SVETI∅KODA sanctuary; EHA echo |
 | ∅-Speech Infrastructure & VID | DriveG/ABSOLUTNO | the translation-station (∮POSTAJA_00); ZV-MAT sound-matrix; KRI∅ARH crystal archive; the VID receptive eye |
+| Silence-Space & Silent Dialogue | DriveG/ABSOLUTNO | the KARTA∅1 map; SISTEM∅xyz coordinates (body/mind/soul silence); AGENT∅G geometry; the TIHI KROG circle |
+| Oracle, Emotion-Flux & Legislation | DriveG/ABSOLUTNO | the ORA∅AG oracle; EM∅FLUX emotional spectrum (⧉/↝/⦿); the ZAK∅LEX rules of ∅speech |
+| JEWIK Body-Sound Modules | DriveG/ABSOLUTNO | the implementable phoneme→frequency→body-center tables; the DNK-loop repetition formula; the JEWIK RESONATOR GUI |
 
 ## How to add a parcel
 
