@@ -16,6 +16,7 @@
 | OPTIKON | DriveG/ABSOLUTNO | the word-lexicon; word-protocol (direction/emotion/function); ogenj=Fire, dih=Air |
 | Manifest of Non-Neutrality | DriveG/ABSOLUTNO | the ethics of speech; narrator's charter; "speech is no and therefore ∫ possibility" |
 | Operativni List Absolut | DriveG/ABSOLUTNO | the Absolute's five positions (VEnNO, LE, SAMO, ENO, PRISOTNO) as master registers |
+| Topological Networks | DriveG/ABSOLUTNO | the DNK spiral + crack topology; the register-flow (Time → Personal Gate); the ring releases |
 
 ## How to add a parcel
 

@@ -147,7 +147,20 @@ is a position, not a bystander.
 
 ---
 
-## 022 — The Absolute's five positions as master registers — OPEN
+## 023 — The topologies define the player's cycle-path; the ring releases — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from the DNK spiral and crack topology, captured by Cline):** The
+crack topology's flow (TIME → ALLY → REVERBERATOR → VIBROETIC → DISPERSER →
+WITNESS → TRANSLATOR → PERSONAL_GATE) may define the **player's path across a
+cycle** — from encountering Time to reaching their own personal gate. And the
+DNK ring's FORGIVENESS/MERCY/RELEASE registers mean the cycle is not only war
+but also release — the eternal war carries a forgiving register, not just
+destruction.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
