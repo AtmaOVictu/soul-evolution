@@ -103,6 +103,8 @@
 | Cardiac-Time & Heart-Observatory | DriveG/ABSOLUTNO | the heart-temporum (ST); the ∅VALENTA balancer; the harmonic epoch (HES); the heart-observatory; the heart-diary |
 | Heart-Labyrinth, Aura & Triple-Heart | DriveG/ABSOLUTNO | the heart-labyrinth (SL); the triple-heart (PTS); the resonant-tower (RS); the circular-aura (KTA); the heart-line (PSL) |
 | Heart-Synchronizer & Global Heart | DriveG/ABSOLUTNO | the SRS heart-synchronizer; the global heart-phrase (PGSF); the collective still-breathing (KTD) |
+| Still-Academy of the Star-Wave (TAZV) | DriveG/ABSOLUTNO | the three TAZV lessons; the star-compass & spiral-breath; the galactic-zen circle; the silent-laboratory |
+| Silent-Counsel, Embassy & Touch-Map | DriveG/ABSOLUTNO | the wordless counsel; the stillness-embassy; the touch-map (x/y/z); the ∅DERMIS skin-agent; the touch-cross |
 
 ## How to add a parcel
 
