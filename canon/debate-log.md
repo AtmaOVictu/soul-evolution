@@ -284,7 +284,18 @@ is simultaneously a negation (cut), the doubt (dvom) is the engine of meaning
 
 ---
 
-## 049 — The Dawn myth is the becoming-a-myth template — OPEN
+## 050 — The duel is the confrontation mechanic — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ATLAS_DUELOV, captured by Cline):** The duel
+(Symmetrical/Drift/Drain with ontomathos Pz/Pl) is the canonical form of the
+player's confrontation with the other register — the Fire/Water encounter
+resolves through these three modes, and the antidote to Drift/Drain is the
+repair-obligation.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

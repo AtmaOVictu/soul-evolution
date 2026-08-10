@@ -45,6 +45,7 @@
 | Colored Agents | DriveG/ABSOLUTNO | emotions as agents (flow DA / break NE / generativity Mogone) |
 | Author-Origin | DriveG/ABSOLUTNO | the Word as primal No; the living paradox; the author's stance |
 | Dawn Archetype | DriveG/ABSOLUTNO | flesh→archetype myth; the freeing cut; body-wound/spirit-breath/soul-freedom |
+| Atlas of Duels | DriveG/ABSOLUTNO | the 3 duel modes (Symmetrical/Drift/Drain); the Fire/Water confrontation |
 
 ## How to add a parcel
 
