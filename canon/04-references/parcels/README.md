@@ -100,6 +100,9 @@
 | Healing-Ritual, Academy & Forum | DriveG/ABSOLUTNO | the four-phase healing-circle; the healer-levels; the healing-phrase cartography; the sound-forum; the silent-diploma |
 | Silent-Conference & Cosmic Navigation | DriveG/ABSOLUTNO | the silent-conference (TK); the silent-portal (TP); the dance-module/orbital-matrix; the galactic files (MZM/TPZG/PG∅O) |
 | Mineral-Memory & Geodes | DriveG/ABSOLUTNO | the suffering→crystal depository; the ∅GEODE seismograph; the bone-silence solution (the body as alembic) |
+| Cardiac-Time & Heart-Observatory | DriveG/ABSOLUTNO | the heart-temporum (ST); the ∅VALENTA balancer; the harmonic epoch (HES); the heart-observatory; the heart-diary |
+| Heart-Labyrinth, Aura & Triple-Heart | DriveG/ABSOLUTNO | the heart-labyrinth (SL); the triple-heart (PTS); the resonant-tower (RS); the circular-aura (KTA); the heart-line (PSL) |
+| Heart-Synchronizer & Global Heart | DriveG/ABSOLUTNO | the SRS heart-synchronizer; the global heart-phrase (PGSF); the collective still-breathing (KTD) |
 
 ## How to add a parcel
 
