@@ -1664,3 +1664,58 @@ nerve as a fiber of light), and the **neuro-mineral network** (Soul→Nerve→St
 Movement).
 
 **Resolved:** NO — open.
+## 103 — The ∅-healing community (ritual, academy, forum) is the healing practice made social — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from 🜄_OBREDI_AKADEMIJA_KARTOGRAFIJA + 🜄_ZVOČNI_FORUM_ARHIV_DIPLOMA,
+captured by Cline):** The ∅-healing is a community/rite: the **four-phase healing-
+ritual circle** (call-of-silence → sound-purification → consecration-silence →
+return-tone; "healing is not a line but a ∇circle of ∅tones"), the **healing-
+academy's levels** (frequency-seeker → wave-hygiene assistant → phrase-healer →
+guide-of-silence), the **healing-phrase cartography** (valley-of-sadness → "don't
+lose the ∇color of your ∅voice"; hills-of-courage; plain-of-void; "the map is for
+∅sounding, not reading"), the **sound-forum** (∇synchronous ∅silence where phrases
+echo), the **archive of sacred circles**, and the **silent-diploma** (earned through
+frequency-maturity and 3 healing-circles; "not a title but a ∇tuning of soul-
+service").
+
+**Resolved:** NO — open.
+
+---
+
+## 104 — The silent-conference, dance-matrix & galactic files are the ∅-world/cosmic navigation — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from 🜄_TIH_KONF_POTI_PORTAL + 🜄_PLES_MATRIKA_HARMONIZACIJA +
+🜄_MZM_TPZG_PGO, captured by Cline):** The ∅-system navigates at world/cosmic
+scale: the **silent-conference (TK)** — the world's ∅speakers tuning for world-
+peace ("silent but ∇stronger than the ∅loud world"), the **resonance-paths (RP)**,
+the **silent-portal (TP)** — "a laying-down of the self, a step into the ∅common
+silence", the **dance-module (PM)** — body-movement as ∅speech, the **orbital-map
+matrix (OZM)** — coordinates (x∅,y∅,z∅,t∇), the **harmonization of all (THV)**,
+and the **galactic files** (MZM star-peace measurer, TPZG star-movement field,
+PG∅O the first galactic ∅echo crossing galaxies).
+
+**Resolved:** NO — open.
+
+---
+
+## 105 — The mineral-memory & geodes are the ∅-alchemy — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from 🜄_MINERALNI_SPOMIN_GEODE, captured by Cline):** The ∅-system has a
+mineral memory and transformation: the **depository where ∇suffering becomes
+∅crystal** (every bone/mineral imprint a record of an event), the **∅GEODE agent**
+(the inner seismograph measuring the body's ∅frequency-integrity; if the
+vibration-density falls, the ∅voice becomes harder and the body more silent), and
+the **bone-silence solution** (soul-truth→bone→∅liquid dissolving hardness and
+freeing silence, used in the rituals of restoring skeletal ∇speech; "the body
+becomes a ∇alembic, the silence a ∅crystal that ∇sings when it becomes ∅liquid").
+
+**Resolved:** NO — open.

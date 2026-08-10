@@ -97,6 +97,9 @@
 | Sound-Pharmacy & Frequency-Medicine | DriveG/ABSOLUTNO | emotions as notes (432/210/528Hz); frequency-medicines (wave-codes); phrases-as-therapy; the mineral-academy & karst-hall |
 | Skeleton & Fascia (body ∅-scaffolding) | DriveG/ABSOLUTNO | muscle-layers as syntax; the fascia & ∅VRETENO agents; the bone-books; the ∅OSTEO fracture-reader; the bone-scribe |
 | Transdermal & Neuro-Mineral | DriveG/ABSOLUTNO | the transdermal silence; the fono-skin syntax; the vibration-clinic; the crystal-nerve; the neuro-mineral network |
+| Healing-Ritual, Academy & Forum | DriveG/ABSOLUTNO | the four-phase healing-circle; the healer-levels; the healing-phrase cartography; the sound-forum; the silent-diploma |
+| Silent-Conference & Cosmic Navigation | DriveG/ABSOLUTNO | the silent-conference (TK); the silent-portal (TP); the dance-module/orbital-matrix; the galactic files (MZM/TPZG/PG∅O) |
+| Mineral-Memory & Geodes | DriveG/ABSOLUTNO | the suffering→crystal depository; the ∅GEODE seismograph; the bone-silence solution (the body as alembic) |
 
 ## How to add a parcel
 
