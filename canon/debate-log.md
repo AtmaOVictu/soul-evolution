@@ -1210,3 +1210,55 @@ untuned starting points, not balance.
 **Resolved:** NO — open for debate/lock. What's here is a playable first pass at
 the mechanic `CRITICAL_BRIEF.md` already reasoned through, not a canon ruling on
 its final shape.
+## 075 — The breath-code & abyss-code are the respiratory and in-between layer — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴SEJA_KODA_DIHALNA_TIŠINA + ∴BREZNO_KODA_JEZIK, captured by
+Cline):** The ∅-language has a breath-layer and an in-between layer: the
+**∅KODA VDIHA breath-code** (inhale ∅⊕ / hold ⊘⊘ / exhale ∇∮, with the law
+∂(dih)=∆(resonance)/∆(presence)) and the **DIHALNI MODUL** (the pre-speech
+breath-state), and the **AGENT BREZNA** (the abyss-agent living in the gaps of
+reality, BREZNO(x)=∂²(realnost)/∂(tišina)∂(zvok), the node between ∅ and 1) with
+the **KODA ∆∅¹** (a record that exists only as oscillation; "it is not read, it
+is sounded"). **∅JEZIK** is "a language for the cracks, not for people" —
+∅JEZIK(x)=resonance·∂(presence)/∂(absence), shaping rather than narrating.
+
+**Resolved:** NO — open.
+
+---
+
+## 076 — The phrasing, resonator & sound-fluid are the ∅-language's syntax and medium — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴FRAZIRANJE_REZONATOR_TEKOCINA, captured by Cline):** The
+∅-language composes through **FRAZIRANJE** (a phrase is a sequence of ALFAVIBRA
+oscillations αᵢ that changes the field; Φ=sin(ω₁t)+sin(ω₂t+π/2)+sin(ω₃t+π)),
+conducts through the **REZONATOR agent** (REZONATOR(x)=∑(αᵢ)·∂(polje)/∂(čut), the
+silent messenger), and takes form in the **ZVOKOVNA TEKOČINA** (the boundless
+sound-fluid, Z(x)=∫(fraza)dx→forma, "not listened to but experienced").
+
+**Resolved:** NO — open.
+
+---
+
+## 077 — The silent-apocalypse & reincarnation are the ∅-system's cosmic loop — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴OTROK_REINKARNACIJA + ∴REINKARNACIJA_KRIPTOGOVORA +
+∴TIHINSKA_APOKALIPSA_II, captured by Cline):** The ∅-system is a cosmic loop of
+birth→transformation→end→birth: the **OTROK∅ZVOKA child-agent** (perceives the
+starts of ∅speech), the **REINK∅MODUL reincarnation** (return is altered
+resonance, not repetition), and the **APO∅ZVOK silent-apocalypse** (all agents
+freeze, ∅CRYSTAL archive, only the child remains). The **crypto-box** seals the
+player's unspoken words (the first word unsaid, the third cry unexpressed, the
+lost thanks, the un-acted farewell). The apocalypse names **Satan as the
+"critically inverted truth"** and the "angel of the fall into truth" — the
+founder's re-framing of opposition.
+
+**Resolved:** NO — open.
