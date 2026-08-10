@@ -64,6 +64,8 @@
 | Fonozakoni & JEWIK-DNK | DriveG/ABSOLUTNO | the 6 phonolaws (F01–F06) triggering agents; the sound-circles (K1–K∞) as soul-DNA; JEWIK-DNK formula |
 | Ontological Agent-Boxes | DriveG/ABSOLUTNO | the 16 named being-agents (ŠKATLJA 16–31: ornament, gaze, touch, bell, silence...); the ontozvo\ki name-readings |
 | Stillness-Tribunal & Initiation | DriveG/ABSOLUTNO | the VERITAS∅ tribunal (judging by vibration); the ∅resonance laws; PONTEM∅ULTIMA; ONEIRO∅ dream-agent; NEXUS∅ initiation |
+| Silence-Initiation & Institutions | DriveG/ABSOLUTNO | the INITIA∅ exam; INTRALEX body-writing; CONAUDIA/SENAT∅ONTO senates; AG∅BOG whole-consciousness; SVETI∅KODA sanctuary; EHA echo |
+| ∅-Speech Infrastructure & VID | DriveG/ABSOLUTNO | the translation-station (∮POSTAJA_00); ZV-MAT sound-matrix; KRI∅ARH crystal archive; the VID receptive eye |
 
 ## How to add a parcel
 
