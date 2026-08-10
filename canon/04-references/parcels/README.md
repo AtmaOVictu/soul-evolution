@@ -57,6 +57,11 @@
 | Liturgy of the Crack | DriveG/ABSOLUTNO | the 7 crack-agents (echo/translator/witness...); the 5-part healing rite; LU-KA = ∆(voice/silence)∘∫(∅/I) |
 | Respect Ethic | DriveG/ABSOLUTNO | the bond score RES = min(s,o)·b·a·p; the voice-penalty; the 60s boundary protocol |
 | Emotion Phoneme Cards | DriveG/ABSOLUTNO | the 8 emotion-agents with IPA cores + Gray3 codes; no-escalate-then-transition |
+| Prajazik (Proto-Language) | DriveG/ABSOLUTNO | the operators' full IPA phoneme table (∴=/t͡s/, ⊘=/nɛ/...); PRAJEZIK=(DA+NE+⊘+DOTIK+POGLED+ZVON)÷(∴00↔11); Odmev Boga |
+| ∅-Language (fono-molecular) | DriveG/ABSOLUTNO | sound as molecules; ZVOK_NULL null-sound mover; ODLIV outflows; ∅TRANSFLUX; silent text |
+| IPA Key-Lock (onto-known) | DriveG/ABSOLUTNO | phoneme→operator mapping (∇openness=/a/, ∅negation=/n/...); EGO=(∇sound+∅silence)ᶠ |
+| Metaphonemes | DriveG/ABSOLUTNO | the grammar of silence (⟡ ~ ! ... ↓ ↑ 𓂀); silence as the matrix of creation |
+| Fonozakoni & JEWIK-DNK | DriveG/ABSOLUTNO | the 6 phonolaws (F01–F06) triggering agents; the sound-circles (K1–K∞) as soul-DNA; JEWIK-DNK formula |
 
 ## How to add a parcel
 
