@@ -255,7 +255,17 @@ rather than choose one.
 
 ---
 
-## 043 — The truth formula; evil as residue; the audio word-size — OPEN
+## 044 — The ascending chain is the soul's progression — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Mandala Atlas Appendix, captured by Cline):** The ascending
+chain MOLK→DOLG→VOLK→SVETLOBA→RITUAL→IGRA→USTVARJANJE→SPOMIN→ZAVEDANJE→INTENCIJA→
+AKCIJA is the canonical **progression system** — the player's soul grows from
+silence to action through these derivable registers (each a log-based formula).
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

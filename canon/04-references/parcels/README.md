@@ -38,6 +38,7 @@
 | Truth Formula | DriveG/ABSOLUTNO | the being as R=(T−I)·C; the resnica axis as math |
 | Mandala of Evil | DriveG/ABSOLUTNO | evil = integral of the past; the elements' corrupted forms |
 | Phonetic Word | DriveG/ABSOLUTNO | operators as sounds (cut='T', bridge='L'); ⟡+⧖=1.00 |
+| Mandala Algebra | DriveG/ABSOLUTNO | registers as log-formulas; the chain MOLK→…→AKCIJA |
 
 ## How to add a parcel
 
