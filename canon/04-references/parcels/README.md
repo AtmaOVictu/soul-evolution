@@ -13,6 +13,9 @@
 | Mithjos | Bistvo/Mithjos | the soul as a living vector (Z, J, E, N); consciousness as crack with doubt |
 | Poetry | Poezija/ | "wounds are the script of my story"; the split as defining; silence/scream; the Light/Dark voice |
 | Ontomandala (Tišina) | DriveG/ABSOLUTNO | silence as the foundation; confirms the foundational quartet; "death does not need them" |
+| OPTIKON | DriveG/ABSOLUTNO | the word-lexicon; word-protocol (direction/emotion/function); ogenj=Fire, dih=Air |
+| Manifest of Non-Neutrality | DriveG/ABSOLUTNO | the ethics of speech; narrator's charter; "speech is no and therefore ∫ possibility" |
+| Operativni List Absolut | DriveG/ABSOLUTNO | the Absolute's five positions (VEnNO, LE, SAMO, ENO, PRISOTNO) as master registers |
 
 ## How to add a parcel
 

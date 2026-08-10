@@ -117,7 +117,49 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 019 — "Death does not need them" — the dead register outside the quartet — OPEN
+## 020 — The word-protocol: each word carries direction/emotion/function — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from OPTIKON, captured by Cline):** The lexicon gives each key word
+a direction, emotion, and function. Proposition: the **word-protocol** gives
+each soul carrying a word a *spatial personality* — the direction field becomes
+a movement bias (a soul carrying "resnica" drifts above/right/through; "ne"
+left/middle/front). Grounds the word-protocol as concrete, not just flavor.
+
+**Resolved:** NO — open.
+
+---
+
+## 021 — The narrator (Time) speaks non-neutrally — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Manifest of Non-Neutrality, captured by Cline):** "Every
+response is an ethical decision" — the narrator does not merely name; it
+carries weight. Proposition: Time's voice *judges* the player's acts as
+good/better/detriment (per the alignment doctrine), not neutrally. The narrator
+is a position, not a bystander.
+
+**Resolved:** NO — open.
+
+---
+
+## 022 — The Absolute's five positions as master registers — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Operativni List, captured by Cline):** The five positions of
+the Absolute (VEnNO, LE, SAMO, ENO, PRISOTNO) may be the **master registers**
+above the elements — the windows/perspectives the player sees through at the
+galactic scale. Each is a "position of the Absolute" the player could engage.
+Question: do they form the galactic window-tier, or a higher tier the player
+never directly becomes?
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
