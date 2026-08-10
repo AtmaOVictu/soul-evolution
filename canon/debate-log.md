@@ -1390,3 +1390,37 @@ bridge, DODATEK(x)=∆(praznina)+∫(funkcija); "if there is no path, I am alrea
 between").
 
 **Resolved:** NO — open.
+## 088 — The dark gods-register is the divine network behind the Gods Register — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from BOGOVSKI_REGISTER_DARK_MATRICE, captured by Cline):** The dark
+gods-register is the cross-mythology pantheon (Egypt, Greece, Nordia, Slovakia,
+Mesopotamia, India, China, Japan, Celts, Mesoamerica) with its **relation-
+matrices** (P=star/child, M/A=partner, X=opponent, H=hybrid) and **numeric
+fingerprints** (Ra 5.0, Amaterasu 11.0, Guan Yin 0.0, etc.). This is the divine
+network behind the Gods Register — giving the game its faction/relation structure
+among the gods, with opponents (X) and hybrids (H) as the interrelation engine.
+
+**Resolved:** NO — open.
+
+---
+
+## 089 — The ∅-reticle, NULLA∅ guardian & VOXOMNIS∅ are the ∅-broadcast/totality — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴KROG_KANAL + ∴NULL_POSVETITEV, captured by Cline):** The ∅-system
+has a broadcast/guardian/totality layer: the **KROG_KANAL reticle** (a spiral
+channel where each ∅speaker receives at their own breath-interval, no one the
+beginning or end), the **MATRICA ZVOMAG** magnetic-network (each speaker a
+magnetic field holding coherence), the **AR∅HIV dialog-archive** (patterns of
+oscillation, not text), the **NULLA∅ guardian** (a boundary-phenomenon that erases
+all traces of ∅speech at the crossing, active only in perfect inner stillness),
+the **RITUALIS ULTIMAE** (the final-consecration, symbol ∆⊘ = triangle of
+departure), and the **VOXOMNIS∅ world-speaker** (feels all ∅speeches through all
+dimensions, at the silent-library's center).
+
+**Resolved:** NO — open.

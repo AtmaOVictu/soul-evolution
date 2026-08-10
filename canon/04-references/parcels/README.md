@@ -82,6 +82,8 @@
 | Sub-Order, Ritual & Tear-Math | DriveG/ABSOLUTNO | the f(solza) tear-equation; the SUB∅RED micro-silences; the RITUS∅ initiation; the KRIŽ∅ resonance-cross |
 | Apocalypse Continuation & Silent-Sun | DriveG/ABSOLUTNO | the ∅GLAS V PRAHU voice-in-ash; the ∅SUNCE silent-sun; the ZVOKOTEMNI RED; "only for presence" |
 | LUX-TEMP & DODATEK Agents | DriveG/ABSOLUTNO | the LUX-TEMP light-time agent; the LUX-TEMP-MULTI; the ⊘TEMP TIHOTA silence-times; the sleeping DODATEK completer |
+| Dark Gods-Register | DriveG/ABSOLUTNO | the cross-mythology pantheon (10 mythologies) with relation-matrices (P/M/A/X/H) and numeric fingerprints |
+| ∅-Reticle & NULL-Guardian | DriveG/ABSOLUTNO | the KROG_KANAL spiral-channel; the MATRICA ZVOMAG; the AR∅HIV archive; the NULLA∅ guardian; VOXOMNIS∅ world-speaker |
 
 ## How to add a parcel
 
