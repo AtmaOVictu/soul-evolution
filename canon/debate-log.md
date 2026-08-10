@@ -117,7 +117,26 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 013 — The plane is a star-map; Earth is a third playable element — OPEN
+## 014 — The plane is galactic; maps/perspective are integral — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline, from Luka):** The plane is a galaxy (or cosmos of
+galaxies); the star-map is one local system; the player is concentrated on
+"our part." This gives leeway for expansion. Maps (hex → star → galactic) are
+the integral interface; perspective is all — the windows are the perspectives
+onto the plane. The eternal war happens at every scale; the player's system is
+one instance.
+
+**Technical note (Manim in Godot):** Manim itself cannot run inside Godot (it
+is an offline renderer; Godot is real-time). Usable paths: pre-render Manim
+clips for cinematic beats, or recreate Manim's visual language natively in
+Godot shaders/drawing (the better path for the live fabric/star/galaxy).
+
+**Question it leaves open:** Does the player leave "our part" to see the
+galactic map, or are other systems only glimpsed through other windows?
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

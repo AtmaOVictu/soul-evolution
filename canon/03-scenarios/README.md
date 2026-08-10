@@ -20,10 +20,11 @@
 | 011 | The Fabric Breathes | prostor × telo | the plane is a living quantum substrate | fabric |
 | 012 | The Sweeping Light | prostor × čas | the Fire system is a directional star-map | star-map |
 | 013 | Earth Against the Engulfing | značaj × pot | play as Earth, the third element, resisting | earth |
+| 014 | The Many Windows of the Plane | prostor × čas | the galaxy, maps, perspective/windows | galaxy |
 
 ## The narrative arc they build
 
-The thirteen seed scenarios form a spine:
+The fourteen seed scenarios form a spine:
 
 1. **003** — the three-state physics (annihilation leaves a body).
 2. **001** — the first meeting that produces the plane's substance.
@@ -38,6 +39,7 @@ The thirteen seed scenarios form a spine:
 11. **011** — the fabric that breathes (the substrate beneath all).
 12. **012** — the sweeping light (the star-map, directional).
 13. **013** — Earth against the engulfing (the third element holds).
+14. **014** — the many windows of the plane (the galaxy, perspective).
 
 A scene can be built from one scenario, or from a crossing of two (e.g. a scene
 that is both `002` blindness and `005` time-price).

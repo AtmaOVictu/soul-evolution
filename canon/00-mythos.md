@@ -130,6 +130,16 @@ ground the war is fought over.
 
 *(Full mapping in `09-earth.md`.)*
 
+## The Galaxy
+
+The plane is a **galaxy** — the star-map is one local system. The player is
+concentrated on **our part**, but the galaxy is vast: **leeway** for more, other
+systems, other wars — all instances of the same eternal conflict. **Maps are
+integral** (hex tile → star-map → galactic map); **perspective is all** — the
+windows are the perspectives onto the plane.
+
+*(Full mapping in `10-galaxy.md`.)*
+
 ---
 
 ## OPEN QUESTIONS (for debate)
@@ -144,3 +154,5 @@ ground the war is fought over.
 - [ ] Is access to the six systems gated by alignment, or open to all?
 - [ ] Is the fabric a playable system or pure substrate?
 - [ ] Is Earth's system Steadiness/Grounding, and is Water (fourth) to come?
+- [ ] Does the player ever leave "our part" to see the galactic map, or are
+      other systems only glimpsed through other windows?
