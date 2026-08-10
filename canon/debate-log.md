@@ -147,7 +147,30 @@ is a position, not a bystander.
 
 ---
 
-## 024 — Time, Death, and the Missing Scales — canon fragment — OPEN
+## 025 — CORRECTION: Dark takes Water, not Air — canon
+
+**Date:** 2026-08-10
+**Status:** CORRECTION (Luka's ruling, supersedes earlier Fire/Air pairing).
+
+**Ruling:** Dark's element is **WATER**, not air — water is opposite to fire.
+The four elements resolve as: **Fire (Light) ↔ Water (Dark)** the primary
+opposition; **Air ↔ Earth** the secondary opposition. **Air is repositioned as
+the medium** — the breath both move through, the register Spirit is made in,
+never owned by either side. Earth remains the third playable (the clay).
+
+**Consequences for canon:**
+- `00-mythos.md` primeval division + Spirit: updated to Fire/Water.
+- `02-elements.md`: new file mapping the corrected four elements.
+- `09-earth.md`: three-playable-elements table + engulfing corrected to Water.
+- The OPTIKON word "dih" (breath) now maps to Air-as-medium (Spirit's breath),
+  not to the dark element.
+
+**Open question it leaves:** Does Water's treasure become the **depth** (the
+concealing silence) rather than air's breath? And does Air, as the medium,
+become the register Spirit lives in (always present, never owned)?
+
+**Resolved:** the correction itself is CANON (Luka's ruling); the open
+questions remain open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS (direct canon fragment from Luka, `[OPEN/LUKA]`).

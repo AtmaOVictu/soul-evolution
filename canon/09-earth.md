@@ -37,7 +37,7 @@ forces press against.
 
 The third scenario (after playing Fire, then Air) is to play **as Earth**,
 holding ground while the forces surround you. The mechanic is **resistance and
-steadiness**: Fire seeks to consume and lift you; Air seeks to erode and
+steadiness**: Fire seeks to consume and lift you; Water seeks to erode and
 scatter you. Earth endures by being the ground — by holding, not by striking.
 
 ## Earth's treasure and system (open)
@@ -56,8 +56,11 @@ treasure and a player-interactive system. Hypothesis:
 | Element | Nature | Treasure | System |
 |---|---|---|---|
 | **Fire** (Light) | illuminates, reveals | revealed light | Illumination (map/star) |
-| **Air** (Dark) | conceals, ambushes | silence | Concealment / Repulsion |
+| **Water** (Dark) | conceals, the depth, ambushes | the depth (water's silence) | Concealment / the depth |
 | **Earth** (Clay) | holds, endures | the ground (stability) | Steadiness / Grounding |
+
+*(CORRECTED 2026-08-10: Dark's element is Water, not Air. See `02-elements.md`
+and debate-log 025.)*
 
 *(Water is not yet introduced — open.)*
 

@@ -11,21 +11,28 @@ Compromise** was struck:
 
 - **Light gained FIRE.** *(ref: `04-references/eng-shit.md` — "As LIGHT — I
   shine in the cracks, not to heal, but to reveal, to slice through the dark.")*
-- **Dark gained AIR.** *(ref: `04-references/zlo.md` — "evil doesn't originate
-  from him directly, but arises in his silence" — the air is the medium of
-  absence.)*
+- **Dark gained WATER.** *(Dark took the element opposite to Fire — water is
+  the depth that conceals, quenches, and holds the dark. Fire is light; water
+  is its opposite, the concealing element.)*
 
-Fire and Air are the two faces of the plane's substance. Neither alone is
-whole; neither can exist without the other.
+Fire and Water are the two faces of the plane's substance — **opposites**.
+Neither alone is whole; neither can exist without the other. **Air** is
+repositioned: it is not Dark's element — it is the **medium** both move
+through, the breath between Fire and Water (and the register Spirit is made
+in).
+
+*(CORRECTED 2026-08-10, Luka: dark takes water, opposite to fire; air is the
+medium, not the dark element. See `02-elements.md` and debate-log 025.)*
 
 ## Spirit
 
 **Both Light and Dark make SPIRIT, and Spirit is always present.**
 
 Spirit is the *third* thing that neither produces alone — what arises in the
-space between Fire and Air when they act upon each other. This is the
+space between Fire and Water when they act upon each other. This is the
 load-bearing wall: the game's "one cannot exist without the other" is not
-narration, it is the physics of Spirit.
+narration, it is the physics of Spirit. **Air is the medium Spirit is made in**
+— the breath between the two opposites.
 
 *(ref: `04-references/operators.md` — the LE axiom: "the word is not a means
 but an ontological cut"; Spirit is the LE cut between Fire and Air.)*

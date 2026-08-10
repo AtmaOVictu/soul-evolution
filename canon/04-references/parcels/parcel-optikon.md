@@ -18,7 +18,7 @@ and for the treasure/affinity mapping.
 | Word | Direction | Emotion | Function | Maps to |
 |---|---|---|---|---|
 | **ogenj** (fire) | below/above/internal | power, destruction, transformation | force of transformation, necessity of change | **Fire**; the beam; the necessitater of change (∆) |
-| **dih** (breath) | below/inside/front | life, presence | rhythm of living, fundamental impulse | **Air**; the breath; the soul's motor |
+| **dih** (breath) | below/inside/front | life, presence | rhythm of living, fundamental impulse | **Air-as-medium**; the breath Spirit is made in *(corrected: not the dark element — see 02-elements)* |
 | **tišina** (silence) | behind/inside/below | fear, respect, empty space | background of meaning, space of consciousness | the **tišina** axis; silence as foundation |
 | **resnica** (truth) | above/right/through | clarity, weight, light | confirmation of the real, orientation | the **resnica** axis; the light |
 | **ne** (no) | left/middle/front | rejection, beginning of difference | ontological separation, threshold of relation | the **¬** operator; the "No" |
