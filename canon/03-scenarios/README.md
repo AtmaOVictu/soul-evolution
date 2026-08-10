@@ -15,10 +15,11 @@
 | 006 | What the Feat Costs | značaj × resnica | feats widen the blindness (no cap) | brief §8 |
 | 007 | The Dust of What Was Broken | pot × čas | dust as the character-builder currency | brief §9 |
 | 008 | The Alignment of the Act | smisel × beseda | alignment as good/better/detriment modifier | txt, mythos |
+| 009 | The Exchange of Treasures | beseda × čas | trade between designated currencies (Time the broker) | treasures, txt |
 
 ## The narrative arc they build
 
-The eight seed scenarios form a spine:
+The nine seed scenarios form a spine:
 
 1. **003** — the three-state physics (annihilation leaves a body).
 2. **001** — the first meeting that produces the plane's substance.
@@ -28,6 +29,7 @@ The eight seed scenarios form a spine:
 6. **006** — the cost of the feat (power devours perception).
 7. **007** — the dust that builds the character.
 8. **008** — the alignment that tunes every act.
+9. **009** — the exchange of treasures (the economy of the plane).
 
 A scene can be built from one scenario, or from a crossing of two (e.g. a scene
 that is both `002` blindness and `005` time-price).

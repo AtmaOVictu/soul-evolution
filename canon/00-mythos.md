@@ -75,6 +75,20 @@ is a **detriment**. The same act changes value by alignment and circumstance.
 *(ref: `04-references/txt.md` axiom — "space is the condition of exchange;
 time is the condition of change.")*
 
+## The Treasures
+
+Every entity carries a **designated treasure/currency** — what it values,
+hoards, and trades. Fire's treasure is revealed light; Air's is silence;
+Neutron's is inertia; Dust's is formlessness; Time's is duration; Spirit's is
+the shared register. The player's treasure is set by alignment.
+
+The blindness is economic as well as perceptual: you can only perceive and
+spend your own treasure. **Time is the only entity that trades between all
+currencies** — it is the trader that makes the economy of the plane possible.
+The **windows** are each entity's treasure-hoard, displayed as art.
+
+*(Full mapping in `05-treasures.md`.)*
+
 ---
 
 ## OPEN QUESTIONS (for debate)
@@ -85,3 +99,4 @@ time is the condition of change.")*
       elements map differently?
 - [ ] Is the player's alignment a *static choice* or a *drift* that can shift
       across cycles?
+- [ ] What does Time hoard as its own treasure beyond duration?

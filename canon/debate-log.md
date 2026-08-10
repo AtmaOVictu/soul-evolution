@@ -117,7 +117,23 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 009 — Canon v0.01 scenarios complete — LOCKED (as a review milestone)
+## 010 — Every entity has a designated treasure/currency — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline, from Luka):** Every entity carries a designated
+treasure/currency — what it values, hoards, and trades. Fire = revealed light;
+Air = silence; Neutron = inertia; Dust = formlessness; Time = duration;
+Spirit = the shared register; player = by alignment. This is the "art to be
+hoarded, upgraded, traded" made entity-specific, and the concrete mechanism
+for "notice only what is theirs." Time is the only broker across all
+currencies. The windows are each entity's treasure-hoard.
+
+**Grounded in:** `04-references/txt.md` ("the only true value is time"),
+`04-references/operators.md` ("the trace is the light of relation"),
+`04-references/zlo.md` ("evil... arises in his silence").
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** LOCKED as a version milestone, not as content.
