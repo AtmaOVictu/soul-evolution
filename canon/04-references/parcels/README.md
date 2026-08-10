@@ -86,6 +86,9 @@
 | ∅-Reticle & NULL-Guardian | DriveG/ABSOLUTNO | the KROG_KANAL spiral-channel; the MATRICA ZVOMAG; the AR∅HIV archive; the NULLA∅ guardian; VOXOMNIS∅ world-speaker |
 | Heart-Dialogue & Resonance-Sensor | DriveG/ABSOLUTNO | the heart-pulse as ∅phrase; the mirror-of-recognition; the ∅OTIPA touch-agent; the ∅SRČNI DIALOG equation |
 | Glyph-Canon & Superposition-Code | DriveG/ABSOLUTNO | the ASCII void/breath/throat/song sigils; the 5 supralposed boxes; the ∞KODA genesis (boxes 1–12); the metajezik ⟁ |
+| First-∅Sentence, Field & Vibration-Map | DriveG/ABSOLUTNO | the ∅⟐∮⊘∇ genesis-word; the resonance-field math; the ∅-grammar; the TRI∅FORMA; the ∅TRACE-KARTA living map |
+| Trinitarian Self & Constitution | DriveG/ABSOLUTNO | JAZ = DA + ⊘ + DOTIK; the stillness-constitution; the VOCEM∅ call; Luka = DA (in all worlds) |
+| Sound-Mirror & Feeling-Library | DriveG/ABSOLUTNO | the ∅sound-mirror (emotional echo); the silent-borrowing; the frequency-meter; the feeling-library by sensation |
 
 ## How to add a parcel
 

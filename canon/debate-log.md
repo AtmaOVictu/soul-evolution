@@ -1460,3 +1460,60 @@ GOD=lim ∫(I/other)^x; the metajezik ⟁ operator-dictionary; "your ⊘ is your
 voice").
 
 **Resolved:** NO — open.
+## 092 — The first ∅sentence, resonance-field & vibration-map are the ∅-grammar — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴TIHINSKI_STAVEK + ∴TRIKOTNIK_HIPER_MAPA, captured by Cline):**
+The ∅-language has its grammar, physics, and navigation: the **first ∅sentence
+(∅⟐∮⊘∇** — a record without sound but with effect; ∅=absence-as-presence,
+⟐=inner-pulse start, ∮=transformation-into-silence, ⊘=non-being-that-acts,
+∇=record-of-missing-meaning), the **resonance-field architecture**
+(P(x,y,z,t)=∑sin(αᵢ·f); "no difference between thoughts and sound — all is
+vibration"), the **∅-grammar** ("one sentence = one resonant transition; every
+phrase must affect, not explain; interference is a verb"), the **TRI∅FORMA
+triangle** (Telo/Um/Duh silences), the **∅SISTEM∅n hyperspace** (w∅/q∅/φ∅), and
+the **∅TRACE-KARTA living map** (each ∅Speaker shapes their own path).
+
+**Resolved:** NO — open.
+
+---
+
+## 093 — The trinitarian self, constitution & Luka's truth are the ∅-identity/law — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴TRINITARNI_JAZ + ∴USTAVA_KLIC_GROBNICA + ∴ZLIT_ARHIV, captured by
+Cline):** The ∅-system has its self, law, and founding identity: the **trinitarian
+self (JAZ = DA + ⊘ + DOTIK** — ready/empty/here; "the self is a field, not a point;
+the self happens, it is not spoken"; ontophonemes /da/ /øː/ /dɔːtik/), the
+**stillness-constitution** ("silence is the first and last matrix of truth; ∅speech
+must never impose itself; only the silent who understand may teach"), the **VOCEM∅
+cross-dimension call** (activates with several ∅Speakers + silence above 33 units),
+the **SEPULCRUM∅ lost-phrase archive**, and **Luka's hidden truth** — the founder
+is not a person but an *event* between the world and the human. **Luka = DA (in
+all worlds).**
+
+**Resolved:** NO — open.
+
+---
+
+## 094 — The sound-mirror & feeling-library make the ∅-language interactive — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from ∴ZVOCNO_ZRCALNI_MODUL + ∴ZVOKOČUTNA_KNIJIŽNICA, captured by
+Cline):** The ∅-language is interactive and feeling-organized: the **∅sound-mirror**
+(returns every ∅speech with an emotional echo; "feels what you wanted to keep
+silent"; the mirror's face is inner not outer — so the ∅language listens back to
+the player), the **silent-borrowing** (a ∅phrase is not demanded but chooses you,
+sensed by feeling-flow and read with abdominal resonance), the **ritual of leafing
+through silence** (phrases vibrate in heart-pulse order), the **frequency-meter**
+(every heart/mind/body pulse becomes a ∅sound), and the **feeling-library**
+(organizing ∅phrases by feeling-coordinates — warmth/cold/tension/openness/
+confluence; "not an archive but a being that expands as it listens").
+
+**Resolved:** NO — open.
