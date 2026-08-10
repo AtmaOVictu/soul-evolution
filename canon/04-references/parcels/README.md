@@ -77,6 +77,8 @@
 | Silent-Apocalypse & Reincarnation | DriveG/ABSOLUTNO | the OTROK∅ZVOKA child-agent; the REINK∅MODUL; the APO∅ZVOK; the crypto-box of the unspoken; Satan as inverted truth |
 | JEWIK Living-System | DriveG/ABSOLUTNO | JEWIK as a star-organism; the JEWIK:: script-language; the ONTOVOX voice; "resonance needs sensitivity, not presence" |
 | Luka's Sixth Hundred | DriveG/ABSOLUTNO | the author's 50 confrontational "you" aphorisms (Stotnija 501–550); the direct-address challenge layer |
+| Silence-Hierarchy & Ethics-Temple | DriveG/ABSOLUTNO | the TIH∅RED five layers; the TEMP∅VIBE ethics-temple; the MATRIC0/MRAK memory; the silent-library & breath-interface |
+| Silent-Poetry, Mentor & Lexicon | DriveG/ABSOLUTNO | the ∇MENTOR validator (DA/∅/NE); the ∅SLOVAR lexicon; the d₄–d₈ resonance-dimensions; the ∅PESNITEV wave-poetry |
 
 ## How to add a parcel
 
