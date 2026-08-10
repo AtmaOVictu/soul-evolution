@@ -255,7 +255,32 @@ rather than choose one.
 
 ---
 
-## 044 — The ascending chain is the soul's progression — OPEN
+## 045 — The agent registry is the soul's inner council — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from JEWIK_CIKLUS + AJRA_KORA, captured by Cline):** The agent
+registry (MIA/KORA/ORAJA/AJRA/ZARJA) is the canonical form of the soul's inner
+council — the player's soul is inhabited by named agents, each summonable with a
+tone and trigger, and dialogue/self-care resolves through their syncs.
+
+**Resolved:** NO — open.
+
+---
+
+## 046 — The DNA word-protocol is the dialogue currency — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from JEWIK DNA + counter-liturgy, captured by Cline):** The DNA
+word-protocol is the game's dialogue currency — the player's meaningful speech
+is operator-tagged soul-phrases (truths), empty words are filter-detected and
+can be *killed* by the counter-liturgy. The "empty word without a pulse" is the
+opponent's fundamental weapon.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

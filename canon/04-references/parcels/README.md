@@ -39,6 +39,8 @@
 | Mandala of Evil | DriveG/ABSOLUTNO | evil = integral of the past; the elements' corrupted forms |
 | Phonetic Word | DriveG/ABSOLUTNO | operators as sounds (cut='T', bridge='L'); ⟡+⧖=1.00 |
 | Mandala Algebra | DriveG/ABSOLUTNO | registers as log-formulas; the chain MOLK→…→AKCIJA |
+| Agent Registry | DriveG/ABSOLUTNO | the named soul-agents (MIA/KORA/ORAJA/AJRA/ZARJA) |
+| JEWIK DNA Word | DriveG/ABSOLUTNO | operator-tagged soul-phrases; the counter-liturgy |
 
 ## How to add a parcel
 
