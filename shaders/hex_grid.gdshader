@@ -7,6 +7,7 @@ shader_type canvas_item;
 // ripple, the world_color/color_balance tint) — ported to GLSL, not redesigned.
 
 uniform sampler2D terrain_tex : filter_nearest;
+uniform sampler2D glass_tex : filter_linear;
 uniform vec2 grid_size = vec2(41.0, 27.0); // cols, rows
 uniform float hex_size = 40.0;
 uniform vec2 arena_size = vec2(2400.0, 1800.0);
@@ -47,6 +48,8 @@ void fragment() {
 	vec2 cell = clamp(world_to_cell(world_pos), vec2(0.0), grid_size - vec2(1.0));
 	vec2 local = world_pos - hex_center(cell);
 	float d = hex_sdf(local, hex_size * 0.92);
+	vec2 glass_uv = clamp(local / (hex_size * 2.0) + 0.5, 0.0, 1.0);
+	vec4 glass = texture(glass_tex, glass_uv);
 
 	vec2 tex_uv = (cell + 0.5) / grid_size;
 	float t = texture(terrain_tex, tex_uv).r;
@@ -92,6 +95,17 @@ void fragment() {
 	if (d > -border_w && d < 0.0) {
 		col = mix(col, line_col, smoothstep(-border_w, 0.0, d));
 	}
+
+	// Baked glass detail (Blender-rendered, see blender/generate_souls.py's
+	// render_glass_hex_tile) layered on top of the fully dynamic terrain
+	// tint above, interior-only so it never bleeds across hex borders. When
+	// glass_tex isn't loaded (asset pipeline not yet run), the default
+	// sampler2D reads transparent black, so glass.a == 0.0 and this is a
+	// no-op — no separate boolean flag needed.
+	if (d < 0.0) {
+		col.rgb = mix(col.rgb, col.rgb + glass.rgb * 0.4, glass.a);
+	}
+
 	if (d > 0.5) {
 		col.a = 0.0;
 	}
