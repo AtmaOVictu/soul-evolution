@@ -115,6 +115,9 @@
 | Diplomatic Columns & Sound-Guardian | DriveG/ABSOLUTNO | the diplomatic pillars; the sound-guardian (filter/echo-shield); the collective sound-inhalation |
 | Inner-Planetarium & Astral-Archive | DriveG/ABSOLUTNO | the inner-planetarium (NP); the still-solar-eruptions; the moon-agent (AL); the astral-archive (AA) |
 | Heart-Monolith & Global-Unity | DriveG/ABSOLUTNO | the heart-monolith (SM); the PGSF cultural variants; the global-unity network (TMZ) |
+| Sound-Sentence Physics & Zvokology | DriveG/ABSOLUTNO | the ∅sentence as a wave-act (Sᵢ=α₁⊕α₂⊕...); the ∮TIŠINA translator; zvokology; ALFAVIBRA (αᵢ=sin(ωᵢt+φᵢ)) |
+| Silent-Concert & Galactic-Music | DriveG/ABSOLUTNO | the silent-concert (∅KTV); the conductor-agent; the score of silence; the galactic-stations; the conductor-diploma |
+| Invisible-Telescope & Galactic-Cross | DriveG/ABSOLUTNO | the invisible-telescope (NT); the sun-agent (AS); the galactic-cross (GK) |
 
 ## How to add a parcel
 
