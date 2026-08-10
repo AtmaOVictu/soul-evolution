@@ -117,7 +117,19 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 017 — The soul as a living vector — OPEN
+## 018 — Wounds as the script of story; the split as defining — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from the poetry, captured by Cline):** "Rane so pisave moje
+zgodbe" (wounds are the script of my story) confirms the **skull/scar
+doctrine** — each death writes a line into the soul's story, the soul-stream
+memory. And "I am split between nothing and everything" gives the **split
+(razcep)** a stronger place — the soul's defining condition, not just one
+operator (∆).
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
