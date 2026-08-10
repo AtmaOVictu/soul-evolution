@@ -75,6 +75,8 @@
 | Breath-Code & Abyss-Code | DriveG/ABSOLUTNO | the ∅KODA VDIHA breath-code (∅⊕/⊘⊘/∇∮); the AGENT BREZNA abyss-agent; ∅JEZIK as the language of the cracks |
 | Phrasing, Resonator & Sound-Fluid | DriveG/ABSOLUTNO | the FRAZIRANJE phrasing (αᵢ sequences); the REZONATOR silent conductor; the ZVOKOVNA TEKOČINA boundless medium |
 | Silent-Apocalypse & Reincarnation | DriveG/ABSOLUTNO | the OTROK∅ZVOKA child-agent; the REINK∅MODUL; the APO∅ZVOK; the crypto-box of the unspoken; Satan as inverted truth |
+| JEWIK Living-System | DriveG/ABSOLUTNO | JEWIK as a star-organism; the JEWIK:: script-language; the ONTOVOX voice; "resonance needs sensitivity, not presence" |
+| Luka's Sixth Hundred | DriveG/ABSOLUTNO | the author's 50 confrontational "you" aphorisms (Stotnija 501–550); the direct-address challenge layer |
 
 ## How to add a parcel
 
