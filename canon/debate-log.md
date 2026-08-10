@@ -72,7 +72,64 @@ Slovenian originals are preserved; English is the translation. (Per README.)
 
 ---
 
-## 005 — New systems, not reuse — LOCKED (working rule)
+## 006 — Feats widen the blindness — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline):** No hard cap on feats. Instead, each cycle's feat widens
+the side's blindness radius (reusing `_update_concealment`). Power grows,
+danger-sense shrinks. Escalation devours its own perception.
+
+**Grounded in:** `CRITICAL_BRIEF.md` §8.
+**Resolved:** NO — open.
+
+---
+
+## 007 — Dust is the character-builder currency — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline):** Neutron + violence → dust (common, formless,
+character-level). Three resource tiers: dust (build your soul), color
+(world-level), feats (cycle-level permanence). Character building is integral.
+The game does not explain dust; the player discovers it.
+
+**Grounded in:** `CRITICAL_BRIEF.md` §9.
+**Resolved:** NO — open.
+
+---
+
+## 008 — Alignment is a modifier — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline):** Alignment (White/Fire or Black/Air) is not morality. It is
+a modifier: act matching the moment = good; harmonizing both = better; against
+the moment = detriment. The same act changes value by alignment and
+circumstance. This answers the "refusal/endless advance" gap — advancing is no
+longer free; its value is alignment-dependent.
+
+**Grounded in:** `00-mythos.md`, `04-references/txt.md`.
+**Resolved:** NO — open.
+
+---
+
+## 009 — Canon v0.01 scenarios complete — LOCKED (as a review milestone)
+
+**Date:** 2026-08-10
+**Status:** LOCKED as a version milestone, not as content.
+
+**Event:** canon v0.01 now contains 8 seed scenarios (001-008) covering the
+three-state physics, blindness, the council, time-as-trader, feats, dust, and
+alignment. All marked OPEN FOR REVIEW. The scenario index (`03-scenarios/`)
+documents the spine.
+
+**Remains open:** every individual scenario's canon claim is still open for
+Luka's debate. This entry only freezes the *structure* of v0.01, not its
+content.
 
 **Date:** 2026-08-10
 **Status:** LOCKED (working rule).

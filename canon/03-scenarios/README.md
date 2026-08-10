@@ -12,16 +12,22 @@
 | 003 | The Broken Thing Remains | telo × prostor | annihilation → corpse-shard neutron | operators, brief §8 |
 | 004 | The Last of Each | značaj × dvom | Grand Council: domination vs splitting | txt, brief §3/§8 |
 | 005 | Time Takes Its Price | čas × smisel | Time as trader (duration for color) | txt, operators, brief §8 |
+| 006 | What the Feat Costs | značaj × resnica | feats widen the blindness (no cap) | brief §8 |
+| 007 | The Dust of What Was Broken | pot × čas | dust as the character-builder currency | brief §9 |
+| 008 | The Alignment of the Act | smisel × beseda | alignment as good/better/detriment modifier | txt, mythos |
 
 ## The narrative arc they build
 
-The five seed scenarios form a spine:
+The eight seed scenarios form a spine:
 
 1. **003** — the three-state physics (annihilation leaves a body).
 2. **001** — the first meeting that produces the plane's substance.
 3. **002** — the blindness that makes the plane grey.
 4. **005** — the price Time extracts for revealing color.
 5. **004** — the Council that re-opens the cycle.
+6. **006** — the cost of the feat (power devours perception).
+7. **007** — the dust that builds the character.
+8. **008** — the alignment that tunes every act.
 
 A scene can be built from one scenario, or from a crossing of two (e.g. a scene
 that is both `002` blindness and `005` time-price).
