@@ -47,6 +47,7 @@
 | Dawn Archetype | DriveG/ABSOLUTNO | flesh→archetype myth; the freeing cut; body-wound/spirit-breath/soul-freedom |
 | Atlas of Duels | DriveG/ABSOLUTNO | the 3 duel modes (Symmetrical/Drift/Drain); the Fire/Water confrontation |
 | Phoneme-OSEBNIK | DriveG/ABSOLUTNO | the phoneme→agent→field→operator word; the mandala method; Victor Tamal |
+| Ontomathos | Obsidian/Matematika | the soul's formal model (P(t), E(t), T(t), A_n(t), D(t)) |
 
 ## How to add a parcel
 

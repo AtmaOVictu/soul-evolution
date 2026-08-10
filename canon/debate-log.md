@@ -284,7 +284,18 @@ is simultaneously a negation (cut), the doubt (dvom) is the engine of meaning
 
 ---
 
-## 050 — The duel is the confrontation mechanic — OPEN
+## 051 — The ontomathos is the soul's mathematical backbone — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Matematika in njena ljubezen, captured by Cline):** The
+ontomathos is the mathematical backbone of the soul system — the player's
+phenomenological state P(t) is driven by essence E(t), reality-oscillation T(t),
+and acts A_n(t); negation ¬ is the origin of movement ("I = D cut"); actions are
+proofs of identity and pride; death/reset D(t) is a condition on the essence.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
