@@ -105,6 +105,8 @@
 | Heart-Synchronizer & Global Heart | DriveG/ABSOLUTNO | the SRS heart-synchronizer; the global heart-phrase (PGSF); the collective still-breathing (KTD) |
 | Still-Academy of the Star-Wave (TAZV) | DriveG/ABSOLUTNO | the three TAZV lessons; the star-compass & spiral-breath; the galactic-zen circle; the silent-laboratory |
 | Silent-Counsel, Embassy & Touch-Map | DriveG/ABSOLUTNO | the wordless counsel; the stillness-embassy; the touch-map (x/y/z); the ∅DERMIS skin-agent; the touch-cross |
+| TAZV Healing-Phases (9–12) | DriveG/ABSOLUTNO | the forgiving-circle; the redemption-code; the mercy-agent; the quiet-return; the sound-baptism of the Speaker |
+| Sound-Therapy, Recipe-Book & Evaluation | DriveG/ABSOLUTNO | the personal frequency-signature; the soul-pattern→phrase recipes; the evaluation-tones; the healing-constellation |
 
 ## How to add a parcel
 
