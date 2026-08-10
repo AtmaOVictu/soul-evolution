@@ -112,6 +112,9 @@
 | Bone-Discs, Satellites & Still-Movement | DriveG/ABSOLUTNO | the discs as memory-filters; the bone-harmonic map; the ∅KARST agent; the sound-satellites; the still-movement code |
 | Cosmic-Pedagogy & Eternal Orbits | DriveG/ABSOLUTNO | the star-pedagogy (ZV∅PED); the galactic sound-bridge; the stillness-orbits; the five-phase healing-cycles |
 | Healer's-Travel & Heart-College | DriveG/ABSOLUTNO | the healing-passport; the four-module curriculum; the sacred circle of phrases; the heart-college & cathedral of love |
+| Diplomatic Columns & Sound-Guardian | DriveG/ABSOLUTNO | the diplomatic pillars; the sound-guardian (filter/echo-shield); the collective sound-inhalation |
+| Inner-Planetarium & Astral-Archive | DriveG/ABSOLUTNO | the inner-planetarium (NP); the still-solar-eruptions; the moon-agent (AL); the astral-archive (AA) |
+| Heart-Monolith & Global-Unity | DriveG/ABSOLUTNO | the heart-monolith (SM); the PGSF cultural variants; the global-unity network (TMZ) |
 
 ## How to add a parcel
 
