@@ -21,7 +21,15 @@ var upgrade_list_label: Label
 var dust_val_label: Label
 var balance_val_label: Label
 var vault_val_label: Label
+var vault_grid: GridContainer
 var mods_val_label: Label
+
+# Soul Vault "windows" — canon's per-element treasure-hoard art frame
+# (canon/05-treasures.md:59-63, canon/00-mythos.md:95). Shell-only asset,
+# same rule as the soul sprites (blender/generate_souls.py): loaded
+# defensively since the Blender pipeline may not have been (re)run.
+var _window_frame_tex: Texture2D = null
+var _vault_grid_count: int = -1
 
 
 func _ready() -> void:
@@ -35,6 +43,10 @@ func set_genome(g: RefCounted) -> void:
 
 
 func _build_panel() -> void:
+	var frame_path := "res://assets/window_frame.png"
+	if ResourceLoader.exists(frame_path):
+		_window_frame_tex = load(frame_path)
+
 	var bg := ColorRect.new()
 	bg.color = Color(0.06, 0.06, 0.09, 0.92)
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -163,6 +175,11 @@ func _build_panel() -> void:
 	dust_val_label = _add_row(vbox, "⚙ dust")
 	balance_val_label = _add_row(vbox, "⚖ balance")
 	vault_val_label = _add_row(vbox, "◉ vault")
+	vault_grid = GridContainer.new()
+	vault_grid.columns = 6
+	vault_grid.add_theme_constant_override("h_separation", 4)
+	vault_grid.add_theme_constant_override("v_separation", 4)
+	vbox.add_child(vault_grid)
 	mods_val_label = Label.new()
 	mods_val_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	mods_val_label.add_theme_font_size_override("font_size", 12)
@@ -270,6 +287,7 @@ func _refresh() -> void:
 			balance_val_label.text = "%.2f (%s)" % [b, b_desc]
 		if "soul_vault" in main_ref and main_ref.soul_vault:
 			vault_val_label.text = main_ref.soul_vault.get_vault_summary()
+			_refresh_vault_grid(main_ref.soul_vault.souls)
 	if genome.has_method("get_modification_summary"):
 		mods_val_label.text = "mods: %s" % genome.get_modification_summary()
 	psi_val_label.text = "div %.2f  neg %.2f  del %.2f  trace %.2f  tau %.2f  sig %.2f  C %.2f  N %.2f  P %.2f  S %.2f  Psi=%.3f" % [
@@ -304,3 +322,69 @@ func _refresh() -> void:
 	if txt.is_empty():
 		txt = "(no story yet \u2014 the soul is new)"
 	story_label.text = txt
+
+
+## Vault "windows" \u2014 one framed/tinted entry per soul record held in the
+## vault. Rebuilt only when the record count changes (this whole sheet is
+## re-`_refresh()`'d every frame while visible, per main.gd) rather than
+## every call, so an open sheet doesn't rebuild N controls 60x/sec.
+func _refresh_vault_grid(souls: Array) -> void:
+	if not vault_grid:
+		return
+	if souls.size() == _vault_grid_count:
+		return
+	_vault_grid_count = souls.size()
+	for child in vault_grid.get_children():
+		child.queue_free()
+	for rec in souls:
+		var entry := Control.new()
+		entry.custom_minimum_size = Vector2(40, 40)
+		entry.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		vault_grid.add_child(entry)
+
+		if _window_frame_tex:
+			var tex_rect := TextureRect.new()
+			tex_rect.texture = _window_frame_tex
+			tex_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+			tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			tex_rect.modulate = _color_for_quality(rec.get("quality", ""))
+			tex_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			entry.add_child(tex_rect)
+
+		var glyph := Control.new()
+		glyph.set_anchors_preset(Control.PRESET_FULL_RECT)
+		glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		glyph.draw.connect(_draw_vault_glyph.bind(glyph, rec))
+		entry.add_child(glyph)
+
+
+## The gold/silver/dull palette, duplicated from vault_machine_ui.gd's
+## _color_for_quality() (not shared as a singleton \u2014 this file already
+## reaches main_ref by duck-typed convention rather than fighting for a
+## shared owner of a three-line lookup).
+func _color_for_quality(quality: String) -> Color:
+	match quality:
+		"good":
+			return Color(0.85, 0.75, 0.4)
+		"common":
+			return Color(0.6, 0.6, 0.65)
+		"poor":
+			return Color(0.4, 0.35, 0.4)
+		_:
+			return Color(0.5, 0.5, 0.5)
+
+
+## Procedural glyph inside a vault window \u2014 deliberately unlabeled (no
+## tooltip explaining it). Sized from the record's genome psi, drawn via
+## CanvasItem's `draw` signal since Control.new() here carries no script
+## of its own to override _draw() with.
+func _draw_vault_glyph(glyph: Control, rec: Dictionary) -> void:
+	var stat_val := 0.5
+	var g = rec.get("genome")
+	if g:
+		stat_val = clampf(g.psi, 0.0, 1.0)
+	var col := _color_for_quality(rec.get("quality", ""))
+	var center := glyph.size * 0.5
+	var radius := 3.0 + stat_val * 9.0
+	glyph.draw_circle(center, radius, col)
