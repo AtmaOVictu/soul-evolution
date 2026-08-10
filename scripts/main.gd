@@ -9,6 +9,8 @@ extends Control
 enum GameState { MAIN_MENU, CHOOSING, PLAYING, PAUSED, SETTINGS }
 
 const SacredGeometryScript := preload("res://scripts/sacred_geometry.gd")
+const ReactionEngineScript := preload("res://scripts/reaction_engine.gd")
+const PurposeLadderScript := preload("res://scripts/purpose_ladder.gd")
 const NARR_BASE := 1.0  # narration/HUD timing base (canon/01b-sacred-geometry.md); NOT gameplay balance
 
 var state: GameState = GameState.MAIN_MENU
@@ -84,6 +86,15 @@ var polarity_label: Label
 var instruction_label: Label
 var first_blast_label: Label
 var flavor_label: Label
+var reaction_label: Label
+var purpose_label: Label
+var sigil_rect: TextureRect
+
+# Reaction / Purpose systems (canon: parcels sound-physics, mandala-algebra).
+var reaction_engine: RefCounted = null
+var purpose_ladder: RefCounted = null
+var reaction_timer: float = 0.0
+var _reaction_act: Array[String] = []
 var narrator_label: Label
 var narrator_timer: float = 0.0
 var void_shader: ShaderMaterial
@@ -241,6 +252,10 @@ func _auto_test() -> void:
 		for f in _t_failures:
 			print("[TEST]  - ", f)
 	print("[TEST] === AUTO TEST COMPLETE ===")
+	# Exit automatically so --auto behaves as a real automated smoke test
+	# rather than leaving the game window open indefinitely — exit code
+	# reflects pass/fail for CI-style usage.
+	get_tree().quit(1 if _t_fail > 0 else 0)
 
 
 func _process(delta: float) -> void:
@@ -255,6 +270,7 @@ func _process(delta: float) -> void:
 		_check_neutron_remnant_blocking()
 		_update_army_ai(delta)
 		_update_active_body(delta)
+		_update_reaction_system(delta)
 		_update_effects(delta)
 		if dust_label:
 			dust_label.text = (L.t("hud_dust") + " %d") % dust if dust > 0 else ""
@@ -599,6 +615,23 @@ func _build_hud() -> void:
 	dust_label.add_theme_font_size_override("font_size", 13)
 	dust_label.add_theme_color_override("font_color", Color(0.5, 0.48, 0.42))
 	vbox.add_child(dust_label)
+	# Reaction / Purpose readout (canon: word-protocol + ascending chain).
+	reaction_label = Label.new()
+	reaction_label.text = ""
+	reaction_label.add_theme_font_size_override("font_size", 13)
+	reaction_label.add_theme_color_override("font_color", Color(0.5, 0.6, 0.7))
+	vbox.add_child(reaction_label)
+	purpose_label = Label.new()
+	purpose_label.text = ""
+	purpose_label.add_theme_font_size_override("font_size", 13)
+	purpose_label.add_theme_color_override("font_color", Color(0.6, 0.7, 0.55))
+	vbox.add_child(purpose_label)
+	# The Blender-rendered operator sigil of the soul's current act.
+	sigil_rect = TextureRect.new()
+	sigil_rect.custom_minimum_size = Vector2(40, 40)
+	sigil_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	sigil_rect.visible = false
+	vbox.add_child(sigil_rect)
 	flavor_label = Label.new()
 	flavor_label.text = ""
 	flavor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -997,6 +1030,10 @@ func _spawn_army() -> void:
 	active_body = white_army[0]
 	active_body.is_active = true
 	soul_stream.incarnate(active_body.genome)
+	# Reaction / Purpose systems — the soul's formation→reaction→purpose loop.
+	reaction_engine = ReactionEngineScript.new()
+	purpose_ladder = PurposeLadderScript.new()
+	reaction_timer = 0.0
 	battle_active = true
 	_ensure_character_sheet()
 	character_sheet.set_genome(active_body.genome)
@@ -1059,6 +1096,75 @@ func _update_army_ai(delta: float) -> void:
 	_check_annihilation()
 	_check_battle_end()
 	_check_grand_council()
+
+
+func _update_reaction_system(delta: float) -> void:
+	# The soul's FORM → REACT → FUEL loop, surfaced on the HUD. Every ~2.5s the
+	# soul forms an act (a ∅sentence of operators), the engine reacts, and the
+	# reaction fuels the purpose ladder. This is the canon's word-protocol +
+	# ascending chain made visible.
+	if not battle_active or not active_body or not active_body.genome:
+		if reaction_label:
+			reaction_label.text = ""
+			purpose_label.text = ""
+		return
+	if _reaction_act.is_empty():
+		_reaction_act = engine_form_act()
+	if not reaction_engine or not purpose_ladder:
+		return
+	reaction_timer += delta
+	if reaction_timer < 2.5:
+		return
+	reaction_timer = 0.0
+	var g = active_body.genome
+	var act: Array[String] = _reaction_act
+	var prof: Dictionary = reaction_engine.form_act(g, act)
+	var r: Dictionary = reaction_engine.react(g, prof)
+	reaction_engine.apply_reaction(g, r)
+	var ascended: bool = purpose_ladder.fuel(g, r, r["echo"])
+	var ladder: Dictionary = purpose_ladder.to_dict()
+	if reaction_label:
+		reaction_label.text = "REACT ⟡ %s  echo=%.2f  %s" % ["⊕".join(act), r["echo"], r["verdict"]]
+	if purpose_label:
+		purpose_label.text = "PURPOSE ▸ %s → %s  purpose=%.2f/%.2f%s" % [
+			ladder["current"], ladder["next"], ladder["purpose"], ladder["threshold"],
+			("  ▲ ASCENDED" if ascended else "")
+		]
+	if sigil_rect and act.size() > 0:
+		# Show the Blender-rendered sigil for the act's lead operator.
+		var sigil_path := "res://assets/sigil_%s.png" % _op_name(act[0])
+		if ResourceLoader.exists(sigil_path):
+			sigil_rect.texture = load(sigil_path)
+			sigil_rect.visible = true
+
+
+## A default act the soul forms — a ∅sentence of operators drawn from the
+## genome's own strongest genes (the soul speaks what it is).
+func _op_name(op: String) -> String:
+	match op:
+		"∇": return "div"
+		"¬": return "neg"
+		"∆": return "delta"
+		"✡": return "trace"
+		"τ": return "tau"
+		"σ": return "sigma"
+	return op
+
+
+func engine_form_act() -> Array[String]:
+	var g = active_body.genome
+	var ops := ["∇", "¬", "∆", "✡", "τ", "σ"]
+	var genes := {
+		"∇": g.divergence, "¬": g.negation, "∆": g.delta,
+		"✡": g.trace, "τ": g.tau, "σ": g.sigma,
+	}
+	# Pick the three strongest operators — the soul's resonance.
+	var sorted_keys := ops.duplicate()
+	sorted_keys.sort_custom(func(a, b): return genes[a] > genes[b])
+	var result: Array[String] = []
+	for i in mini(3, sorted_keys.size()):
+		result.append(String(sorted_keys[i]))
+	return result
 
 
 func _update_color_balance() -> void:
