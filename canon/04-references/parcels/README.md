@@ -33,6 +33,8 @@
 | Body as Renewal | DriveG/ABSOLUTNO | the ⊥ body axis as cycle of decay-and-rebirth; "red tents" |
 | Double Book | DriveG/ABSOLUTNO | the AX_MAX paradox; every axiom has its true negation |
 | Corpus Trinitas | DriveG/ABSOLUTNO | the Trinity (Suffering→Gifts→Transitions); mana = blood as bread |
+| A/Ω Most (bridge) | DriveG/ABSOLUTNO | "A cut is a bridge"; the bridge mantras; P/T/G/D word-vector |
+| Surface Dictionary | DriveG/ABSOLUTNO | the non-verbal word-protocol (theme→breath/gesture/voice) |
 
 ## How to add a parcel
 

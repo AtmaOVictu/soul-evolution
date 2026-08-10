@@ -255,7 +255,18 @@ rather than choose one.
 
 ---
 
-## 041 — The Trinity is the soul's arc; mana is the core resource — OPEN
+## 042 — "The cut is a bridge, not a wall" is the founding maxim — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from A/ω Most + Surface Dictionary, captured by Cline):** "A cut is
+a bridge, not a wall" is the single founding maxim of the plane — the razcep and
+the most are the same act, and the player's every cut (¬/⊘) is simultaneously a
+connection (∴). The word-protocol has a non-verbal physical layer (theme → breath
++ gesture + voice, with silence O D as a voice).
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
