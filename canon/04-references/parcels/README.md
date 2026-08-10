@@ -12,6 +12,7 @@
 | Prirocnik Jaszu | Priročnik jaszu (Vodila/Namen) | "ownership nullifies knowledge"; "to change the world, change the conscience"; body as the drive of outcome |
 | Mithjos | Bistvo/Mithjos | the soul as a living vector (Z, J, E, N); consciousness as crack with doubt |
 | Poetry | Poezija/ | "wounds are the script of my story"; the split as defining; silence/scream; the Light/Dark voice |
+| Ontomandala (Tišina) | DriveG/ABSOLUTNO | silence as the foundation; confirms the foundational quartet; "death does not need them" |
 
 ## How to add a parcel
 

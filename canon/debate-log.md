@@ -117,7 +117,23 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 018 — Wounds as the script of story; the split as defining — OPEN
+## 019 — "Death does not need them" — the dead register outside the quartet — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Ontomandala of Absolute Silence, captured by Cline):** The
+border maxim "Space, us, and movement are wounded in doubt — death does not
+need them" (a) **confirms the foundational quartet** (space/time/movement/
+doubt, wounded in doubt — doubt essential, so debate-log 015 is reinforced),
+and (b) adds **"death does not need them"** — death stands outside the quartet.
+This suggests the **neutron/grey/dead register** is a separate, dead register
+that is NOT dependent on space/time/movement/doubt — the living quartet feeds
+it, but it does not touch back.
+
+**Question it leaves open:** Is the neutron/grey truly outside the quartet —
+an unreachable, dead register — or does it still *touch* via the wound (doubt)?
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
