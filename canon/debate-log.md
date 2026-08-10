@@ -117,7 +117,21 @@ longer free; its value is alignment-dependent.
 
 ---
 
-## 010 — Every entity has a designated treasure/currency — OPEN
+## 011 — Every entity has a player-interactive system — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (Cline, from Luka):** Every entity has a designated treasure
+(`05-treasures.md`) *and* a system the player can interact with. Fire =
+Illumination, Air = Concealment/Repulsion, Neutron = Wreckage, Dust = Building,
+Time = Trade/Narration, Spirit = Harmony. Each is its own system (per working
+rule 005). The windows are the surfaces of these systems; the player
+constructs the reality by acting through them.
+
+**Question it leaves open:** Is access to the six systems gated by alignment,
+or open to all?
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

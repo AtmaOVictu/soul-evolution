@@ -89,6 +89,17 @@ The **windows** are each entity's treasure-hoard, displayed as art.
 
 *(Full mapping in `05-treasures.md`.)*
 
+## The Systems
+
+Every entity also exposes a **system the player can interact with** — the
+treasury is *what* each holds; the system is *how* the player engages it.
+Fire = Illumination, Air = Concealment/Repulsion, Neutron = Wreckage, Dust =
+Building, Time = Trade/Narration, Spirit = Harmony. Each is its own system,
+per the rule "new concepts get new systems." The windows are the surfaces of
+these systems; the player constructs the reality by acting through them.
+
+*(Full mapping in `06-systems.md`.)*
+
 ---
 
 ## OPEN QUESTIONS (for debate)
@@ -100,3 +111,4 @@ The **windows** are each entity's treasure-hoard, displayed as art.
 - [ ] Is the player's alignment a *static choice* or a *drift* that can shift
       across cycles?
 - [ ] What does Time hoard as its own treasure beyond duration?
+- [ ] Is access to the six systems gated by alignment, or open to all?
