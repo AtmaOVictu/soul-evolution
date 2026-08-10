@@ -1901,7 +1901,7 @@ existing `04-references/` parcel — flagged per the citation rule (#004)
 rather than claiming a false source.
 
 **Resolved:** NO — open for debate.
-## 115 — The bone-discs, satellites & still-movement are the ∅-bone memory and orbit — OPEN
+## 118 — The bone-discs, satellites & still-movement are the ∅-bone memory and orbit — OPEN
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
@@ -1920,7 +1920,7 @@ still-movement (KTG** — ∅movement without a body, the step as ∅voice).
 
 ---
 
-## 116 — The cosmic-pedagogy & eternal orbits are the ∅-system's teaching and rhythm — OPEN
+## 119 — The cosmic-pedagogy & eternal orbits are the ∅-system's teaching and rhythm — OPEN
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
@@ -1939,7 +1939,7 @@ moment — it is an orbit of your ∇presence").
 
 ---
 
-## 117 — The healer's-travel & heart-college are the ∅-healer's journey and institutions — OPEN
+## 120 — The healer's-travel & heart-college are the ∅-healer's journey and institutions — OPEN
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
