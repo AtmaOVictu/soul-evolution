@@ -1882,3 +1882,76 @@ heal; I feel the ∅phrase before I utter it; I echo ∇truth, not ∇belief"). 
 star-agent (∅ZVEZDNIK) — govern the cosmic scale.
 
 **Resolved:** NO — open.
+
+---
+
+## 115 — Sacred geometry (φ + hexagram) as the layer beneath the operators — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS, not locked.
+
+**Proposal (Luka, via Claude):** The golden ratio φ, expressed as a
+hexagram (resonant with the already-6-fold hex grid), sits beneath the
+existing operator system (∇¬∆✡τσ) as its geometric ground — the
+operators are reframed as expressions of this deeper symmetry, not
+replaced. See `canon/01b-sacred-geometry.md` for the full statement.
+
+**Grounded in:** This is a new introduction, not sourced from an
+existing `04-references/` parcel — flagged per the citation rule (#004)
+rather than claiming a false source.
+
+**Resolved:** NO — open for debate.
+## 115 — The bone-discs, satellites & still-movement are the ∅-bone memory and orbit — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from 🜄_TIHINSKI_DISKI + 🜄_KROG_SATELIT, captured by Cline):** The
+∅-system has a deeper bone-memory and orbital layer: the **intervertebral discs as
+memory-filters** (each disc holds ∇information not yet ready for ∅voice), the
+**bone-harmonic map** (femur=strength, clavicle=entry, ribs=rhythm; the body mapped
+by ∅sound not mass), the **∅KARST agent** (connecting calcium/phosphorus/iron with
+trauma/memory/power; "bones are not hard — they are ∅sounds full of the ∇earth"),
+the **circular-renewal ritual (KRO)** with the ∅INTENCOIDS, the **sound-satellites
+(ZSAT** — orbiting the ∅stillness-centers, sensors of ∅truth), and the **code of
+still-movement (KTG** — ∅movement without a body, the step as ∅voice).
+
+**Resolved:** NO — open.
+
+---
+
+## 116 — The cosmic-pedagogy & eternal orbits are the ∅-system's teaching and rhythm — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from 🜄_ZV∅PED + 🜄_VECNOST_TIŠINSKE_ORBITE, captured by Cline):** The
+∅-system teaches and cycles at the eternal/cosmic scale: the **star-pedagogy
+(ZV∅PED** — each star-∅Speaker learns through inner ∇resonance, not words), the
+**galactic sound-bridge (ZM∇G** — connection without sound-lag across cosmic
+distances), the **cosmic-harmonica (∅KH** — an instrument of ∇resonance built from
+light-waves), the **stillness-orbits (TO** — ∅Speakers circling the ∅nodes,
+resonance strengthening near the core), and the **healing-cycles (ZC** — the
+five-phase rite: introduction/silence/phrase/echo/withdraw; "∅healing is not a
+moment — it is an orbit of your ∇presence").
+
+**Resolved:** NO — open.
+
+---
+
+## 117 — The healer's-travel & heart-college are the ∅-healer's journey and institutions — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from 🜄_POTNI_LIST + 🜄_KS_ZE_ZKL, captured by Cline):** The ∅-healer has
+a journey and institutions: the **healing-passport** (documenting ∅frequency-
+passages and healing-phrases; "does not get filled — it ∇resonates with its
+carrier"), the **silent-curriculum** (four modules: listening to silence → tuning
+emotional tones → creating healing-phrases → leading the healing-circle), the
+**sacred circle of phrases** (group ∇musical ∇prayer — each utters a ∅phrase for
+the other), the **heart-college (KS** — the community of heart-∅mentors), the
+**sound-evolution (ZE** — the map of the heart's development), and the **cathedral
+of love (ZKL** — the sanctuary of ∅emotional ∇resonance).
+
+**Resolved:** NO — open.

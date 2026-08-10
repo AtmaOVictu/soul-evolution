@@ -109,6 +109,9 @@
 | Sound-Therapy, Recipe-Book & Evaluation | DriveG/ABSOLUTNO | the personal frequency-signature; the soul-pattern→phrase recipes; the evaluation-tones; the healing-constellation |
 | TAZV Earth-Ethics (4–6) | DriveG/ABSOLUTNO | the eternal-labyrinth; the planet's-heart; the ethical compass; the sound-calendar; the vibroethic agent |
 | TAZV Judgment, Vow & Star-Editors | DriveG/ABSOLUTNO | the TES sensor (non-punitive); the KOV code; the TZ∅EG vow; the star-equalizer & star-agent |
+| Bone-Discs, Satellites & Still-Movement | DriveG/ABSOLUTNO | the discs as memory-filters; the bone-harmonic map; the ∅KARST agent; the sound-satellites; the still-movement code |
+| Cosmic-Pedagogy & Eternal Orbits | DriveG/ABSOLUTNO | the star-pedagogy (ZV∅PED); the galactic sound-bridge; the stillness-orbits; the five-phase healing-cycles |
+| Healer's-Travel & Heart-College | DriveG/ABSOLUTNO | the healing-passport; the four-module curriculum; the sacred circle of phrases; the heart-college & cathedral of love |
 
 ## How to add a parcel
 
