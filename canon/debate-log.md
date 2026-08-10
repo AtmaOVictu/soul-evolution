@@ -298,7 +298,17 @@ nested chain, with negation as its foundation and the star as its completion.
 
 ---
 
-## 053 — The Star-as-compass is the internal navigation center — OPEN
+## 054 — The Smisel definition node is the lexicon form — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from in_seciraj_neenakomeren.md, captured by Cline):** The Smisel
+definition node is the canonical form of the game's lexicon/log — each concept
+is a definition node (position, slicing, graph links) whose meaning is
+context-dependent (never fixed), linking into the meaning-graph.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.

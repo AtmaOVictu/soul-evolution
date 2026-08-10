@@ -51,6 +51,7 @@
 | Ontological Function F(x) | Obsidian/Bistvo | the 11-stage chain ¬→⟁→…→⟡; every being as a nested function |
 | Star-as-Compass | Obsidian/Bistvo | the ZVEZDA center (∴⟡∆⟡⊚⟡π⟡∞); the internal navigation |
 | Consciousness Transition | Obsidian/Matematika | the 4-phase arc; ethic-emotions reshape the path |
+| Smisel System | Obsidian/Smisel | the definition-node format; meaning is context-dependent |
 
 ## How to add a parcel
 
