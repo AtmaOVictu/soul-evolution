@@ -12,6 +12,7 @@ const SoulStreamScript := preload("res://scripts/soul_stream.gd")
 const SacredGeometryScript := preload("res://scripts/sacred_geometry.gd")
 const ReactionEngineScript := preload("res://scripts/reaction_engine.gd")
 const PurposeLadderScript := preload("res://scripts/purpose_ladder.gd")
+const OracleAssetScript := preload("res://scripts/oracle_asset.gd")
 
 var _pass := 0
 var _fail := 0
@@ -39,6 +40,9 @@ func _initialize() -> void:
 	_test_reaction_react()
 	_test_reaction_apply()
 	_test_purpose_fuel_ascends()
+	_test_oracle_consult()
+	_test_oracle_upgrade()
+	_test_oracle_seeded_reproducible()
 	_report()
 	quit()
 
@@ -327,3 +331,53 @@ func _test_purpose_fuel_ascends() -> void:
 	_assert(ladder.history.size() == ladder.ascensions, "history tracks ascensions")
 	_assert(ladder.purpose >= 0.0, "purpose never goes negative")
 	_assert(ladder.to_dict()["current"] == ladder.current(), "to_dict reports the current register")
+
+
+# ===================================================================
+# OracleAsset (interactive, upgradeable fated-reading asset)
+# ===================================================================
+
+func _test_oracle_consult() -> void:
+	var o = OracleAssetScript.new()
+	o.set_seed(42)
+	var r: Dictionary = o.consult(100)
+	_assert(r["ok"] == true, "oracle consults when dust is available")
+	_assert(ReactionEngineScript.OPERATORS.has(r["operator"]), "oracle returns a valid operator")
+	_assert(["DA", "∅", "NE"].has(r["verdict"]), "oracle returns a valid verdict")
+	_assert(PurposeLadderScript.REGISTERS.has(r["register"]), "oracle returns a valid register")
+	_assert(r["phrase"].length() > 0, "oracle returns a phrase")
+	_assert(r["sigil"].begins_with("sigil_"), "oracle returns a sigil path")
+	_assert(o.consultations == 1, "a successful consult increments the counter")
+	# Not enough dust -> refused.
+	_assert(o.consult(0)["ok"] == false, "oracle refuses without dust")
+
+
+func _test_oracle_upgrade() -> void:
+	var o = OracleAssetScript.new()
+	_assert(o.tier == 1, "oracle starts at tier 1")
+	_assert(o.upgrade(0) == false, "oracle cannot upgrade without dust")
+	_assert(o.tier == 1, "failed upgrade does not change tier")
+	_assert(o.upgrade(100) == true, "oracle upgrades when dust is available")
+	_assert(o.tier == 2, "oracle tier rises to 2")
+	# Max it out.
+	var guard := 0
+	while not o.is_maxed() and guard < 20:
+		o.upgrade(1000)
+		guard += 1
+	_assert(o.is_maxed(), "oracle reaches its max tier")
+	_assert(o.upgrade(1000) == false, "maxed oracle cannot upgrade further")
+
+
+func _test_oracle_seeded_reproducible() -> void:
+	# Same seed must reproduce the same reading sequence — the oracle is a
+	# reproducible simulation, not a pure dice-roll each time.
+	var a = OracleAssetScript.new()
+	a.set_seed(7)
+	var b = OracleAssetScript.new()
+	b.set_seed(7)
+	for i in 6:
+		var ra: Dictionary = a.consult(1000)
+		var rb: Dictionary = b.consult(1000)
+		_assert(ra["operator"] == rb["operator"], "seeded oracle reproduces operator (pull %d)" % i)
+		_assert(ra["verdict"] == rb["verdict"], "seeded oracle reproduces verdict (pull %d)" % i)
+	_assert(a.operator_fate == b.operator_fate, "seeded oracle accumulates identical fate-distribution")

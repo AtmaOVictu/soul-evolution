@@ -11,6 +11,8 @@ enum GameState { MAIN_MENU, CHOOSING, PLAYING, PAUSED, SETTINGS }
 const SacredGeometryScript := preload("res://scripts/sacred_geometry.gd")
 const ReactionEngineScript := preload("res://scripts/reaction_engine.gd")
 const PurposeLadderScript := preload("res://scripts/purpose_ladder.gd")
+const OracleAssetScript := preload("res://scripts/oracle_asset.gd")
+const OracleUIScript := preload("res://scripts/oracle_ui.gd")
 const NARR_BASE := 1.0  # narration/HUD timing base (canon/01b-sacred-geometry.md); NOT gameplay balance
 
 var state: GameState = GameState.MAIN_MENU
@@ -96,6 +98,8 @@ var reaction_engine: RefCounted = null
 var purpose_ladder: RefCounted = null
 var reaction_timer: float = 0.0
 var _reaction_act: Array[String] = []
+var oracle: RefCounted = null
+var oracle_ui: Control = null
 var narrator_label: Label
 var narrator_timer: float = 0.0
 var void_shader: ShaderMaterial
@@ -233,6 +237,30 @@ func _auto_test() -> void:
 		_t_assert(not character_sheet.vault_val_label.text.is_empty(), "sheet's vault field populates")
 		_t_assert(character_sheet.dust_val_label.text == str(dust), "sheet's dust field matches the real dust value")
 
+	print("[TEST] --- Asset Gallery (direct verification) ---")
+	_on_gallery_pressed()
+	_t_assert(gallery_ui != null, "gallery_ui was created")
+	_t_assert(gallery_ui.visible == true, "gallery_ui is visible after opening")
+	if gallery_ui:
+		var entry_count: int = gallery_ui.grid.get_child_count()
+		_t_assert(entry_count > 0, "gallery grid has entries after opening (got %d)" % entry_count)
+		# Not just node count — verify at least one entry actually loaded a
+		# real texture (not an empty placeholder cell), and that a specific,
+		# recently-generated asset is genuinely discoverable by name, not
+		# just "something" showed up.
+		var found_valid_texture := false
+		var found_recent_name := false
+		for cell in gallery_ui.grid.get_children():
+			for sub in cell.get_children():
+				if sub is TextureRect and sub.texture != null:
+					found_valid_texture = true
+				if sub is Label and sub.text == "glass_hex_tile.png":
+					found_recent_name = true
+		_t_assert(found_valid_texture, "at least one gallery entry has a real loaded texture, not an empty cell")
+		_t_assert(found_recent_name, "glass_hex_tile.png specifically appears in the gallery by name")
+	_on_gallery_back()
+	_t_assert(gallery_ui.visible == false, "gallery_ui is hidden after going back")
+
 	print("[TEST] --- The Hourglass (direct verification) ---")
 	dust = 7
 	var color_before_pour := world_color
@@ -324,6 +352,8 @@ func _input(event: InputEvent) -> void:
 			_toggle_character_sheet()
 		if event.keycode == KEY_G:
 			_open_gumball_machine()
+		if event.keycode == KEY_O:
+			_toggle_oracle()
 		if event.keycode == KEY_H:
 			_pour_hourglass()
 		if event.keycode == KEY_SPACE and soul_genome and soul_polarity == 0:
@@ -778,6 +808,16 @@ func _on_polarity_chosen(chosen: int) -> void:
 
 func _start_game() -> void:
 	state = GameState.PLAYING
+	# Hidden here, not left to the caller: _auto_test() reaches this via
+	# _on_polarity_chosen() directly, skipping _on_play_pressed() (the only
+	# other place that hid it) entirely — main_menu_container stayed at its
+	# default visible=true for the whole run, rendering behind the battle.
+	if main_menu_container:
+		main_menu_container.visible = false
+	if gallery_ui:
+		gallery_ui.visible = false
+	if settings_container:
+		settings_container.visible = false
 	polarity_container.visible = false
 	# Release focus from buttons so SPACE reaches the game
 	for child in polarity_container.get_children():
@@ -1098,6 +1138,13 @@ func _spawn_army() -> void:
 	reaction_engine = ReactionEngineScript.new()
 	purpose_ladder = PurposeLadderScript.new()
 	reaction_timer = 0.0
+	# The Oracle of the Many Windows — the interactive, upgradeable asset.
+	oracle = OracleAssetScript.new()
+	oracle.set_seed(randi())
+	oracle_ui = OracleUIScript.new()
+	oracle_ui.main_ref = self
+	oracle_ui.oracle = oracle
+	hud.add_child(oracle_ui)
 	battle_active = true
 	_ensure_character_sheet()
 	character_sheet.set_genome(active_body.genome)
@@ -1724,6 +1771,14 @@ func _pour_hourglass() -> void:
 # ===================================================================
 # SOUL VAULT — gumball machine (luck-driven, perception reads odds)
 # ===================================================================
+
+func _toggle_oracle() -> void:
+	if not oracle_ui:
+		return
+	oracle_ui.visible = not oracle_ui.visible
+	if oracle_ui.visible:
+		oracle_ui._refresh()
+
 
 func _open_gumball_machine() -> void:
 	if not soul_vault or not active_body or not active_body.genome:

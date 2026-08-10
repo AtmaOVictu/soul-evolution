@@ -97,6 +97,9 @@ const EN := {
 	"menu_return": "RETURN TO MAIN MENU",
 	"menu_army": "Army size per side: %d",
 	"menu_how_to": "how to play",
+	"menu_gallery": "GALLERY",
+	"gallery_title": "ASSET GALLERY",
+	"gallery_empty": "no generated assets found in res://assets/",
 
 	# --- HUD ---
 	"hud_soul_white": "SOUL: WHITE — CREATION / LIGHT",
@@ -118,12 +121,24 @@ const EN := {
 	"narr_machine_empty": "the machine is empty.",
 	"narr_light_void": "light enters the void. the first narrative begins.",
 	"narr_void_child": "the void accepts its child. everything begins from nothing.",
+	"narr_hourglass_poured": "you pour %d sand. Time reads your echo=%.2f and gives %d color back.",
+	"narr_hourglass_empty": "the hourglass is empty. there is nothing to give.",
 
 	# --- Grand Council ---
 	"council_title": "THE GRAND COUNCIL",
 	"council_sub": "movement has stopped. the last of each side must choose.",
 	"council_domination": "DOMINATION",
 	"council_split": "SPLIT",
+
+	# --- Oracle of the Many Windows ---
+	"oracle_title": "ORACLE OF THE MANY WINDOWS",
+	"oracle_status": "Tier %d · consulted %d · dust spent %d",
+	"oracle_consult": "CONSULT  (⚙ %d dust)",
+	"oracle_upgrade": "UPGRADE SIGHT  (⚙ %d dust)",
+	"oracle_maxed": "SIGHT IS MAXED",
+	"oracle_reading": "the oracle reads:  %s  %s  ·  register %s",
+	"oracle_no_dust": "no dust. the oracle wants sand.",
+	"oracle_upgraded": "the oracle's sight deepens.",
 }
 
 # Slovenian — the full translation of the same key set.
@@ -197,6 +212,9 @@ const SL := {
 	"menu_return": "NAZAJ V GLAVNI MENI",
 	"menu_army": "Velikost vojske na stran: %d",
 	"menu_how_to": "kako igrati",
+	"menu_gallery": "GALERIJA",
+	"gallery_title": "GALERIJA SREDSTEV",
+	"gallery_empty": "v res://assets/ ni najdenih ustvarjenih sredstev",
 
 	# --- HUD ---
 	"hud_soul_white": "DUŠA: BELA — USTVARJANJE / SVETLOBA",
@@ -218,12 +236,24 @@ const SL := {
 	"narr_machine_empty": "stroj je prazen.",
 	"narr_light_void": "svetloba vstopi v praznino. prva pripoved se začne.",
 	"narr_void_child": "praznina sprejme svojega otroka. vse se začne iz nič.",
+	"narr_hourglass_poured": "izliješ %d peska. Čas prebere tvoj odmev=%.2f in vrne %d barve.",
+	"narr_hourglass_empty": "peščena ura je prazna. ni česa dati.",
 
 	# --- Grand Council (Veliki svet) ---
 	"council_title": "VELIKI SVET",
 	"council_sub": "gibanje se je ustavilo. zadnji strani se morata odločiti.",
 	"council_domination": "PREVLADA",
 	"council_split": "RAZDELITEV",
+
+	# --- Oracle (Prerok) ---
+	"oracle_title": "PREROK MNOGIH OKEN",
+	"oracle_status": "Stopnja %d · posvetovanj %d · porabljen prah %d",
+	"oracle_consult": "POSVET  (⚙ %d prahu)",
+	"oracle_upgrade": "POGLOBI VID  (⚙ %d prahu)",
+	"oracle_maxed": "VID JE MAKSIMALEN",
+	"oracle_reading": "prerok bere:  %s  %s  ·  register %s",
+	"oracle_no_dust": "ni prahu. prerok hoče pesek.",
+	"oracle_upgraded": "prerokov vid se poglobi.",
 }
 
 
