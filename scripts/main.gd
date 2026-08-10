@@ -34,6 +34,21 @@ var pandora_opened: bool = false
 var pandora_threshold: int = 8
 var world_color: int = 0  # color accumulated from annihilation — saturates the world
 
+# --- Grand Council (canon/00-mythos.md act 3; CRITICAL_BRIEF.md §3/§8) ---
+# Its own system, not folded into battle-end/campaign_phase: the Council is a
+# distinct forced event (movement locks, a choice, a Rebirth), not just
+# another battle-end state. council_active gates the modal + pauses combat;
+# battle_active is the actual movement/AI gate (see _update_army_ai).
+var council_active: bool = false
+# Threshold on death_count, which increments by 2 per annihilation
+# (_check_annihilation — one white + one black soul die together) and by 1
+# per other combat death (_update_army_ai's get_life_pct() <= 0 path). 40
+# is effectively "both starting armies (2 * army_size) are gone" — the
+# mythos's "last members of black and white."
+var council_threshold: int = 40
+var council_ui: Control = null
+var feats_gained: int = 0
+
 # --- Battle system ---
 var soul_stream: RefCounted = null
 var soul_vault: RefCounted = null
@@ -202,6 +217,21 @@ func _auto_test() -> void:
 		_t_assert(not character_sheet.balance_val_label.text.is_empty(), "sheet's balance field populates")
 		_t_assert(not character_sheet.vault_val_label.text.is_empty(), "sheet's vault field populates")
 		_t_assert(character_sheet.dust_val_label.text == str(dust), "sheet's dust field matches the real dust value")
+
+	print("[TEST] --- Grand Council (direct verification) ---")
+	# council_threshold (40) won't be reached naturally in this 15s+ window,
+	# so force it directly — same pattern as the neutron remnant block above.
+	death_count = council_threshold
+	_check_grand_council()
+	_t_assert(council_active == true, "council_active is true once death_count crosses council_threshold")
+	_t_assert(battle_active == false, "battle_active is false while the council is active")
+	_resolve_council("split")
+	_t_assert(battle_active == true, "battle_active is true again after the council resolves (Rebirth)")
+	_t_assert(council_active == false, "council_active is false again after the council resolves")
+	_t_assert(death_count == 0, "death_count resets to 0 on Rebirth")
+	_t_assert(feats_gained == 1, "feats_gained increments by exactly 1 on Rebirth")
+	_t_assert(white_army.size() > 0, "white_army still has survivors after the council")
+	_t_assert(black_army.size() > 0, "black_army still has survivors after the council")
 
 	print("[TEST] === RESULTS: %d passed, %d failed ===" % [_t_pass, _t_fail])
 	if _t_fail > 0:
@@ -1025,6 +1055,7 @@ func _update_army_ai(delta: float) -> void:
 	_update_color_balance()
 	_check_annihilation()
 	_check_battle_end()
+	_check_grand_council()
 
 
 func _update_color_balance() -> void:
@@ -1396,6 +1427,79 @@ func _check_pandora() -> void:
 			if is_instance_valid(sn) and sn.has_method("_apply_polarity"):
 				sn.color_unlocked = true
 				sn._apply_polarity()
+
+
+# ===================================================================
+# GRAND COUNCIL — movement locks, the last survivors choose, then Rebirth
+# (canon/00-mythos.md act 3; CRITICAL_BRIEF.md §3/§8)
+# ===================================================================
+
+func _check_grand_council() -> void:
+	if not council_active and battle_active and death_count >= council_threshold:
+		council_active = true
+		battle_active = false
+		narrate("the weight of the lost locks the plane. the last of each side must meet.")
+		_open_grand_council()
+
+
+func _open_grand_council() -> void:
+	if not council_ui:
+		var ui_script = preload("res://scripts/council_ui.gd")
+		council_ui = Control.new()
+		council_ui.name = "GrandCouncil"
+		council_ui.set_script(ui_script)
+		council_ui.main_ref = self
+		hud.add_child(council_ui)
+	council_ui.visible = true
+
+
+func _resolve_council(choice: String) -> void:
+	var dominant: Array = white_army if white_army.size() >= black_army.size() else black_army
+	match choice:
+		"domination":
+			# The world doesn't let a single color persist — a harsher,
+			# involuntary tax paid AFTER the choice, on the winning side only.
+			_convert_fraction(dominant, 0.3)
+		"split":
+			# Same total tax as domination's single-side 30%, but voluntary,
+			# symmetric, and paid UP FRONT — no post-choice penalty.
+			_convert_fraction(white_army, 0.15)
+			_convert_fraction(black_army, 0.15)
+	# Rebirth, regardless of choice: color reappears (halved, not zeroed),
+	# the wreckage of the last age is cleared, and each side gains a feat.
+	world_color = int(world_color / 2)
+	for rem in neutron_remnants:
+		if is_instance_valid(rem):
+			rem.queue_free()
+	neutron_remnants.clear()
+	death_count = 0
+	feats_gained += 1
+	council_active = false
+	battle_active = true
+	if council_ui:
+		council_ui.visible = false
+	narrate("the plane breathes again. color returns, amplified.")
+
+
+func _convert_fraction(army: Array, ratio: float) -> void:
+	# Shared helper for both council choices. Which array is "the other" is
+	# picked by reference identity (is_same), not content, so this holds
+	# even if a near-wiped army's contents momentarily look equal by size.
+	var target_army: Array = black_army if is_same(army, white_army) else white_army
+	var count: int = int(army.size() * ratio)
+	if count <= 0:
+		return
+	var pool: Array = army.duplicate()
+	pool.shuffle()
+	for i in range(mini(count, pool.size())):
+		var sn: Node2D = pool[i]
+		if not is_instance_valid(sn):
+			continue
+		sn.polarity = 1 - sn.polarity
+		if sn.has_method("_apply_polarity"):
+			sn._apply_polarity()
+		army.erase(sn)
+		target_army.append(sn)
 
 
 func _update_active_body(delta: float) -> void:
