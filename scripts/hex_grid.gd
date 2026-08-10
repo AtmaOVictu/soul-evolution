@@ -9,7 +9,7 @@ var grid_rows: int = 0
 var _time: float = 0.0
 var dark_zone_positions: Array = []  # Vector2, world-space centers of T_DARK hexes
 
-const ARENA_SIZE := Vector2(2400.0, 1800.0)
+const ARENA_SIZE := Vector2(3440.0, 1440.0)
 const T_OPEN := 0
 const T_WALL := 1
 const T_DARK := 2
@@ -45,6 +45,18 @@ func _build_hex_lattice_shader() -> void:
 	hex_shader_material.set_shader_parameter("arena_size", ARENA_SIZE)
 	if ResourceLoader.exists("res://assets/glass_hex_tile.png"):
 		hex_shader_material.set_shader_parameter("glass_tex", load("res://assets/glass_hex_tile.png"))
+
+	# Sacred-geometry-derived shader constants (canon/01b-sacred-geometry.md) —
+	# computed here since GLSL can't preload scripts/sacred_geometry.gd.
+	var sg := preload("res://scripts/sacred_geometry.gd")
+	hex_shader_material.set_shader_parameter("border_w", sg.ladder(-1.0) * hex_size * 0.1)
+	hex_shader_material.set_shader_parameter("hex_fill_frac", sg.ladder(0.0))
+	hex_shader_material.set_shader_parameter("glass_uv_scale", sg.ladder(1.5))
+	hex_shader_material.set_shader_parameter("wave_speed", sg.ladder(-1.0))
+	hex_shader_material.set_shader_parameter("tint_blend", sg.ladder(-2.0))
+	hex_shader_material.set_shader_parameter("glass_blend", sg.ladder(-2.0))
+	hex_shader_material.set_shader_parameter("hue_skew_blend", sg.ladder(-1.5))
+	hex_shader_material.set_shader_parameter("hexagram_angle", sg.HEXAGRAM_ANGLE)
 
 	hex_lattice_rect = ColorRect.new()
 	hex_lattice_rect.name = "HexLattice"
@@ -118,36 +130,53 @@ func _generate_terrain() -> void:
 	var hex_h: float = hex_size * sqrt(3.0)
 	var col_sp: float = hex_size * 1.5
 	var row_sp: float = hex_h
-	var arena_w: float = 2400.0
-	var arena_h: float = 1800.0
+	var arena_w: float = ARENA_SIZE.x
+	var arena_h: float = ARENA_SIZE.y
 	grid_cols = int(ceil(arena_w / col_sp)) + 1
 	grid_rows = int(ceil(arena_h / row_sp)) + 1
 	terrain.resize(grid_cols * grid_rows)
 	terrain.fill(T_WALL)
 	# Maze generation (recursive backtracking)
 	_maze_carve(1, 1)
-	# Add rooms at key locations
-	_carve_room(3, 2, 2)
-	_carve_room(8, 2, 2)
-	_carve_room(5, 4, 2)
-	_carve_room(3, 6, 2)
-	_carve_room(8, 6, 2)
-	# Ensure corridors connect rooms
-	_carve_corridor(3, 2, 5, 4)
-	_carve_corridor(5, 4, 8, 2)
-	_carve_corridor(5, 4, 3, 6)
-	_carve_corridor(5, 4, 8, 6)
-	_carve_corridor(3, 2, 3, 6)
-	_carve_corridor(8, 2, 8, 6)
-	# Dark zones (black ambush spots)
-	for p in [Vector2i(2,3), Vector2i(2,4), Vector2i(7,3), Vector2i(7,4), Vector2i(1,5), Vector2i(9,5)]:
+	# Add rooms at key locations — spread across the wide (ultrawide) arena:
+	# left cluster, center cluster, right cluster.
+	_carve_room(4, 2, 2)
+	_carve_room(10, 2, 2)
+	_carve_room(7, 4, 2)
+	_carve_room(4, 6, 2)
+	_carve_room(10, 6, 2)
+	_carve_room(28, 3, 3)
+	_carve_room(28, 8, 3)
+	_carve_room(46, 2, 2)
+	_carve_room(52, 4, 2)
+	_carve_room(46, 7, 2)
+	_carve_room(52, 9, 2)
+	# Ensure corridors connect rooms (left cluster)
+	_carve_corridor(4, 2, 7, 4)
+	_carve_corridor(7, 4, 10, 2)
+	_carve_corridor(7, 4, 4, 6)
+	_carve_corridor(7, 4, 10, 6)
+	_carve_corridor(4, 2, 4, 6)
+	_carve_corridor(10, 2, 10, 6)
+	# Center + right connectors
+	_carve_corridor(10, 4, 28, 4)
+	_carve_corridor(28, 3, 28, 8)
+	_carve_corridor(28, 4, 46, 4)
+	_carve_corridor(46, 2, 52, 4)
+	_carve_corridor(52, 4, 52, 9)
+	_carve_corridor(46, 2, 46, 7)
+	# Dark zones (black ambush spots) — spread left/center/right
+	for p in [Vector2i(2,3), Vector2i(2,4), Vector2i(9,3), Vector2i(9,4), Vector2i(1,5), Vector2i(11,5),
+			Vector2i(26,3), Vector2i(30,6), Vector2i(44,2), Vector2i(44,5), Vector2i(50,6), Vector2i(54,3)]:
 		_set_t(p.x, p.y, T_DARK)
 		dark_zone_positions.append(hex_to_world(p.x, p.y))
-	# Light zones (white advantage)
-	for p in [Vector2i(5,2), Vector2i(6,2), Vector2i(5,6), Vector2i(6,6), Vector2i(4,1), Vector2i(7,1)]:
+	# Light zones (white advantage) — spread across the width
+	for p in [Vector2i(5,2), Vector2i(6,2), Vector2i(5,6), Vector2i(6,6), Vector2i(4,1), Vector2i(9,1),
+			Vector2i(27,2), Vector2i(29,7), Vector2i(45,3), Vector2i(51,2), Vector2i(53,8), Vector2i(47,1)]:
 		_set_t(p.x, p.y, T_LIGHT)
-	# Cover (tactical positions)
-	for p in [Vector2i(5,3), Vector2i(4,4), Vector2i(6,5), Vector2i(3,4), Vector2i(7,4), Vector2i(5,7)]:
+	# Cover (tactical positions) — across left/center/right
+	for p in [Vector2i(5,3), Vector2i(4,4), Vector2i(6,5), Vector2i(3,4), Vector2i(9,4), Vector2i(5,7),
+			Vector2i(27,4), Vector2i(29,5), Vector2i(45,4), Vector2i(47,5), Vector2i(51,4), Vector2i(53,6)]:
 		_set_t(p.x, p.y, T_COVER)
 	# Ensure walls at edges
 	for c in grid_cols:

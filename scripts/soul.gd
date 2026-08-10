@@ -6,6 +6,9 @@ extends Node2D
 ## "Each use blasts/farts — since it's still the start of the game,
 ##  and everything is still just black and white, damn it."
 
+const SacredGeometryScript := preload("res://scripts/sacred_geometry.gd")
+const SOUL_UI_BASE := 10.0  # visual-proportion base for this file (canon/01b-sacred-geometry.md); NOT a balance constant
+
 var polarity: int = 0  # 0 = white/creation, 1 = black/destruction
 var genome: RefCounted = null  # SoulGenome — the plane's code
 var color_unlocked: bool = false  # true when Pandora's box opens
@@ -64,7 +67,7 @@ func _apply_polarity() -> void:
 	# Add camera that follows the soul
 	var cam := Camera2D.new()
 	cam.name = "Camera"
-	cam.zoom = Vector2(0.7, 0.7)
+	cam.zoom = Vector2(1.0, 1.0)
 	cam.position_smoothing_enabled = true
 	cam.position_smoothing_speed = 3.0
 	add_child(cam)
@@ -109,15 +112,16 @@ func _process(delta: float) -> void:
 		velocity *= 0.92  # friction — things stop when you stop
 		position += velocity * delta
 
-	# Gentle floating wobble (even when stationary) — slower, applies to everyone
+	# Gentle floating wobble (even when stationary) — slower, applies to everyone.
+	# Speeds/amplitude re-derived from PHI (canon/01b-sacred-geometry.md).
 	var wobble := Vector2(
-		sin(time_alive * 0.8) * 1.5,
-		cos(time_alive * 0.6) * 1.0
+		sin(time_alive * SacredGeometryScript.ladder(-1.0)) * SacredGeometryScript.ladder(1.0),  # 0.8->PHI^-1, 1.5->PHI^1
+		cos(time_alive * SacredGeometryScript.ladder(-1.5)) * 1.0  # 0.6->PHI^-1.5; 1.0 == PHI^0, exact
 	)
 	position += wobble * delta
 
 	# Keep in arena bounds (larger than viewport — camera follows)
-	var margin := radius + 4.0
+	var margin := radius + SOUL_UI_BASE * SacredGeometryScript.ladder(-2.0)  # 4.0 -> 3.82
 	position.x = clampf(position.x, margin, 2400.0 - margin)
 	position.y = clampf(position.y, margin, 1800.0 - margin)
 
@@ -175,11 +179,11 @@ func _fire_light_beam() -> void:
 	var dir := Vector2(cos(facing_angle), sin(facing_angle))
 	fragments.append({
 		"type": "beam",
-		"start": dir * (radius + 4.0),
+		"start": dir * (radius + SOUL_UI_BASE * SacredGeometryScript.ladder(-2.0)),  # 4.0 -> 3.82
 		"end": dir * rng,
 		"damage": dmg,
 		"age": 0.0,
-		"life": 0.4,
+		"life": 0.4,  # hit-detection window -- gameplay balance, excluded
 	})
 
 
@@ -251,7 +255,7 @@ func _draw() -> void:
 		_draw_black_soul(life_pct, flash_mod)
 
 	# --- LIFE RING ---
-	var ring_radius := radius + 22.0
+	var ring_radius := radius + SOUL_UI_BASE * SacredGeometryScript.ladder(1.5)  # 22.0 -> 20.58
 	var ring_bg := Color(0.2, 0.2, 0.2, 0.5)
 	var ring_fill: Color
 	if life_pct > 0.6:
@@ -267,11 +271,12 @@ func _draw() -> void:
 	# --- Force field (black only) ---
 	if force_field_active and force_field_strength > 0.0:
 		var ff_range := get_force_field_range()
+		# Ring spacing/fade/width re-derived from PHI (canon/01b-sacred-geometry.md).
 		for i in range(3):
-			var rr := ff_range * (0.4 + float(i) * 0.2)
-			var ra := force_field_strength * 0.3 * (1.0 - float(i) * 0.25)
+			var rr := ff_range * (0.382 + float(i) * 0.236)  # 0.4->PHI^-2, 0.2->PHI^-3
+			var ra := force_field_strength * 0.330 * (1.0 - float(i) * 0.236)  # 0.3->PHI^-2.5, 0.25->PHI^-3
 			var rc := Color(0.3, 0.2, 0.5, ra)
-			draw_arc(Vector2.ZERO, rr, 0.0, TAU, 48, rc, 2.5 - float(i) * 0.5, false)
+			draw_arc(Vector2.ZERO, rr, 0.0, TAU, 48, rc, 2.618 - float(i) * 0.618, false)  # 2.5->PHI^2, 0.5->PHI^-1
 
 	# --- Projectiles (light beams) ---
 	for f in fragments:
@@ -288,7 +293,7 @@ func _draw() -> void:
 				var send: Vector2 = f["start"] + bdir * slen * float(s + 1)
 				var fade: float = 1.0 - float(s) / float(segments)
 				var sc := Color(1.0, 1.0, 1.0, alpha * fade * 0.95)
-				var sw: float = 4.0 - float(s) * 0.35
+				var sw: float = 3.82 - float(s) * 0.382  # 4.0/0.35 -> SOUL_UI_BASE*PHI^-2, PHI^-2 (canon/01b-sacred-geometry.md)
 				draw_line(sstart, send, sc, maxf(sw, 1.0), false)
 
 
@@ -299,7 +304,7 @@ func _draw_color_fill(fill_col: Color, fill_pct: float) -> void:
 	if fill_pct <= 0.001:
 		return
 	var points := PackedVector2Array([Vector2.ZERO])
-	var segs: int = maxi(2, int(ceil(40.0 * fill_pct)))
+	var segs: int = maxi(2, int(ceil(40.0 * fill_pct)))  # 40.0 == hex_size, already PHI-base-aligned (canon/01b-sacred-geometry.md)
 	for s in range(segs + 1):
 		var a: float = -PI / 2.0 + TAU * fill_pct * float(s) / float(segs)
 		points.append(Vector2(cos(a), sin(a)) * radius)
@@ -316,16 +321,20 @@ func _draw_white_soul(life_pct: float, flash: float) -> void:
 	if flash > 0.0:
 		fill_col = fill_col.lerp(Color.WHITE, flash)
 
-	# Halo glow — light bleeds outward (this is a radiation source)
+	# Halo glow — light bleeds outward (this is a radiation source).
+	# Step 6.0 -> SOUL_UI_BASE*PHI^-1 (canon/01b-sacred-geometry.md);
+	# alpha values (0.22/0.06) are below the ladder's useful resolution at
+	# this base and are left as art-direction literals.
+	var halo_step := SOUL_UI_BASE * SacredGeometryScript.ladder(-1.0)
 	for i in range(3):
-		var halo_r: float = radius + 6.0 + float(i) * 6.0
+		var halo_r: float = radius + halo_step + float(i) * halo_step
 		var halo_a: float = (0.22 - float(i) * 0.06) * (0.5 + life_pct * 0.5)
 		draw_circle(Vector2.ZERO, halo_r, Color(1.0, 0.97, 0.85, halo_a))
 
 	_draw_color_fill(fill_col, life_pct)
 
 	if soul_texture:
-		var tex_size := radius * 2.15
+		var tex_size := radius * SacredGeometryScript.ladder(1.5)  # 2.15 -> 2.058
 		# Shell drawn translucent — shading modulates the fill instead of
 		# hiding it under an opaque colored surface.
 		draw_texture_rect(soul_texture, Rect2(Vector2(-tex_size, -tex_size) * 0.5, Vector2(tex_size, tex_size)), false, Color(1.0, 1.0, 1.0, 0.55))
@@ -347,19 +356,23 @@ func _draw_black_soul(life_pct: float, flash: float) -> void:
 	if flash > 0.0:
 		fill_col = fill_col.lerp(Color(0.5, 0.5, 0.55), flash)
 
-	# Void tendrils — jagged dark spikes reaching outward (this is a void source, not a glow)
+	# Void tendrils — jagged dark spikes reaching outward (this is a void
+	# source, not a glow). Rotation/wobble speeds and radial offsets
+	# re-derived from PHI (canon/01b-sacred-geometry.md); tendril_count (a
+	# topology choice) and the wobble amplitude/phase-spread (below the
+	# ladder's useful resolution) are left as art-direction literals.
 	var tendril_count := 7
 	for i in range(tendril_count):
-		var ang: float = TAU * float(i) / float(tendril_count) + time_alive * 0.4
-		var wobble: float = sin(time_alive * 2.2 + float(i) * 1.7) * 3.0
-		var base_pt := Vector2(cos(ang), sin(ang)) * (radius - 2.0)
-		var tip_pt := Vector2(cos(ang), sin(ang)) * (radius + 9.0 + wobble)
+		var ang: float = TAU * float(i) / float(tendril_count) + time_alive * 0.4236  # 0.4 -> TIME_BASE * PHI^3
+		var wobble: float = sin(time_alive * 2.283 + float(i) * 1.7) * 3.0  # 2.2 -> PHI^6.5 * TIME_BASE
+		var base_pt := Vector2(cos(ang), sin(ang)) * (radius - SOUL_UI_BASE * SacredGeometryScript.ladder(-3.0))  # 2.0 -> 2.36
+		var tip_pt := Vector2(cos(ang), sin(ang)) * (radius + SOUL_UI_BASE + wobble)  # 9.0 -> SOUL_UI_BASE*PHI^0 = 10.0
 		draw_line(base_pt, tip_pt, Color(0.02, 0.01, 0.04, 0.55), 2.5, false)
 
 	_draw_color_fill(fill_col, life_pct)
 
 	if soul_texture:
-		var tex_size := radius * 2.15
+		var tex_size := radius * SacredGeometryScript.ladder(1.5)  # 2.15 -> 2.058
 		draw_texture_rect(soul_texture, Rect2(Vector2(-tex_size, -tex_size) * 0.5, Vector2(tex_size, tex_size)), false, Color(1.0, 1.0, 1.0, 0.6))
 	else:
 		# Fallback (asset pipeline not run — see blender/generate_souls.py)

@@ -232,6 +232,19 @@ func _auto_test() -> void:
 		_t_assert(not character_sheet.vault_val_label.text.is_empty(), "sheet's vault field populates")
 		_t_assert(character_sheet.dust_val_label.text == str(dust), "sheet's dust field matches the real dust value")
 
+	print("[TEST] --- The Hourglass (direct verification) ---")
+	dust = 7
+	var color_before_pour := world_color
+	_pour_hourglass()
+	var gained := world_color - color_before_pour
+	_t_assert(dust == 0, "pouring the hourglass spends all held dust")
+	# Rate is echo-priced (0.5x-1.5x, see _pour_hourglass), not flat 1:1 —
+	# assert the payout lands in that range rather than an exact value.
+	_t_assert(gained >= int(round(7 * 0.5)) and gained <= int(round(7 * 1.5)),
+		"pouring converts dust to world_color within the 0.5x-1.5x echo-priced range (got +%d for 7 dust)" % gained)
+	_pour_hourglass()
+	_t_assert(world_color == color_before_pour + gained, "pouring an empty hourglass does not change world_color")
+
 	print("[TEST] --- Grand Council (direct verification) ---")
 	# council_threshold (40) won't be reached naturally in this 15s+ window,
 	# so force it directly — same pattern as the neutron remnant block above.
@@ -310,6 +323,8 @@ func _input(event: InputEvent) -> void:
 			_toggle_character_sheet()
 		if event.keycode == KEY_G:
 			_open_gumball_machine()
+		if event.keycode == KEY_H:
+			_pour_hourglass()
 		if event.keycode == KEY_SPACE and soul_genome and soul_polarity == 0:
 			var soul := get_node_or_null("Soul")
 			if soul and soul.has_method("_fire_ability"):
@@ -630,6 +645,11 @@ func _build_hud() -> void:
 	sigil_rect = TextureRect.new()
 	sigil_rect.custom_minimum_size = Vector2(40, 40)
 	sigil_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	# Without this, a TextureRect sizes itself to its texture's native
+	# resolution (the sigil PNGs are full-size renders, not 40x40 icons) —
+	# custom_minimum_size is only a floor, not a ceiling. This was almost
+	# certainly what rendered as a giant shape in the middle of the screen.
+	sigil_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	sigil_rect.visible = false
 	vbox.add_child(sigil_rect)
 	flavor_label = Label.new()
@@ -987,14 +1007,14 @@ func _check_soul_obstacle_collision() -> void:
 func _spawn_army() -> void:
 	soul_stream = SoulStream.new()
 	soul_stream.stream_id = 1
-	var arena := Vector2(2400.0, 1800.0)
+	var arena := Vector2(3440.0, 1440.0)
 	var soul_script = preload("res://scripts/soul.gd")
 	# Spawn white army (left side) — first soul is the ORIGINAL
 	for i in army_size:
 		var sn := Node2D.new()
 		sn.name = "White_%d" % i
 		sn.set_script(soul_script)
-		sn.position = Vector2(150.0 + randf_range(0.0, 500.0), 200.0 + randf_range(0.0, 1400.0))
+		sn.position = Vector2(150.0 + randf_range(0.0, 700.0), 220.0 + randf_range(0.0, 1000.0))
 		add_child(sn)
 		var g := SoulGenome.create_random(soul_counter, 0)
 		soul_counter += 1
@@ -1013,7 +1033,7 @@ func _spawn_army() -> void:
 		var sn := Node2D.new()
 		sn.name = "Black_%d" % i
 		sn.set_script(soul_script)
-		sn.position = Vector2(1750.0 + randf_range(0.0, 500.0), 200.0 + randf_range(0.0, 1400.0))
+		sn.position = Vector2(2600.0 + randf_range(0.0, 700.0), 220.0 + randf_range(0.0, 1000.0))
 		add_child(sn)
 		var g := SoulGenome.create_random(soul_counter, 1)
 		soul_counter += 1
@@ -1344,8 +1364,8 @@ func _get_white_tactical_pos(sn: Node2D) -> Vector2:
 	# White souls spread to illuminate maximum area
 	# Position in a grid pattern across the arena
 	var spacing := 200.0
-	var arena_w := 2400.0
-	var arena_h := 1800.0
+	var arena_w := 3440.0
+	var arena_h := 1440.0
 	# Find grid cell for this soul
 	var idx := 0
 	for i in range(white_army.size()):
@@ -1361,7 +1381,7 @@ func _get_white_tactical_pos(sn: Node2D) -> Vector2:
 
 func _get_black_tactical_pos(sn: Node2D) -> Vector2:
 	# Black souls cluster toward center and chokepoints
-	var center := Vector2(1200.0, 900.0)
+	var center := Vector2(1720.0, 720.0)
 	var idx := 0
 	for i in range(black_army.size()):
 		if black_army[i] == sn:
@@ -1621,6 +1641,40 @@ func _update_active_body(delta: float) -> void:
 		_check_incarnation()
 	if character_sheet and character_sheet.visible:
 		character_sheet._refresh()
+
+
+# ===================================================================
+# THE HOURGLASS — Time as trader (CRITICAL_BRIEF.md §11)
+# ===================================================================
+
+## Pours all currently-held dust into world_color. The rate isn't flat —
+## Time reads the soul's own currently-formed act (the same ∅sentence
+## already scored every ~2.5s for the REACT/PURPOSE HUD, engine_form_act()/
+## reaction_engine.form_act()/.react()) and prices the trade by its echo:
+## a well-resonating soul (high echo, verdict DA) trades up to 1.5x; a
+## noisy one (low echo, verdict NE) trades down to 0.5x. This doesn't call
+## apply_reaction() — that already runs on its own 2.5s cadence — this is a
+## read-only re-score purely to price the pour. No new UI: the soul already
+## computes its act automatically from its own strongest genome traits
+## (engine_form_act(), "the soul speaks what it is"), so there's nothing
+## for the player to compose. Still no Council-pacing cost (death_count
+## untouched) — deliberately deferred, see canon/debate-log.md #128.
+func _pour_hourglass() -> void:
+	if dust <= 0:
+		narrate(L.t("narr_hourglass_empty"))
+		return
+	var poured := dust
+	dust = 0
+	var echo := 0.0
+	if reaction_engine and active_body and active_body.genome and not _reaction_act.is_empty():
+		var g = active_body.genome
+		var prof: Dictionary = reaction_engine.form_act(g, _reaction_act)
+		var r: Dictionary = reaction_engine.react(g, prof)
+		echo = r["echo"]
+	var multiplier: float = 0.5 + echo  # echo in [0,1] -> rate in [0.5, 1.5]
+	var gained: int = int(round(float(poured) * multiplier))
+	world_color += gained
+	narrate(L.t("narr_hourglass_poured") % [poured, echo, gained])
 
 
 # ===================================================================
