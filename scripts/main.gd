@@ -29,6 +29,7 @@ var main_menu_container: CenterContainer
 var polarity_container: CenterContainer
 var pause_container: CenterContainer
 var settings_container: CenterContainer
+var gallery_ui: Control = null
 
 # --- Campaign ---
 var campaign_phase: int = 0  # 0=monochrome, 1=first color, 2=battle, 3=plane
@@ -393,6 +394,11 @@ func _build_main_menu() -> void:
 	settings_btn.custom_minimum_size = Vector2(300, 50)
 	settings_btn.pressed.connect(_on_settings_pressed)
 	vbox.add_child(settings_btn)
+	var gallery_btn := Button.new()
+	gallery_btn.text = L.t("menu_gallery")
+	gallery_btn.custom_minimum_size = Vector2(300, 50)
+	gallery_btn.pressed.connect(_on_gallery_pressed)
+	vbox.add_child(gallery_btn)
 	var quit_btn := Button.new()
 	quit_btn.text = L.t("menu_quit")
 	quit_btn.custom_minimum_size = Vector2(300, 50)
@@ -412,6 +418,23 @@ func _on_settings_pressed() -> void:
 	main_menu_container.visible = false
 	settings_container.visible = true
 	state = GameState.SETTINGS
+
+
+func _on_gallery_pressed() -> void:
+	if not gallery_ui:
+		var ui_script = preload("res://scripts/asset_gallery_ui.gd")
+		gallery_ui = Control.new()
+		gallery_ui.name = "AssetGallery"
+		gallery_ui.set_script(ui_script)
+		gallery_ui.back_pressed.connect(_on_gallery_back)
+		add_child(gallery_ui)
+	main_menu_container.visible = false
+	gallery_ui.visible = true
+
+
+func _on_gallery_back() -> void:
+	gallery_ui.visible = false
+	main_menu_container.visible = true
 
 
 func _on_quit_pressed() -> void:
@@ -1004,17 +1027,37 @@ func _check_soul_obstacle_collision() -> void:
 # BATTLE SYSTEM — 100 vs 100, soul-stream incarnates on death
 # ===================================================================
 
+## A starting-zone BOX with uniform proportions for one army. The box keeps a
+## fixed aspect ratio (uniform width:height) so both sides get an identical,
+## deliberately-proportioned spawn area — the "physical boundary" of the start.
+## polarity 0 = white (left), 1 = black (right).
+func _get_starting_zone(polarity: int, arena: Vector2) -> Rect2:
+	# Uniform proportion: the box is always width = 0.30 * arena, height =
+	# 0.70 * arena, so its aspect is fixed (0.30/0.70 ~ 0.43) regardless of
+	# arena size — uniform on both sides.
+	var w := arena.x * 0.30
+	var h := arena.y * 0.70
+	var cx := arena.x * (0.15 if polarity == 0 else 0.85)
+	return Rect2(Vector2(cx - w * 0.5, (arena.y - h) * 0.5), Vector2(w, h))
+
+
+## A uniformly-random point inside a Rect2 box.
+func _random_in_zone(zone: Rect2) -> Vector2:
+	return zone.position + Vector2(randf_range(0.0, zone.size.x), randf_range(0.0, zone.size.y))
+
+
 func _spawn_army() -> void:
 	soul_stream = SoulStream.new()
 	soul_stream.stream_id = 1
 	var arena := Vector2(3440.0, 1440.0)
 	var soul_script = preload("res://scripts/soul.gd")
 	# Spawn white army (left side) — first soul is the ORIGINAL
+	var white_zone := _get_starting_zone(0, arena)
 	for i in army_size:
 		var sn := Node2D.new()
 		sn.name = "White_%d" % i
 		sn.set_script(soul_script)
-		sn.position = Vector2(150.0 + randf_range(0.0, 700.0), 220.0 + randf_range(0.0, 1000.0))
+		sn.position = _random_in_zone(white_zone)
 		add_child(sn)
 		var g := SoulGenome.create_random(soul_counter, 0)
 		soul_counter += 1
@@ -1029,11 +1072,12 @@ func _spawn_army() -> void:
 		sn._apply_polarity()
 		white_army.append(sn)
 	# Spawn black army (right side) — first soul is the ORIGINAL
+	var black_zone := _get_starting_zone(1, arena)
 	for i in army_size:
 		var sn := Node2D.new()
 		sn.name = "Black_%d" % i
 		sn.set_script(soul_script)
-		sn.position = Vector2(2600.0 + randf_range(0.0, 700.0), 220.0 + randf_range(0.0, 1000.0))
+		sn.position = _random_in_zone(black_zone)
 		add_child(sn)
 		var g := SoulGenome.create_random(soul_counter, 1)
 		soul_counter += 1
