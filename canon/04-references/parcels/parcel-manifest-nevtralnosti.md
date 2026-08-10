@@ -23,6 +23,10 @@ carries weight; every silence is an action; speech is the "No" and therefore
 | "meaning does not arise from data, but from rupture" | the rupture/wound doctrine; smisel from the wound |
 | "what is missing: touch, vulnerability, memory, tenderness, wonder" | the un-measurable; the game-does-not-give-knowledge rule |
 | "do not antinominate solitude... acknowledge the center" | the "one cannot exist without the other"; the center (Spirit?) |
+| **"every unit of language must have its antinomy... every sign its counter-sign"** | the axiom of antinomy; living language = completed moment + necessary antinomy |
+| **"no feelings are forbidden... anger is ethical when it protects others; guilt is wisdom when it rejects humiliation"** | the right to every feeling; the emotions are agents |
+| **"nothing is enough, because every word is already late... inadequacy is not deficiency, but fidelity to the unredeemed"** | the ethics of inadequacy; incomplete completeness |
+| **"do not seek symmetry, but acknowledge the center"** | the center over symmetry; the whole |
 
 ## Key connections
 
