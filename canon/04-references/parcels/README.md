@@ -35,6 +35,9 @@
 | Corpus Trinitas | DriveG/ABSOLUTNO | the Trinity (Suffering→Gifts→Transitions); mana = blood as bread |
 | A/Ω Most (bridge) | DriveG/ABSOLUTNO | "A cut is a bridge"; the bridge mantras; P/T/G/D word-vector |
 | Surface Dictionary | DriveG/ABSOLUTNO | the non-verbal word-protocol (theme→breath/gesture/voice) |
+| Truth Formula | DriveG/ABSOLUTNO | the being as R=(T−I)·C; the resnica axis as math |
+| Mandala of Evil | DriveG/ABSOLUTNO | evil = integral of the past; the elements' corrupted forms |
+| Phonetic Word | DriveG/ABSOLUTNO | operators as sounds (cut='T', bridge='L'); ⟡+⧖=1.00 |
 
 ## How to add a parcel
 

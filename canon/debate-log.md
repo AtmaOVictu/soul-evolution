@@ -255,7 +255,19 @@ rather than choose one.
 
 ---
 
-## 042 — "The cut is a bridge, not a wall" is the founding maxim — OPEN
+## 043 — The truth formula; evil as residue; the audio word-size — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from OPTI_MATH + MANDALA_ZLO + MANDALA_LJUBI_NIC, captured by
+Cline):** The being is defined by the truth formula R = (T−I)·C (the
+purity-corrected gap between appearance and intent). Evil is the integral of the
+past (accumulated, uncut residue), and the cut (¬/⊘) prevents each element from
+becoming its corrupted form. The word-protocol has an audio layer (each operator
+sounds: cut='T', bridge='L', nothing=glottal stop).
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
