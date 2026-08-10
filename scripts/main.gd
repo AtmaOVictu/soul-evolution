@@ -133,6 +133,16 @@ func _auto_test() -> void:
 	# Not asserting world_color > 0 here: whether an annihilation has landed
 	# in exactly 15s is itself timing-dependent, tested more directly below.
 
+	print("[TEST] --- Concealment ---")
+	# Concurrent AI/annihilation is still running here, same as the asserts
+	# above — only check the invariant (alpha stays a valid opacity), not
+	# any specific value, since terrain/distance/color_ratio are all live.
+	var concealment_ok := true
+	for sn in white_army + black_army:
+		if is_instance_valid(sn) and (sn.concealment_alpha < 0.0 or sn.concealment_alpha > 1.0):
+			concealment_ok = false
+	_t_assert(concealment_ok, "every living army member's concealment_alpha stays within [0.0, 1.0]")
+
 	print("[TEST] --- Neutron remnant + dust (direct verification) ---")
 	# --auto never simulates a SPACE press, so obstacle/remnant beam collision
 	# is otherwise unexercised — teleport onto a remnant and fire directly to
@@ -985,26 +995,32 @@ func _update_color_balance() -> void:
 
 
 func _update_concealment(delta: float) -> void:
-	# Black ambushes from dark hex zones — white has no night vision, so a black
-	# soul standing in a dark tile fades toward near-invisible for a white viewer
-	# until they close the distance. Black viewers see their own kind fine.
+	# Blindness is global and symmetric — "Light notices only what is Light's,
+	# Dark notices only what is Dark's" (canon/00-mythos.md) — and lifts as
+	# world_color rises ("Color appears when Time facilitates perception").
+	# White viewers fade the black army, black viewers fade the white army,
+	# using the same color_ratio hex_grid.gd derives for its own void tint.
 	if not active_body or not is_instance_valid(active_body):
 		return
 	var hex := get_node_or_null("HexGrid")
 	if not hex:
 		return
-	var viewer_is_white: bool = active_body.polarity == 0
-	var reveal_radius := 160.0
+	var color_ratio: float = clampf(float(world_color) / maxf(float(army_size) * 2.0, 1.0), 0.0, 1.0)
+	var reveal_radius: float = lerp(90.0, 420.0, color_ratio)
+	var ambush_floor: float = lerp(0.12, 1.0, color_ratio)
+	var open_floor: float = lerp(0.55, 1.0, color_ratio)
 	var fade_speed: float = clampf(delta * 3.0, 0.0, 1.0)
-	for sn in black_army:
+	var viewer_is_white: bool = active_body.polarity == 0
+	var hidden_army: Array = black_army if viewer_is_white else white_army
+	var ambush_terrain: int = hex.T_DARK if viewer_is_white else hex.T_LIGHT
+	for sn in hidden_army:
 		if not is_instance_valid(sn) or sn == active_body:
 			continue
-		var target_alpha := 1.0
-		if viewer_is_white:
-			var in_dark: bool = hex.get_terrain_at(sn.position) == hex.T_DARK
-			var dist: float = active_body.position.distance_to(sn.position)
-			if in_dark and dist > reveal_radius:
-				target_alpha = 0.15
+		var dist: float = active_body.position.distance_to(sn.position)
+		var in_ambush_terrain: bool = hex.get_terrain_at(sn.position) == ambush_terrain
+		var target_alpha: float = ambush_floor if in_ambush_terrain else open_floor
+		if dist <= reveal_radius:
+			target_alpha = 1.0
 		sn.concealment_alpha = lerp(sn.concealment_alpha, target_alpha, fade_speed)
 
 
