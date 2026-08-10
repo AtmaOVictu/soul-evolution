@@ -22,6 +22,9 @@
 | Onto-Synthesis | DriveG/ABSOLUTNO | the quartet's source; space-as-relation, doubt-as-motor, Bog=totality of relations |
 | Apd Kocka | DriveG/ABSOLUTNO | the formal alignment engine (κ_etik, cycle O→∆→1→Ω); the alignment value |
 | Legenda Magnus Opus | DriveG/ABSOLUTNO | the multi-layer translation chain (archetype→energy→filter→integration); the window mechanic |
+| Kropla Protocol | DriveG/ABSOLUTNO | the trig alignment geometry (COS/SIN/TAN/OST/TAL); the antinom band O 0.50 |
+| Atlas OSEBNIKA | DriveG/ABSOLUTNO | the two-level model (Absolute equation + Immanence); LOVE=log(t+1) |
+| Gods Register | DriveG/ABSOLUTNO | the pantheon (Thor, Seth, Morana...), fingerprints, relation legend |
 
 ## How to add a parcel
 

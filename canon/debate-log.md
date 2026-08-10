@@ -179,7 +179,51 @@ becomes its own grey" — overcrowding alignment reverses it.
 
 ---
 
-## 031 — The token-through-windows translation is the window mechanic — OPEN
+## 032 — The antinomical band (O 0.50) is the measured antinom threshold — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Kropla Protocol, captured by Cline):** The "antinomical band
+at O 0.50" is the exact threshold where a canon truth flips to its hidden
+opposite — making the antinom a *measured* mechanic, not just a narrative
+pairing. Intimacy=COS, Memory=SIN, Voice=~SIN~TAN, Path=TAL are the formulas
+for the player's relations (intimacy with a soul, memory of a cycle, voice of
+an act).
+
+**Resolved:** NO — open.
+
+---
+
+## 033 — The two-level model (Absolute + Immanence) is the entity reader — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Atlas OSEBNIKA, captured by Cline):** Every entity is presented
+through two levels — **Absolute** (logarithmic equation/necessity) and
+**Immanence** (embodied meaning). The character sheet could show both: the
+opaque formula and its embodiment, which the player must reconcile (echoing
+"the game does not give knowledge lightly"). "LOVE = log(t+1), t=we" means
+relation grows logarithmically with the shared "we."
+
+**Resolved:** NO — open.
+
+---
+
+## 034 — The gods are the named faces of the registers — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Gods Register, captured by Cline):** The gods are the
+personified registers — the player encounters "Thor" as the Guardian's mythic
+form, "Seth" as the Opponent, "Morana" as the Death-depth — each with a
+fingerprint (potency). The relation legend (P/M/A/X/=H/resonance) is the
+plane's relational algebra; the soul vault's souls could carry an archetypal
+fingerprint.
+
+**Resolved:** NO — open.
 
 **Date:** 2026-08-10
 **Status:** HYPOTHESIS.
