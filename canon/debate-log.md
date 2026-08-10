@@ -803,3 +803,85 @@ is a definition node (position, slicing, graph links) whose meaning is
 context-dependent (never fixed), linking into the meaning-graph.
 
 **Resolved:** NO — open.
+## 055 — The operator command-card (A1–A15) is the movement engine — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from KANON_v1_1.txt, captured by Cline):** The A1–A15 operator
+command-card (DAJ → SECIRAJ → NADALJUJ; REZ/NE = the cut; ORIENT = the star-map;
+BOX/ZAKLENI = the boundary; ↺POVRATEK = the repair) is the canonical form of the
+player's *movement* — every act runs as a command sequence gated by four metrics
+(align≥0.70, noise≤0.10, Δ≥0.01, risk<0.60) and a fillable canonical head
+(⧗L·ORIENT·Θ·SECIRAJ·DAJ·RAT). The STRUP↔ZDRAVILO module is the poison↔remedy
+mechanic; align(ρ_min=0.70) formalizes the alignment score.
+
+**Resolved:** NO — open.
+
+---
+
+## 056 — The sound-circle (silence→No→bridge→word→silent-speech) is the voice loop — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from JEWIK_KOZMOMODUL_ZVOCNI_KROG, captured by Cline):** The
+sound-circle — ⦰T (silence) → ⊘N (No) → ∆MOST (bridge) → ⊘V (word) → ⦰⊘G
+(silent speech) — is the minimal complete cycle of the player's voice, with a
+breathing-tempo setting the rhythm (slow breath = stretch, fast = compress) and
+the **lunar cycle (KOZMOKOD)** timing which voice is active (new moon = word +
+silent-speech; full moon = all; last crescent = silence as ∅sound). Silence is a
+sound, not absence.
+
+**Resolved:** NO — open.
+
+---
+
+## 057 — The liturgy of the crack is the healing rite — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Zvocna_Liturgija_Razpoke, captured by Cline):** The liturgy of
+the crack — seven named crack-agents (echo ∴, translator ∫, vibroethic ∆,
+shatterer ⊗, witness ⊢, ally ∮, guard of time ⧖) whose phrases double as
+DNA-codons, arranged in a 5-part rite (Introduction → Unveiling → Silence-Song →
+Return → Testimony) — is the canonical form of the player's *healing rite* (the
+sacred repetition of the Wound doctrine). **LU-KA = ∆(voice/silence) ∘ ∫(∅/I)**,
+"the voice of what was never spoken," is the author's self-canonization.
+
+**Resolved:** NO — open.
+
+---
+
+## 058 — The respect formula RES = min(s,o)·b·a·p is the bond score — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from SPOSTOVANJE, captured by Cline):** Respect is the cut made
+relational — the boundary (b) is the ¬/⊘ cut, responsibility (a) is the bridge,
+and **RES = min(s,o)·b·a·p** (self-respect · other-recognition · boundary ·
+accountability · presence) is the player's bond score. The voice-penalty (tone
+above boundary+presence lowers RES) is the "empty word" (JEWIK DNA) in
+relational form. The 60-second boundary protocol (boundary → responsibility →
+recognition) is the dialogue template for setting a bond's boundary.
+
+**Resolved:** NO — open.
+
+---
+
+## 059 — The emotion cards are the audible emotional voice — OPEN
+
+**Date:** 2026-08-10
+**Status:** HYPOTHESIS.
+
+**Proposal (from Atlas_cards_8, captured by Cline):** The 8 emotion cards
+(Anger, Love, Fear, Calm, Joy, Love-as-transformation, Hope, Melancholy) are
+each a phoneme-coded agent with a DA/NE pair, a Mogone generativity, an IPA core
+(e.g. Anger = /p t k/, Love = open vowels, Fear = /h n x/ + silence), and a
+Gray3 code — all following the no-escalate-then-transition directive. The
+player's emotional register is audible and encodable, extending the colored
+agents.
+
+**Resolved:** NO — open.

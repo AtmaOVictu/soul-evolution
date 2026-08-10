@@ -52,6 +52,11 @@
 | Star-as-Compass | Obsidian/Bistvo | the ZVEZDA center (∴⟡∆⟡⊚⟡π⟡∞); the internal navigation |
 | Consciousness Transition | Obsidian/Matematika | the 4-phase arc; ethic-emotions reshape the path |
 | Smisel System | Obsidian/Smisel | the definition-node format; meaning is context-dependent |
+| KANON v1.1 Standard | DriveG/ABSOLUTNO | the A1–A15 operator command-card; the 4 metrics (align/noise/Δ/risk); the STRUP↔ZDRAVILO poison↔remedy module |
+| Sound-Circle (KOZMOKOD) | DriveG/ABSOLUTNO | the voice-loop (silence→No→bridge→word→silent-speech); the breathing-tempo & lunar cycle |
+| Liturgy of the Crack | DriveG/ABSOLUTNO | the 7 crack-agents (echo/translator/witness...); the 5-part healing rite; LU-KA = ∆(voice/silence)∘∫(∅/I) |
+| Respect Ethic | DriveG/ABSOLUTNO | the bond score RES = min(s,o)·b·a·p; the voice-penalty; the 60s boundary protocol |
+| Emotion Phoneme Cards | DriveG/ABSOLUTNO | the 8 emotion-agents with IPA cores + Gray3 codes; no-escalate-then-transition |
 
 ## How to add a parcel
 
