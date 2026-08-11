@@ -258,6 +258,26 @@ func _auto_test() -> void:
 					found_recent_name = true
 		_t_assert(found_valid_texture, "at least one gallery entry has a real loaded texture, not an empty cell")
 		_t_assert(found_recent_name, "glass_hex_tile.png specifically appears in the gallery by name")
+		# A node existing with a texture assigned is not the same as it being
+		# visible on screen — this is the exact gap that let a real bug (grid
+		# populated correctly but its ScrollContainer parent rendering at
+		# zero height, clipping everything) pass every prior version of this
+		# check. Wait a couple of frames for layout to settle, then assert
+		# real geometry, not just tree structure.
+		await get_tree().process_frame
+		await get_tree().process_frame
+		_t_assert(gallery_ui.scroll.size.y > 0, "gallery scroll container has nonzero rendered height (got %s)" % gallery_ui.scroll.size)
+		_t_assert(gallery_ui.size.x > 1000, "gallery root control spans the full window width, not a narrow column (got %s)" % gallery_ui.size)
+		# get_texture().get_image() right after a logical-state change can
+		# read a stale GPU frame (render thread lags a frame or two behind
+		# the main thread) — a few extra process_frame awaits give the
+		# render thread time to catch up before capturing.
+		for _i in range(6):
+			await get_tree().process_frame
+		var shot := get_viewport().get_texture().get_image()
+		var shot_path := "user://debug_gallery.png"
+		shot.save_png(shot_path)
+		print("[TEST] gallery screenshot saved to ", ProjectSettings.globalize_path(shot_path))
 	_on_gallery_back()
 	_t_assert(gallery_ui.visible == false, "gallery_ui is hidden after going back")
 
@@ -1189,6 +1209,13 @@ func _ensure_character_sheet() -> void:
 	character_sheet.set_script(sheet_script)
 	character_sheet.main_ref = self
 	character_sheet.visible = false
+	# The sheet is added to the HUD canvas during battle; from the main menu
+	# the HUD canvas may not exist yet, so create it so the sheet always has a
+	# parent and is actually shown.
+	if not hud:
+		hud = CanvasLayer.new()
+		hud.name = "HUD"
+		add_child(hud)
 	hud.add_child(character_sheet)
 
 

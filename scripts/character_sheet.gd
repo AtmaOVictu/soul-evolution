@@ -317,7 +317,7 @@ func _build_panel() -> void:
 	vbox.add_child(mandala_header)
 	mandala_ui = preload("res://scripts/soul_mandala_ui.gd").new()
 	mandala_ui.name = "Mandala"
-	mandala_ui.custom_minimum_size = Vector2(0, 380)
+	mandala_ui.custom_minimum_size = Vector2(360, 380)
 	vbox.add_child(mandala_ui)
 
 

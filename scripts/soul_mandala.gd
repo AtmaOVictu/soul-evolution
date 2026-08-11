@@ -12,9 +12,18 @@ signal segment_selected(name: String, value: float, detail: String)
 
 var genome: RefCounted = null
 var _hover_segment: int = -1
+var _anim: float = 0.0
 
 # Each ring: {name, count, get_val(i), label(i), detail(i)}
 var _rings: Array = []
+
+# Per-ring rotation speed (the mandala "breathes" — the character is alive).
+const RING_SPEED := [0.0, 0.02, -0.012, 0.008]
+
+
+func _process(delta: float) -> void:
+	_anim += delta
+	queue_redraw()
 
 
 func set_genome(g: RefCounted) -> void:
@@ -61,7 +70,8 @@ func _build_rings() -> void:
 
 
 func _segment_at(pos: Vector2) -> Dictionary:
-	# Hit-test: find which ring + segment the point is over.
+	# Hit-test: find which ring + segment the point is over (accounting for
+	# each ring's animation rotation so the click stays where the segment is).
 	var c := size * 0.5
 	var d := pos - c
 	var r := d.length()
@@ -71,9 +81,14 @@ func _segment_at(pos: Vector2) -> Dictionary:
 		var rr: Array = ring_radii[ri]
 		if r >= rr[0] and r <= rr[1]:
 			var ring: Dictionary = _rings[ri]
-			var seg := int(a / TAU * float(ring["count"]))
+			var rot := _ring_rot(ri)
+			var seg := int(wrapf(a - rot, 0.0, TAU) / TAU * float(ring["count"]))
 			return {"ring": ri, "seg": seg}
 	return {}
+
+
+func _ring_rot(ri: int) -> float:
+	return _anim * RING_SPEED[ri % RING_SPEED.size()] * TAU
 
 
 func _ring_radii() -> Array:
@@ -100,8 +115,9 @@ func _draw() -> void:
 		var inner: float = rr[0]
 		var outer: float = rr[1]
 		var step := TAU / float(ring["count"])
+		var rot := _ring_rot(ri)
 		for i in range(ring["count"]):
-			var a0 := -PI / 2.0 + float(i) * step
+			var a0 := -PI / 2.0 + rot + float(i) * step
 			var a1 := a0 + step
 			var val: float = clampf(ring["get_val"].call(i), 0.0, 100.0)
 			# Color by value: hue from red (0) through green (100) — the soul's
