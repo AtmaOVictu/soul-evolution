@@ -10,7 +10,14 @@ const SacredGeometryScript := preload("res://scripts/sacred_geometry.gd")
 const SOUL_UI_BASE := 10.0  # visual-proportion base for this file (canon/01b-sacred-geometry.md); NOT a balance constant
 
 var polarity: int = 0  # 0 = white/creation, 1 = black/destruction
-var genome: RefCounted = null  # SoulGenome — the plane's code
+# Typed as the concrete class, not plain RefCounted: GDScript resolves
+# `.propname` on a loosely-typed RefCounted variable through a dynamic
+# lookup that can fail to find custom script members even though
+# `.get("propname")` on the exact same object succeeds (confirmed via
+# direct diagnostic — genome.get("skill_template") worked while
+# genome.skill_template threw "Invalid access to property or key" on the
+# same call). Concrete typing makes the compiler resolve it directly.
+var genome: SoulGenome = null
 var color_unlocked: bool = false  # true when Pandora's box opens
 
 # Only the soul the player currently inhabits reads WASD/SPACE. Every other
@@ -297,13 +304,38 @@ func _draw() -> void:
 			var blen: float = bvec.length()
 			var bdir: Vector2 = bvec / maxf(blen, 1.0)
 			var slen: float = blen / float(segments)
-			for s in segments:
-				var sstart: Vector2 = f["start"] + bdir * slen * float(s)
-				var send: Vector2 = f["start"] + bdir * slen * float(s + 1)
-				var fade: float = 1.0 - float(s) / float(segments)
-				var sc := Color(1.0, 1.0, 1.0, alpha * fade * 0.95)
-				var sw: float = 3.82 - float(s) * 0.382  # 4.0/0.35 -> SOUL_UI_BASE*PHI^-2, PHI^-2 (canon/01b-sacred-geometry.md)
-				draw_line(sstart, send, sc, maxf(sw, 1.0), false)
+			# The beam's LOOK is tied to the skill's growth + evolutions: higher
+			# level = thicker/brighter beam; pierce = hot white core; split =
+			# a forked second beam at half range. This is the visible result of
+			# the SkillTemplate growth.
+			var pierce: bool = f.get("pierce", false)
+			var split: bool = f.get("split", false)
+			var lvl: int = 0
+			var skill := genome.skill_template if genome else null
+			if skill:
+				lvl = skill.current_level
+			var lvl_frac: float = float(lvl) / 3.0
+			var base_w_end: float = 3.82 + lvl_frac * 2.0
+			var base_w_start: float = 4.0 + lvl_frac * 1.5
+			for pass_i in range(2 if split else 1):
+				var pass_dir := bdir
+				var pass_start: Vector2 = f["start"]
+				if split and pass_i == 1:
+					# The split beam forks off at half range.
+					pass_start = f["start"] + bdir * blen * 0.5
+					pass_dir = bdir.rotated(0.35)
+					pass_start += pass_dir * 4.0
+				for s2 in segments:
+					var sstart: Vector2 = pass_start + pass_dir * slen * float(s2)
+					var send: Vector2 = pass_start + pass_dir * slen * float(s2 + 1)
+					var fade2: float = 1.0 - float(s2) / float(segments)
+					var sw: float = lerpf(base_w_end, base_w_start, fade2) * (0.6 if (split and pass_i == 1) else 1.0)
+					var seg_col: Color = Color(1.0, 0.9, 0.7, alpha * fade2 * 0.95) if pierce else Color(1.0, 1.0, 1.0, alpha * fade2 * 0.95)
+					draw_line(sstart, send, seg_col, maxf(sw, 1.0), false)
+				if split and pass_i == 0:
+					# The main beam visibly "splits" at the fork point.
+					var fork_col := Color(1.0, 0.7, 0.4, alpha * 0.9)
+					draw_circle(f["start"] + bdir * blen * 0.5, 3.0 + lvl_frac * 2.0, fork_col)
 
 
 ## The soul filled with its color/soul/lifeforce, expressed as % — a level,
