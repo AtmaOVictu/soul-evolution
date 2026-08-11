@@ -13,6 +13,7 @@ const ReactionEngineScript := preload("res://scripts/reaction_engine.gd")
 const PurposeLadderScript := preload("res://scripts/purpose_ladder.gd")
 const OracleAssetScript := preload("res://scripts/oracle_asset.gd")
 const OracleUIScript := preload("res://scripts/oracle_ui.gd")
+const CharacterWindowScript := preload("res://scripts/character_window.gd")
 const NARR_BASE := 1.0  # narration/HUD timing base (canon/01b-sacred-geometry.md); NOT gameplay balance
 
 var state: GameState = GameState.MAIN_MENU
@@ -100,6 +101,7 @@ var reaction_timer: float = 0.0
 var _reaction_act: Array[String] = []
 var oracle: RefCounted = null
 var oracle_ui: Control = null
+var character_window: Window = null
 var narrator_label: Label
 var narrator_timer: float = 0.0
 var void_shader: ShaderMaterial
@@ -268,16 +270,21 @@ func _auto_test() -> void:
 		await get_tree().process_frame
 		_t_assert(gallery_ui.scroll.size.y > 0, "gallery scroll container has nonzero rendered height (got %s)" % gallery_ui.scroll.size)
 		_t_assert(gallery_ui.size.x > 1000, "gallery root control spans the full window width, not a narrow column (got %s)" % gallery_ui.size)
-		# get_texture().get_image() right after a logical-state change can
-		# read a stale GPU frame (render thread lags a frame or two behind
-		# the main thread) — a few extra process_frame awaits give the
-		# render thread time to catch up before capturing.
-		for _i in range(6):
-			await get_tree().process_frame
-		var shot := get_viewport().get_texture().get_image()
-		var shot_path := "user://debug_gallery.png"
-		shot.save_png(shot_path)
-		print("[TEST] gallery screenshot saved to ", ProjectSettings.globalize_path(shot_path))
+		# Screenshotting needs a real GPU frame — in --headless mode the
+		# viewport has no rendering backend, and get_texture().get_image()
+		# hangs indefinitely waiting for a frame that will never come. Only
+		# capture when actually running windowed.
+		if DisplayServer.get_name() != "headless":
+			# get_texture().get_image() right after a logical-state change
+			# can read a stale GPU frame (render thread lags the main thread
+			# by a frame or two) — a few extra process_frame awaits give it
+			# time to catch up before capturing.
+			for _i in range(6):
+				await get_tree().process_frame
+			var shot := get_viewport().get_texture().get_image()
+			var shot_path := "user://debug_gallery.png"
+			shot.save_png(shot_path)
+			print("[TEST] gallery screenshot saved to ", ProjectSettings.globalize_path(shot_path))
 	_on_gallery_back()
 	_t_assert(gallery_ui.visible == false, "gallery_ui is hidden after going back")
 
@@ -488,21 +495,56 @@ func _on_gallery_pressed() -> void:
 
 
 func _on_character_pressed() -> void:
-	# Open the character sheet from the main menu. With no active battle soul,
-	# show a representative preview genome so the sheet has something to read.
-	_ensure_character_sheet()
-	if not character_sheet:
-		return
-	if not character_sheet._active_genome:
-		var preview = SoulGenome.create_random(randi(), 0)
-		preview.set_ego(1.0)
-		character_sheet.set_genome(preview)
-	character_sheet.from_menu = true
-	character_sheet.menu_return = func():
-		main_menu_container.visible = true
+	# Open the autonomous character window (its own site/window), showing a
+	# representative preview soul when no battle is active.
+	_open_character_window(true)
+
+
+func _open_character_window(preview_if_empty: bool) -> void:
+	if not character_window:
+		character_window = CharacterWindowScript.new()
+		character_window.main_ref = self
+		add_child(character_window)
+	if preview_if_empty or not character_window.sheet or not character_window.sheet._active_genome:
+		if not character_window.sheet:
+			character_window._build_window()
+		if not character_window.sheet._active_genome:
+			var preview = SoulGenome.create_random(randi(), 0)
+			preview.set_ego(1.0)
+			character_window.set_genome(preview)
 	main_menu_container.visible = false
-	character_sheet.visible = true
-	character_sheet._refresh()
+	character_window.popup_centered()
+	character_window.grab_focus()
+
+
+func _character_window_closed() -> void:
+	character_window.hide()
+	main_menu_container.visible = true
+
+
+func _open_oracle_window() -> void:
+	if oracle_ui:
+		oracle_ui.visible = true
+		oracle_ui.grab_focus()
+
+
+func _open_gallery_window() -> void:
+	if gallery_ui:
+		gallery_ui.visible = true
+	elif main_menu_container:
+		_on_gallery_pressed()
+
+
+func _open_vault_window() -> void:
+	if soul_vault:
+		_open_gumball_machine()
+
+
+func _open_battle_window() -> void:
+	if state == GameState.PLAYING:
+		character_window.hide()
+	else:
+		_on_play_pressed()
 
 
 func _on_gallery_back() -> void:

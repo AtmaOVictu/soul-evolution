@@ -145,6 +145,13 @@ const EN := {
 	"mandala_hint": "click a segment to read the soul's attribute, its %, and what it does.",
 	"mandala_value": "attribute",
 	"mandala_title": "GENOME MANDALA",
+
+	# --- Character Window (autonomous) ---
+	"sheet_window_title": "SOUL — CHARACTER",
+	"nav_oracle": "Oracle",
+	"nav_gallery": "Gallery",
+	"nav_vault": "Vault",
+	"nav_battle": "Battle",
 }
 
 # Slovenian — the full translation of the same key set.
@@ -266,6 +273,13 @@ const SL := {
 	"mandala_hint": "klikni segment, da prebereš dušin atribut, njegov % in kaj dela.",
 	"mandala_value": "atribut",
 	"mandala_title": "GENOMSKA MANDALA",
+
+	# --- Okno lika (avtonomno) ---
+	"sheet_window_title": "DUŠA — LIK",
+	"nav_oracle": "Prerok",
+	"nav_gallery": "Galerija",
+	"nav_vault": "Arhiv",
+	"nav_battle": "Boj",
 }
 
 
