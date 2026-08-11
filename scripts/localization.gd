@@ -98,6 +98,7 @@ const EN := {
 	"menu_army": "Army size per side: %d",
 	"menu_how_to": "how to play",
 	"menu_gallery": "GALLERY",
+	"menu_character": "CHARACTER",
 	"gallery_title": "ASSET GALLERY",
 	"gallery_empty": "no generated assets found in res://assets/",
 
@@ -213,6 +214,7 @@ const SL := {
 	"menu_army": "Velikost vojske na stran: %d",
 	"menu_how_to": "kako igrati",
 	"menu_gallery": "GALERIJA",
+	"menu_character": "LIK",
 	"gallery_title": "GALERIJA SREDSTEV",
 	"gallery_empty": "v res://assets/ ni najdenih ustvarjenih sredstev",
 

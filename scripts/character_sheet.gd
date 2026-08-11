@@ -21,6 +21,7 @@ var main_ref: Node = null
 
 var sheet: PanelContainer
 var back_button: Button
+var menu_button: Button
 var provenance_label: Label
 var title_label: Label
 var polar_label: Label
@@ -52,6 +53,11 @@ var _window_frame_tex: Texture2D = null
 var _frame_stylebox: StyleBoxTexture = null
 var _vault_grid_count: int = -1
 
+# When opened from the main menu (no active battle), a "back to menu" button
+# is shown instead of the TAB-style active-soul behaviour.
+var from_menu: bool = false
+var menu_return: Callable = Callable()
+
 
 func _ready() -> void:
 	_build_panel()
@@ -65,6 +71,7 @@ func _on_visibility_changed() -> void:
 	if visible and _active_genome:
 		mode = Mode.ACTIVE
 		back_button.visible = false
+		menu_button.visible = from_menu
 		world_section.visible = true
 		render_soul(_active_genome, {})
 		_refresh_world()
@@ -130,6 +137,13 @@ func _build_panel() -> void:
 	back_button.visible = false
 	back_button.pressed.connect(_on_back_pressed)
 	vbox.add_child(back_button)
+
+	menu_button = Button.new()
+	menu_button.text = L.t("menu_back")
+	menu_button.flat = true
+	menu_button.visible = false
+	menu_button.pressed.connect(_on_menu_return)
+	vbox.add_child(menu_button)
 
 	provenance_label = Label.new()
 	provenance_label.add_theme_font_size_override("font_size", 12)
@@ -439,6 +453,13 @@ func _refresh() -> void:
 	genome = _active_genome
 	render_soul(_active_genome, {})
 	_refresh_world()
+
+
+func _on_menu_return() -> void:
+	from_menu = false
+	visible = false
+	if menu_return.is_valid():
+		menu_return.call()
 
 
 func _on_back_pressed() -> void:

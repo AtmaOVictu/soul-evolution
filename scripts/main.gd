@@ -429,6 +429,11 @@ func _build_main_menu() -> void:
 	gallery_btn.custom_minimum_size = Vector2(300, 50)
 	gallery_btn.pressed.connect(_on_gallery_pressed)
 	vbox.add_child(gallery_btn)
+	var character_btn := Button.new()
+	character_btn.text = L.t("menu_character")
+	character_btn.custom_minimum_size = Vector2(300, 50)
+	character_btn.pressed.connect(_on_character_pressed)
+	vbox.add_child(character_btn)
 	var quit_btn := Button.new()
 	quit_btn.text = L.t("menu_quit")
 	quit_btn.custom_minimum_size = Vector2(300, 50)
@@ -460,6 +465,24 @@ func _on_gallery_pressed() -> void:
 		add_child(gallery_ui)
 	main_menu_container.visible = false
 	gallery_ui.visible = true
+
+
+func _on_character_pressed() -> void:
+	# Open the character sheet from the main menu. With no active battle soul,
+	# show a representative preview genome so the sheet has something to read.
+	_ensure_character_sheet()
+	if not character_sheet:
+		return
+	if not character_sheet._active_genome:
+		var preview = SoulGenome.create_random(randi(), 0)
+		preview.set_ego(1.0)
+		character_sheet.set_genome(preview)
+	character_sheet.from_menu = true
+	character_sheet.menu_return = func():
+		main_menu_container.visible = true
+	main_menu_container.visible = false
+	character_sheet.visible = true
+	character_sheet._refresh()
 
 
 func _on_gallery_back() -> void:
