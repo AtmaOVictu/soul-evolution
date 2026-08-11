@@ -140,6 +140,11 @@ const EN := {
 	"oracle_reading": "the oracle reads:  %s  %s  ·  register %s",
 	"oracle_no_dust": "no dust. the oracle wants sand.",
 	"oracle_upgraded": "the oracle's sight deepens.",
+
+	# --- Genome Mandala ---
+	"mandala_hint": "click a segment to read the soul's attribute, its %, and what it does.",
+	"mandala_value": "attribute",
+	"mandala_title": "GENOME MANDALA",
 }
 
 # Slovenian — the full translation of the same key set.
@@ -256,6 +261,11 @@ const SL := {
 	"oracle_reading": "prerok bere:  %s  %s  ·  register %s",
 	"oracle_no_dust": "ni prahu. prerok hoče pesek.",
 	"oracle_upgraded": "prerokov vid se poglobi.",
+
+	# --- Genomska mandala ---
+	"mandala_hint": "klikni segment, da prebereš dušin atribut, njegov % in kaj dela.",
+	"mandala_value": "atribut",
+	"mandala_title": "GENOMSKA MANDALA",
 }
 
 

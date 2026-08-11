@@ -40,6 +40,7 @@ var balance_val_label: Label
 var vault_val_label: Label
 var vault_grid: GridContainer
 var mods_val_label: Label
+var mandala_ui: Control = null
 
 var absolute_section: VBoxContainer
 var immanence_section: VBoxContainer
@@ -307,6 +308,18 @@ func _build_panel() -> void:
 	vault_grid.add_theme_constant_override("v_separation", 4)
 	world_section.add_child(vault_grid)
 
+	# --- Genome Mandala (interactive: click a segment to read an attribute) ---
+	var mandala_header := Label.new()
+	mandala_header.text = L.t("mandala_title")
+	mandala_header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	mandala_header.add_theme_font_size_override("font_size", 11)
+	mandala_header.add_theme_color_override("font_color", Color(0.4, 0.4, 0.5))
+	vbox.add_child(mandala_header)
+	mandala_ui = preload("res://scripts/soul_mandala_ui.gd").new()
+	mandala_ui.name = "Mandala"
+	mandala_ui.custom_minimum_size = Vector2(0, 380)
+	vbox.add_child(mandala_ui)
+
 
 func _section_header(parent: Control, text: String) -> void:
 	var lbl := Label.new()
@@ -348,6 +361,8 @@ func _add_row(parent: Control, label_text: String) -> Label:
 func render_soul(g: RefCounted, provenance: Dictionary) -> void:
 	if not g:
 		return
+	if mandala_ui:
+		mandala_ui.set_genome(g)
 
 	if provenance.is_empty():
 		provenance_label.visible = false
