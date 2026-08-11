@@ -174,6 +174,13 @@ func _fire_light_beam() -> void:
 	# Store in LOCAL coordinates (relative to soul) for _draw()
 	var dmg: float = genome.get_laser_damage()
 	var rng: float = genome.get_laser_range()
+	# The skill template's growth overrides/augments the raw genome formulas,
+	# so the laser's growth is a designed curve, not just a raw stat.
+	if genome.skill_template:
+		var m: Dictionary = genome.skill_template.compute_mechanics()
+		dmg = m["damage"]
+		rng = m["range"]
+		blast_cooldown = m["cooldown"]
 	var life_factor := 0.5 + get_life_pct() * 0.5
 	dmg *= life_factor
 	var dir := Vector2(cos(facing_angle), sin(facing_angle))
@@ -184,6 +191,8 @@ func _fire_light_beam() -> void:
 		"damage": dmg,
 		"age": 0.0,
 		"life": 0.4,  # hit-detection window -- gameplay balance, excluded
+		"pierce": genome.skill_template.has_evolution("pierce") if genome.skill_template else false,
+		"split": genome.skill_template.has_evolution("split") if genome.skill_template else false,
 	})
 
 

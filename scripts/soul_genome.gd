@@ -4,6 +4,8 @@ class_name SoulGenome
 ## The soul's genome — its DNA in the plane.
 ## "Our version of the genome code" — the ontomathematical identity.
 
+const SkillTemplateScript := preload("res://scripts/skill_template.gd")
+
 var soul_id: int = 0
 var polarity: int = 0
 
@@ -137,6 +139,7 @@ static func create_random(id: int, pol: int) -> SoulGenome:
 	g._compute_pools()
 	g._compute_powers()
 	g._compute_mithjos()
+	g.skill_template = SkillTemplateScript.laser_template()
 	return g
 
 
@@ -324,6 +327,10 @@ func _boost_genome(multiplier: float) -> void:
 ## Ego: 0.0 = hollow (no player), 1.0 = original (born with ego).
 ## Affects all stats: effective = base × (1.0 + ego × 0.3)
 var ego: float = 0.0
+
+## The soul's skill-growth template (e.g. the laser skill). A skill_instance of
+## SkillTemplate drives how the soul's abilities grow and evolve.
+var skill_template: RefCounted = null
 
 
 func set_ego(val: float) -> void:

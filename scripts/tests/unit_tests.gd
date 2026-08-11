@@ -13,6 +13,7 @@ const SacredGeometryScript := preload("res://scripts/sacred_geometry.gd")
 const ReactionEngineScript := preload("res://scripts/reaction_engine.gd")
 const PurposeLadderScript := preload("res://scripts/purpose_ladder.gd")
 const OracleAssetScript := preload("res://scripts/oracle_asset.gd")
+const SkillTemplateScript := preload("res://scripts/skill_template.gd")
 
 var _pass := 0
 var _fail := 0
@@ -43,6 +44,8 @@ func _initialize() -> void:
 	_test_oracle_consult()
 	_test_oracle_upgrade()
 	_test_oracle_seeded_reproducible()
+	_test_skill_template_growth()
+	_test_skill_template_evolution()
 	_report()
 	quit()
 
@@ -381,3 +384,41 @@ func _test_oracle_seeded_reproducible() -> void:
 		_assert(ra["operator"] == rb["operator"], "seeded oracle reproduces operator (pull %d)" % i)
 		_assert(ra["verdict"] == rb["verdict"], "seeded oracle reproduces verdict (pull %d)" % i)
 	_assert(a.operator_fate == b.operator_fate, "seeded oracle accumulates identical fate-distribution")
+
+
+# ===================================================================
+# SkillTemplate (skill growth + evolution, tied to the beam mechanics)
+# ===================================================================
+
+func _test_skill_template_growth() -> void:
+	var t = SkillTemplateScript.laser_template()
+	_assert(t.name == "laser", "laser template is named laser")
+	_assert(t.current_level == 0, "template starts at level 0")
+	var m0: Dictionary = t.compute_mechanics()
+	_assert(absf(m0["damage"] - 10.0) < 0.01, "level 0 damage is the base (10)")
+	# Upgrade to level 2 (cost 10) and check the mechanics grew.
+	_assert(t.upgrade(10) == true, "upgrade succeeds with enough dust")
+	_assert(t.current_level == 1, "upgrade advances to level 1")
+	var m1: Dictionary = t.compute_mechanics()
+	_assert(m1["damage"] > m0["damage"], "damage grows with level")
+	_assert(m1["range"] > m0["range"], "range grows with level")
+	_assert(m1["cooldown"] < m0["cooldown"], "cooldown shrinks with level")
+	# Can't upgrade without dust.
+	_assert(t.upgrade(0) == false, "upgrade fails without dust")
+	_assert(t.current_level == 1, "failed upgrade does not advance")
+
+
+func _test_skill_template_evolution() -> void:
+	var t = SkillTemplateScript.laser_template()
+	_assert(t.has_evolution("pierce") == false, "no evolutions at level 0")
+	# Reach level 3 (unlocks pierce).
+	while t.current_level < 3 and not t.is_maxed():
+		t.upgrade(1000)
+	_assert(t.has_evolution("pierce") == true, "pierce unlocks by level 3")
+	_assert("pierce" in t.unlocked_evolutions(), "pierce is in the unlocked list")
+	# Max it out and confirm split unlocks too.
+	while not t.is_maxed():
+		t.upgrade(1000)
+	_assert(t.is_maxed(), "template reaches max level")
+	_assert(t.has_evolution("split") == true, "split unlocks at max level")
+	_assert(t.upgrade_cost() == -1, "maxed template has no upgrade cost")
