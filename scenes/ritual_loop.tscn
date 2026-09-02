@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ritual_loop_cl032"]
+[gd_scene load_steps=15 format=3 uid="uid://ritual_loop_cl032"]
 
 [ext_resource type="Script" path="res://scripts/ritual/ritual_loop_starter.gd" id="0"]
 [ext_resource type="Script" path="res://scripts/ritual/distinction_field_ritual.gd" id="1"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" path="res://scripts/ritual/presence_node.gd" id="9"]
 [ext_resource type="Script" path="res://scripts/ritual/guard_panel.gd" id="10"]
 [ext_resource type="Script" path="res://scripts/ritual/residual_input.gd" id="11"]
+[ext_resource type="Script" path="res://scripts/ritual/wholeness_boundary.gd" id="12"]
+[ext_resource type="Script" path="res://scripts/ritual/seal_lock.gd" id="13"]
+[ext_resource type="Script" path="res://scripts/ritual/agent_routing_deck.gd" id="14"]
 
 [sub_resource type="ShaderMaterial" id="void_mat"]
 shader = ExtResource("6")

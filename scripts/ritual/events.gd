@@ -7,6 +7,11 @@
 # CL-036: Guard
 # CL-037: Residual
 # CL-038: Problem Knot
+# CL-039: Wholeness
+# CL-040: SEAL
+# CL-041: RES Material
+# CL-042: Solution Pair Bridge
+# CL-043: Agent Routing
 
 extends Node
 
@@ -46,12 +51,29 @@ signal residual_seed_created(node: Node2D)
 signal knot_created(knot: Node2D, description: String)
 signal knot_examined(knot: Node2D, description: String)
 
-# SEAL (future)
-# signal seal_attempted
-# signal seal_blocked(reasons: Array)
+# CL-039: Wholeness
+signal wholeness_evaluated(complete: bool, missing: Array)
+
+# CL-040: SEAL
+signal seal_available
+signal seal_completed(distinctions: Array)
+signal seal_cancelled
+
+# CL-041: RES Material
+signal res_card_created(card: Node2D, info: Dictionary)
+signal res_card_inspected(card: Node2D, info: Dictionary)
+
+# CL-042: Solution Pair Bridge
+signal bridge_formed(knot: Node2D, res_card: Node2D)
+
+# CL-043: Agent Routing
+signal agent_routed(agent_type: StringName, res_card: Node2D, result: Dictionary)
 
 var _distinction_registry: Array[Node2D] = []
 var _residual_name: String = ""
+var _res_cards: Array[Node2D] = []
+var _knots: Array[Node2D] = []
+var _bridges: Array[Node2D] = []
 
 func register_distinction(node: Node2D) -> void:
   if node not in _distinction_registry:
@@ -97,6 +119,13 @@ func get_scoped_count() -> int:
       count += 1
   return count
 
+func get_sealed_count() -> int:
+  var count := 0
+  for d in _distinction_registry:
+    if is_instance_valid(d) and d.is_sealed:
+      count += 1
+  return count
+
 func has_residual() -> bool:
   return _residual_name != ""
 
@@ -105,3 +134,21 @@ func set_residual_name(name: String) -> void:
 
 func get_residual_name() -> String:
   return _residual_name
+
+# RES Card registry
+func register_res_card(card: Node2D) -> void:
+  _res_cards.append(card)
+
+func get_all_res_cards() -> Array[Node2D]:
+  return _res_cards.deduplicate()
+
+# Knot registry
+func register_knot(knot: Node2D) -> void:
+  _knots.append(knot)
+
+func get_all_knots() -> Array[Node2D]:
+  return _knots.deduplicate()
+
+# Bridge registry
+func register_bridge(bridge: Node2D) -> void:
+  _bridges.append(bridge)
