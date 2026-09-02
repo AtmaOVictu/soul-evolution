@@ -6,6 +6,7 @@
 # CL-035: Evidence
 # CL-036: Guard
 # CL-037: Residual
+# CL-038: Problem Knot
 
 extends Node
 
@@ -35,17 +36,15 @@ signal evidence_attached(node: Node2D)
 signal evidence_skipped
 
 # CL-036: Guard
-signal guard_check_requested
 signal guard_result(result: Dictionary)
-signal guard_shown
-signal guard_dismissed
 
 # CL-037: Residual
 signal residual_named(name: String)
 signal residual_seed_created(node: Node2D)
 
-# CL-038: Problem Knot (stubbed)
-# signal knot_created(knot_id: String, description: String)
+# CL-038: Problem Knot
+signal knot_created(knot: Node2D, description: String)
+signal knot_examined(knot: Node2D, description: String)
 
 # SEAL (future)
 # signal seal_attempted

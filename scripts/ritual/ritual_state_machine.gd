@@ -3,11 +3,11 @@
 # CL-033: VOID -> PRESENCE -> QUESTION
 # CL-034: -> CONTEXT (Ref frame, scope)
 # CL-035: -> EVIDENCE (witness)
-# CL-036: -> GUARD_CHECK (organism's immune system)
+# CL-036: -> GUARD_CHECK (immune system)
 # CL-037: -> RESIDUAL (name what remains)
+# CL-038: -> KNOT (failure becomes material)
 #
-# After evidence, the Guard evaluates. If SEAL is blocked (residual
-# unnamed), the player names what remains. A ℜ seed appears.
+# ALL 10 STATES IMPLEMENTED. The first ritual loop is complete.
 
 extends Node
 
@@ -21,9 +21,9 @@ enum State {
   BOUNDARY,
   CONTEXT,
   EVIDENCE,
-  GUARD_CHECK,  # CL-036: NOW IMPLEMENTED
-  RESIDUAL,     # CL-037: NOW IMPLEMENTED
-  KNOT,
+  GUARD_CHECK,
+  RESIDUAL,
+  KNOT,         # CL-038: NOW IMPLEMENTED
 }
 
 var current_state: State = State.VOID
@@ -35,28 +35,29 @@ var _is_implemented: Dictionary = {
   State.BOUNDARY: true,
   State.CONTEXT: true,
   State.EVIDENCE: true,
-  State.GUARD_CHECK: true,  # CL-036
-  State.RESIDUAL: true,     # CL-037
-  State.KNOT: false,        # CL-038
+  State.GUARD_CHECK: true,
+  State.RESIDUAL: true,
+  State.KNOT: true,   # CL-038: ALL IMPLEMENTED
 }
 
 const FIRST_QUESTION := "What is different here?"
 const NEXT_QUESTION_AFTER_BOUNDARY := "Where is this true?"
 const EVIDENCE_QUESTION := "What have you witnessed?"
-const GUARD_QUESTION := "Is this ready to hold?"
 const RESIDUAL_QUESTION := "What remains unresolved?"
 const PRESENCE_HINT := "Something stirs in the void..."
 
-const CONTEXT_CONSEQUENCE_TITLE := "Scope defined"
-const CONTEXT_CONSEQUENCE_BODY := "Meaning holds where the frame encompasses it."
-const EVIDENCE_CONSEQUENCE_TITLE := "Witnessed"
-const EVIDENCE_CONSEQUENCE_BODY := "The distinction holds. It will not flicker. ⟡"
+const CONTEXT_TITLE := "Scope defined"
+const CONTEXT_BODY := "Meaning holds where the frame encompasses it."
+const EVIDENCE_TITLE := "Witnessed"
+const EVIDENCE_BODY := "The distinction holds. It will not flicker. ⟡"
 const GUARD_PASS_TITLE := "Stable"
 const GUARD_PASS_BODY := "The distinction is stable, scoped, witnessed. It may be sealed."
 const GUARD_BLOCK_TITLE := "SEAL blocked"
 const GUARD_BLOCK_BODY := "Name what remains unresolved before sealing."
 const RESIDUAL_TITLE := "Residual named"
 const RESIDUAL_BODY := "ℜ remains. Not every good answer is sealable. Some are valuable because they name what remains."
+const KNOT_TITLE := "A Problem Knot forms"
+const KNOT_BODY := "It carries what was missing. It remains. Failure has become material."
 
 var _question_shown: bool = false
 var _presence_node: Node2D = null
@@ -80,8 +81,7 @@ func start_ritual() -> void:
   transition_to(State.PRESENCE)
 
 func transition_to(new_state: State) -> void:
-  if new_state == current_state:
-    return
+  if new_state == current_state: return
   if not _is_implemented.get(new_state, false):
     push_warning("State %s is not yet implemented" % State.keys()[new_state])
     return
@@ -90,21 +90,18 @@ func transition_to(new_state: State) -> void:
 
 func _on_state_changed(_state_name: StringName) -> void:
   match current_state:
-    State.PRESENCE:
-      _spawn_presence()
+    State.PRESENCE: _spawn_presence()
     State.QUESTION:
       if not _question_shown:
         _question_shown = true
         Events.question_shown.emit(FIRST_QUESTION)
-    State.CONTEXT:
-      _activate_ref_frame()
+    State.CONTEXT: _activate_ref_frame()
     State.EVIDENCE:
       _evidence_count = 0
       Events.question_shown.emit(EVIDENCE_QUESTION)
-    State.GUARD_CHECK:
-      _evaluate_guard()
-    State.RESIDUAL:
-      Events.question_shown.emit(RESIDUAL_QUESTION)
+    State.GUARD_CHECK: _evaluate_guard()
+    State.RESIDUAL: Events.question_shown.emit(RESIDUAL_QUESTION)
+    State.KNOT: _create_knot()
 
 # ── CL-033: Presence ──
 func _spawn_presence() -> void:
@@ -156,10 +153,10 @@ func _on_scope_changed(in_scope: Array, out_of_scope: Array) -> void:
   if current_state != State.CONTEXT: return
   _scope_changed_count += 1
   if _scope_changed_count == 1:
-    var body := CONTEXT_CONSEQUENCE_BODY
+    var body := CONTEXT_BODY
     if in_scope.is_empty(): body = "No scope. Meaning unbound is meaning dissolved."
     var agg_kappa := Events.get_aggregate_clarity()
-    Events.consequence_shown.emit(CONTEXT_CONSEQUENCE_TITLE, body,
+    Events.consequence_shown.emit(CONTEXT_TITLE, body,
       "κ | Scoped: %d/%d" % [in_scope.size(), in_scope.size() + out_of_scope.size()],
       "%.2f (%d scoped)" % [agg_kappa, in_scope.size()])
     transition_to(State.BOUNDARY)
@@ -171,7 +168,7 @@ func _on_evidence_attached(node: Node2D) -> void:
   var agg_kappa := Events.get_aggregate_clarity()
   var witnessed := Events.get_witnessed_count()
   var total := Events.get_distinction_count()
-  Events.consequence_shown.emit(EVIDENCE_CONSEQUENCE_TITLE, EVIDENCE_CONSEQUENCE_BODY,
+  Events.consequence_shown.emit(EVIDENCE_TITLE, EVIDENCE_BODY,
     "κ | Witnessed: %d/%d" % [witnessed, total], "%.2f (%d ⟡)" % [agg_kappa, witnessed])
   transition_to(State.BOUNDARY)
 
@@ -187,19 +184,15 @@ func _evaluate_guard() -> void:
   _guard_evaluated = true
   var has_residual := Events.has_residual()
   var result := GuardCheck.check_seal_eligibility(has_residual)
-  
   Events.guard_result.emit(result)
   
   if result["can_seal"]:
     Events.consequence_shown.emit(GUARD_PASS_TITLE, GUARD_PASS_BODY,
       "κ | Guard: stable", "%.2f (ready to seal)" % Events.get_aggregate_clarity())
-    # In future CL: allow SEAL here
-    # For now, transition back to QUESTION
     transition_to(State.BOUNDARY)
   else:
     Events.consequence_shown.emit(GUARD_BLOCK_TITLE, GUARD_BLOCK_BODY,
       "κ | Guard: %s" % result["reason"], "What remains?")
-    # Go to RESIDUAL (CL-037)
     transition_to(State.RESIDUAL)
 
 # ── CL-037: Residual ──
@@ -207,13 +200,11 @@ func _on_residual_named(name: String) -> void:
   if current_state != State.RESIDUAL: return
   Events.set_residual_name(name)
   
-  # Create residual seed visual
   var ResidualScript = preload("res://scripts/ritual/residual_seed.gd")
   var seed := Node2D.new()
   seed.set_script(ResidualScript)
   seed.setup(name)
   
-  # Position near the distinctions
   var distinctions := Events.get_all_distinctions()
   if distinctions.size() > 0:
     seed.position = distinctions[0].position + Vector2(40, 40)
@@ -230,6 +221,41 @@ func _on_residual_named(name: String) -> void:
     "ℜ: %s" % name, "%.2f (residual held)" % Events.get_aggregate_clarity())
   transition_to(State.BOUNDARY)
 
+# ── CL-038: Problem Knot ──
+func _create_knot() -> void:
+  var result := GuardCheck.evaluate()
+  
+  # Build description from what's missing
+  var missing := []
+  if not result["has_scoped"]: missing.append("scope")
+  if not result["has_witnessed"]: missing.append("witness")
+  if not Events.has_residual(): missing.append("residual")
+  
+  var desc := "This answer lacks " + ", ".join(missing) + "." if missing.size() > 0 else "This answer is unresolved."
+  
+  var KnotScript = preload("res://scripts/ritual/problem_knot.gd")
+  var knot := Node2D.new()
+  knot.set_script(KnotScript)
+  knot.setup(desc, not result["has_scoped"], not result["has_witnessed"], not Events.has_residual())
+  
+  # Position the knot away from distinctions, in a corner
+  var viewport_size := get_viewport().get_visible_rect().size
+  knot.position = Vector2(
+    viewport_size.x * 0.15 + randf() * 40,
+    viewport_size.y * 0.75 + randf() * 30
+  )
+  
+  var layer := get_parent().get_node_or_null("DistinctionLayer")
+  if layer: layer.add_child(knot)
+  else: get_parent().add_child(knot)
+  
+  Events.knot_created.emit(knot, desc)
+  
+  Events.consequence_shown.emit(KNOT_TITLE, KNOT_BODY,
+    "⊗ | Missing: %s" % (", ".join(missing) if missing.size() > 0 else "none"),
+    "%.2f (knot persists)" % Events.get_aggregate_clarity())
+  transition_to(State.BOUNDARY)
+
 # ── Distinction / Consequence handlers ──
 func _on_distinction_made(quality: StringName, _position: Vector2) -> void:
   if current_state == State.QUESTION or current_state == State.DISTINCTION:
@@ -239,34 +265,31 @@ func _on_distinction_made(quality: StringName, _position: Vector2) -> void:
 func _on_consequence_dismissed() -> void:
   if current_state == State.BOUNDARY:
     # Flow tracking:
-    # 1. After distinction: -> CONTEXT
-    # 2. After scope: -> EVIDENCE
-    # 3. After evidence: -> GUARD_CHECK
-    # 4. After guard pass: -> QUESTION (next cycle)
-    # 5. After guard block: -> RESIDUAL
-    # 6. After residual: -> QUESTION (cycle complete)
+    # 1. After distinction → CONTEXT
+    # 2. After scope → EVIDENCE
+    # 3. After evidence → GUARD_CHECK
+    # 4a. Guard pass → QUESTION (cycle complete)
+    # 4b. Guard block → RESIDUAL
+    # 5. After residual → BOUNDARY → QUESTION (cycle complete)
+    # If residual is skipped/empty → KNOT → BOUNDARY → QUESTION
     
-    if _evidence_count > 0 and not _guard_evaluated:
-      # After evidence, go to guard
-      transition_to(State.GUARD_CHECK)
-    elif _guard_evaluated and Events.has_residual():
-      # After residual named, cycle complete
+    if _guard_evaluated and not Events.has_residual():
+      # Guard blocked, no residual → create knot
       _guard_evaluated = false
       _evidence_count = 0
       _scope_changed_count = 0
-      Events.question_shown.emit(FIRST_QUESTION)
-      transition_to(State.QUESTION)
-    elif _guard_evaluated and not Events.has_residual():
-      # Guard passed without needing residual
+      transition_to(State.KNOT)
+    elif _evidence_count > 0 and not _guard_evaluated:
+      transition_to(State.GUARD_CHECK)
+    elif _guard_evaluated:
+      # Guard passed or residual named → cycle complete
       _guard_evaluated = false
       _evidence_count = 0
       _scope_changed_count = 0
       Events.question_shown.emit(FIRST_QUESTION)
       transition_to(State.QUESTION)
     elif _scope_changed_count > 0 and _evidence_count == 0:
-      # After scope, go to evidence
       transition_to(State.EVIDENCE)
     else:
-      # First cycle: after boundary, go to context
       Events.question_shown.emit(NEXT_QUESTION_AFTER_BOUNDARY)
       transition_to(State.CONTEXT)
