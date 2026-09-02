@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ritual_loop_cl032"]
+[gd_scene load_steps=11 format=3 uid="uid://ritual_loop_cl032"]
 
 [ext_resource type="Script" path="res://scripts/ritual/ritual_loop_starter.gd" id="0"]
 [ext_resource type="Script" path="res://scripts/ritual/distinction_field_ritual.gd" id="1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://shaders/void_reactive.gdshader" id="6"]
 [ext_resource type="Script" path="res://scripts/ritual/void_reactive_controller.gd" id="7"]
 [ext_resource type="Script" path="res://scripts/ritual/ritual_audio.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/ritual/presence_node.gd" id="9"]
 
 [sub_resource type="ShaderMaterial" id="void_mat"]
 shader = ExtResource("6")
@@ -17,9 +18,12 @@ shader_parameter/breath_depth = 0.08
 shader_parameter/void_color = Color(0.02, 0.02, 0.04, 1.0)
 shader_parameter/light_color = Color(0.15, 0.2, 0.35, 1.0)
 shader_parameter/distinction_count = 0
+shader_parameter/presence_intensity = 0.0
 
 [node name="RitualLoop" type="Control"]
 custom_minimum_size = Vector2i(1024, 640)
+offset_right = 1024.0
+offset_bottom = 640.0
 script = ExtResource("0")
 
 [node name="VoidBackground" type="ColorRect" parent="."]
@@ -42,30 +46,31 @@ script = ExtResource("2")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
+mouse_filter = 0
 script = ExtResource("1")
 
 [node name="QuestionPrompt" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
 anchors_preset = 7
 anchor_left = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = 60.0
-offset_right = 200.0
+offset_left = -300.0
+offset_top = 50.0
+offset_right = 300.0
 offset_bottom = 120.0
-horizontal_alignment = 1
-vertical_alignment = 1
+bbcode_enabled = true
+text = ""
 script = ExtResource("3")
 
 [node name="ConsequenceCard" type="Panel" parent="."]
+unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -320.0
-offset_top = 80.0
+offset_left = -280.0
+offset_top = 200.0
 offset_right = -40.0
-offset_bottom = 260.0
+offset_bottom = 380.0
 script = ExtResource("4")
 
 [node name="VBox" type="VBoxContainer" parent="ConsequenceCard"]
@@ -79,12 +84,12 @@ offset_bottom = -16.0
 
 [node name="TitleLabel" type="Label" parent="ConsequenceCard/VBox"]
 unique_name_in_owner = true
-text = "—"
+text = ""
 
 [node name="BodyLabel" type="Label" parent="ConsequenceCard/VBox"]
 unique_name_in_owner = true
-text = "—"
 autowrap_mode = 2
+text = ""
 
 [node name="MetricRow" type="HBoxContainer" parent="ConsequenceCard/VBox"]
 
@@ -94,28 +99,25 @@ text = "κ"
 
 [node name="MetricValue" type="Label" parent="ConsequenceCard/VBox/MetricRow"]
 unique_name_in_owner = true
-text = "0.00"
+text = ""
 
 [node name="DismissHint" type="Label" parent="ConsequenceCard/VBox"]
 unique_name_in_owner = true
-text = "[ click or Space to continue ]"
+text = "[click or space to continue]"
 
 [node name="ClarityBar" type="ProgressBar" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -80.0
-offset_top = 280.0
-offset_right = -20.0
-offset_bottom = 560.0
-orientation = 1
+anchors_preset = 6
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = -30.0
+offset_right = 60.0
+offset_bottom = -10.0
+max_value = 1.0
+step = 0.01
 script = ExtResource("5")
 
 [node name="ClarityLabel" type="Label" parent="ClarityBar"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
 offset_left = -60.0
 offset_top = -30.0
 offset_right = 60.0
