@@ -34,7 +34,7 @@ const RESULT_TEXT := {
   Result.MISSING_CONTEXT: "unscoped",
   Result.MISSING_EVIDENCE: "unwitnessed",
   Result.RESIDUAL_UNNAMED: "residual unnamed",
-  Result.SEALED_BLOCKED: "seal blocked",
+  Result.SEAL_BLOCKED: "seal blocked",
 }
 
 static func evaluate() -> Dictionary:
@@ -53,7 +53,7 @@ static func evaluate() -> Dictionary:
   var result: Result
   
   if not has_distinction:
-    result = Result.MISSING_CONTEXT  # nothing to guard
+    result = Result.MISSING_CONTEXT
   elif not has_scoped:
     result = Result.MISSING_CONTEXT
   elif not has_witnessed:

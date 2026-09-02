@@ -19,9 +19,6 @@
 
 extends Node2D
 
-signal seal_completed(distinctions: Array)
-signal seal_cancelled
-
 var _is_active: bool = false
 var _breath_time: float = 0.0
 var _seal_anim_time: float = 0.0
@@ -63,19 +60,16 @@ func _draw() -> void:
   var breath := sin(_breath_time * 0.8) * 0.2 + 0.8
   
   if _is_sealing:
-    # Sealing animation: expanding ring that contracts to a point
     var t := clampf(_seal_anim_time / 1.5, 0.0, 1.0)
     var ring_r := lerpf(60.0, 5.0, t)
     var alpha := 1.0 - t
     
-    # Multiple concentric rings
     for i in 3:
       var offset := i * 0.2
       var r := ring_r + offset * 20.0
       draw_arc(Vector2.ZERO, r, 0, TAU, 32,
         Color(0.7, 0.8, 1.0, alpha * (1.0 - float(i) / 3.0)), 2.0)
     
-    # Central ◉ forming
     var core_alpha := clampf(t * 2.0, 0.0, 1.0)
     draw_circle(Vector2.ZERO, 4.0, Color(0.8, 0.9, 1.0, core_alpha))
     draw_arc(Vector2.ZERO, 6.0, 0, TAU, 16, Color(0.8, 0.9, 1.0, core_alpha), 1.5)
@@ -94,12 +88,13 @@ func _execute_seal() -> void:
       d.seal()
       sealed.append(d)
   
-  seal_completed.emit(sealed)
+  # FIX: emit via Events autoload — the FSM connects to Events.seal_completed
+  Events.seal_completed.emit(sealed)
 
 func cancel() -> void:
   _is_sealing = false
   _seal_anim_time = 0.0
-  seal_cancelled.emit()
+  Events.seal_cancelled.emit()
   deactivate()
 
 func is_sealing() -> bool:
