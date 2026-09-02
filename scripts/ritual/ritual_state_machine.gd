@@ -29,14 +29,15 @@ enum State {
   GUARD_CHECK,
   RESIDUAL,
   KNOT,
-  WHOLENESS,    # CL-039
-  SEAL,          # CL-040
-  MATERIAL,      # CL-041
-  BRIDGE,        # CL-042
-  ROUTING,       # CL-043
+  WHOLENESS,
+  SEAL,
+  MATERIAL,
+  BRIDGE,
+  ROUTING,
 }
 
 var current_state: State = State.VOID
+
 var _is_implemented: Dictionary = {
   State.VOID: true,
   State.PRESENCE: true,
@@ -48,11 +49,11 @@ var _is_implemented: Dictionary = {
   State.GUARD_CHECK: true,
   State.RESIDUAL: true,
   State.KNOT: true,
-  State.WHOLENESS: true,     # CL-039
-  State.SEAL: true,          # CL-040
-  State.MATERIAL: true,      # CL-041
-  State.BRIDGE: true,         # CL-042
-  State.ROUTING: true,        # CL-043
+  State.WHOLENESS: true,
+  State.SEAL: true,
+  State.MATERIAL: true,
+  State.BRIDGE: true,
+  State.ROUTING: true,
 }
 
 const FIRST_QUESTION := "What is different here?"
@@ -97,12 +98,14 @@ var _evidence_count: int = 0
 var _guard_evaluated: bool = false
 var _wholeness_evaluated: bool = false
 var _seal_completed: bool = false
+var _material_created: bool = false
+var _bridge_attempted: bool = false
+var _routing_done: bool = false
 
 func _ready() -> void:
   Events.ritual_state_changed.connect(_on_state_changed)
-  Events.distinction_made.connect(_on_distinction_made)
-  Events.consequence_dismissed.connect(_on_consequence_dismissed)
   Events.presence_noticed.connect(_on_presence_noticed)
+  Events.distinction_made.connect(_on_distinction_made)
   Events.scope_changed.connect(_on_scope_changed)
   Events.evidence_attached.connect(_on_evidence_attached)
   Events.evidence_skipped.connect(_on_evidence_skipped)
@@ -115,24 +118,20 @@ func start_ritual() -> void:
   transition_to(State.PRESENCE)
 
 func transition_to(new_state: State) -> void:
-  if new_state == current_state: return
   if not _is_implemented.get(new_state, false):
-    push_warning("State %s is not yet implemented" % State.keys()[new_state])
     return
   current_state = new_state
-  Events.ritual_state_changed.emit(StringName(State.keys()[new_state]))
+  Events.ritual_state_changed.emit(StringName(State.keys()[new_state].to_lower()))
 
 func _on_state_changed(_state_name: StringName) -> void:
   match current_state:
+    State.VOID: pass
     State.PRESENCE: _spawn_presence()
-    State.QUESTION:
-      if not _question_shown:
-        _question_shown = true
-        Events.question_shown.emit(FIRST_QUESTION)
+    State.QUESTION: _show_question()
+    State.DISTINCTION: pass
+    State.BOUNDARY: pass
     State.CONTEXT: _activate_ref_frame()
-    State.EVIDENCE:
-      _evidence_count = 0
-      Events.question_shown.emit(EVIDENCE_QUESTION)
+    State.EVIDENCE: Events.question_shown.emit(EVIDENCE_QUESTION)
     State.GUARD_CHECK: _evaluate_guard()
     State.RESIDUAL: Events.question_shown.emit(RESIDUAL_QUESTION)
     State.KNOT: _create_knot()
@@ -164,8 +163,17 @@ func _spawn_presence() -> void:
 
 func _on_presence_noticed(pos: Vector2) -> void:
   _presence_seed_position = pos
+  if _presence_node and is_instance_valid(_presence_node):
+    _presence_node.deactivate()
   await get_tree().create_timer(1.2).timeout
   transition_to(State.QUESTION)
+
+# ── CL-034: Question / Distinction ──
+func _show_question() -> void:
+  if _question_shown:
+    return
+  Events.question_shown.emit(FIRST_QUESTION)
+  _question_shown = true
 
 # ── CL-034: Ref Context ──
 func _activate_ref_frame() -> void:
@@ -186,36 +194,32 @@ func _activate_ref_frame() -> void:
     if layer: layer.add_child(_ref_region)
     else: get_parent().add_child(_ref_region)
   _ref_region.activate()
-  Events.ref_activated.emit(_ref_region._get_frame_rect())
+  Events.ref_activated.emit(_ref_region.get_rect())
 
 func _on_scope_changed(in_scope: Array, out_of_scope: Array) -> void:
-  if current_state != State.CONTEXT: return
   _scope_changed_count += 1
-  if _scope_changed_count == 1:
-    var body := CONTEXT_BODY
-    if in_scope.is_empty(): body = "No scope. Meaning unbound is meaning dissolved."
-    var agg_kappa := Events.get_aggregate_clarity()
-    Events.consequence_shown.emit(CONTEXT_TITLE, body,
-      "κ | Scoped: %d/%d" % [in_scope.size(), in_scope.size() + out_of_scope.size()],
-      "%.2f (%d scoped)" % [agg_kappa, in_scope.size()])
-    transition_to(State.BOUNDARY)
+  for d in in_scope:
+    d.set_scoped(true)
+  for d in out_of_scope:
+    d.set_scoped(false)
+  Events.consequence_shown.emit(CONTEXT_TITLE, CONTEXT_BODY,
+    "κ | Scoped: %d/%d" % [Events.get_scoped_count(), Events.get_distinction_count()],
+    "%.2f (context defined)" % Events.get_aggregate_clarity())
+  transition_to(State.BOUNDARY)
 
 # ── CL-035: Evidence ──
 func _on_evidence_attached(node: Node2D) -> void:
-  if current_state != State.EVIDENCE: return
   _evidence_count += 1
-  var agg_kappa := Events.get_aggregate_clarity()
-  var witnessed := Events.get_witnessed_count()
-  var total := Events.get_distinction_count()
   Events.consequence_shown.emit(EVIDENCE_TITLE, EVIDENCE_BODY,
-    "κ | Witnessed: %d/%d" % [witnessed, total], "%.2f (%d ⟡)" % [agg_kappa, witnessed])
+    "κ | Witnessed: %d/%d" % [_evidence_count, Events.get_distinction_count()],
+    "%.2f (witnessed)" % Events.get_aggregate_clarity())
   transition_to(State.BOUNDARY)
 
 func _on_evidence_skipped() -> void:
-  if current_state != State.EVIDENCE: return
   Events.consequence_shown.emit("Unwitnessed",
-    "Unwitnessed distinctions remain effects, not consequences.",
-    "κ | Witnessed: 0/%d" % Events.get_distinction_count(), "What remains unheld?")
+    "What remains unheld will flicker. The field remembers.",
+    "κ | Witnessed: 0/%d" % Events.get_distinction_count(),
+    "What remains unheld?")
   transition_to(State.BOUNDARY)
 
 # ── CL-036: Guard Check ──
@@ -224,7 +228,6 @@ func _evaluate_guard() -> void:
   var has_residual := Events.has_residual()
   var result := GuardCheck.check_seal_eligibility(has_residual)
   Events.guard_result.emit(result)
-  
   if result["can_seal"]:
     Events.consequence_shown.emit(GUARD_PASS_TITLE, GUARD_PASS_BODY,
       "κ | Guard: stable", "%.2f (ready)" % Events.get_aggregate_clarity())
@@ -282,7 +285,6 @@ func _create_knot() -> void:
 # ── CL-039: Wholeness ──
 func _evaluate_wholeness() -> void:
   _wholeness_evaluated = true
-  
   if not _wholeness_boundary or not is_instance_valid(_wholeness_boundary):
     var OmegaScript = preload("res://scripts/ritual/wholeness_boundary.gd")
     _wholeness_boundary = Node2D.new()
@@ -290,16 +292,13 @@ func _evaluate_wholeness() -> void:
     var layer := get_parent().get_node_or_null("DistinctionLayer")
     if layer: layer.add_child(_wholeness_boundary)
     else: get_parent().add_child(_wholeness_boundary)
-  
   _wholeness_boundary.activate()
-  
-  # Wait for evaluation animation
   await get_tree().create_timer(1.5).timeout
-  
   var omega := _wholeness_boundary
   var is_complete: bool = omega.is_complete()
   var missing: Array = omega.get_missing()
-  
+  # FIX: deactivate the boundary after evaluation so it doesn't persist visually
+  omega.deactivate()
   if is_complete:
     Events.consequence_shown.emit(WHOLENESS_COMPLETE_TITLE, WHOLENESS_COMPLETE_BODY,
       "Ω | Complete", "%.2f (whole)" % Events.get_aggregate_clarity())
@@ -311,6 +310,9 @@ func _evaluate_wholeness() -> void:
       "Ω | Missing: %s" % ", ".join(missing), "%.2f (incomplete)" % Events.get_aggregate_clarity())
     transition_to(State.BOUNDARY)
 
+func _on_wholeness_evaluated(_complete: bool, _missing: Array) -> void:
+  pass
+
 # ── CL-040: SEAL ──
 func _activate_seal() -> void:
   if not _seal_lock or not is_instance_valid(_seal_lock):
@@ -321,10 +323,8 @@ func _activate_seal() -> void:
     var layer := get_parent().get_node_or_null("DistinctionLayer")
     if layer: layer.add_child(_seal_lock)
     else: get_parent().add_child(_seal_lock)
-  
   _seal_lock.activate()
   Events.question_shown.emit(SEAL_QUESTION)
-  # Auto-begin seal after a short pause (player confirms by waiting)
   await get_tree().create_timer(2.0).timeout
   if current_state == State.SEAL:
     _seal_lock.begin_seal()
@@ -332,14 +332,11 @@ func _activate_seal() -> void:
 func _on_seal_completed(distinctions: Array) -> void:
   if current_state != State.SEAL: return
   _seal_completed = true
-  
   var sealed_count := distinctions.size()
   Events.consequence_shown.emit(SEAL_TITLE, SEAL_BODY,
     "◉ | Sealed: %d" % sealed_count, "%.2f (permanent)" % Events.get_aggregate_clarity())
-  
   if _seal_lock and is_instance_valid(_seal_lock):
     _seal_lock.deactivate()
-  
   transition_to(State.BOUNDARY)
 
 func _on_seal_cancelled() -> void:
@@ -350,14 +347,13 @@ func _on_seal_cancelled() -> void:
 
 # ── CL-041: RES Material Cards ──
 func _create_material_cards() -> void:
+  _material_created = true
   var distinctions := Events.get_all_distinctions()
   var layer := get_parent().get_node_or_null("DistinctionLayer")
   var card_count := 0
-  
   for d in distinctions:
     if not is_instance_valid(d) or not d.is_sealed:
       continue
-    
     var RESScript = preload("res://scripts/ritual/res_material_card.gd")
     var card := Node2D.new()
     card.set_script(RESScript)
@@ -367,17 +363,13 @@ func _create_material_cards() -> void:
       String(d.quality),
       Events.get_residual_name()
     )
-    
-    # Position cards in a row at the bottom
     var viewport_size := get_viewport().get_visible_rect().size
     card.position = Vector2(
       viewport_size.x * 0.2 + card_count * 100,
       viewport_size.y * 0.85
     )
-    
     if layer: layer.add_child(card)
     else: get_parent().add_child(card)
-    
     Events.register_res_card(card)
     Events.res_card_created.emit(card, {
       "name": Events.get_residual_name(),
@@ -385,27 +377,23 @@ func _create_material_cards() -> void:
       "quality": String(d.quality)
     })
     card_count += 1
-  
   Events.consequence_shown.emit(MATERIAL_TITLE, MATERIAL_BODY,
     "RES | Cards: %d" % card_count, "%.2f (%d material)" % [Events.get_aggregate_clarity(), card_count])
   transition_to(State.BOUNDARY)
 
 # ── CL-042: Solution Pair Bridge ──
 func _activate_bridge() -> void:
+  _bridge_attempted = true
   var knots := Events.get_all_knots()
   var cards := Events.get_all_res_cards()
-  
   if knots.is_empty() or cards.is_empty():
     Events.consequence_shown.emit("No bridge possible",
       "Bridging requires both a Problem Knot and a RES Material Card.",
       "∴ | Knots: %d, Cards: %d" % [knots.size(), cards.size()], "Need both")
     transition_to(State.BOUNDARY)
     return
-  
-  # Auto-bridge the first knot to the first card
   var knot := knots[0]
   var card := cards[0]
-  
   if is_instance_valid(knot) and is_instance_valid(card):
     var BridgeScript = preload("res://scripts/ritual/solution_pair_bridge.gd")
     var bridge := Node2D.new()
@@ -414,20 +402,16 @@ func _activate_bridge() -> void:
     var layer := get_parent().get_node_or_null("DistinctionLayer")
     if layer: layer.add_child(bridge)
     else: get_parent().add_child(bridge)
-    
     bridge.setup(knot, card)
     Events.register_bridge(bridge)
-    
-    # Wait for bridge animation
     await get_tree().create_timer(1.0).timeout
-    
     Events.consequence_shown.emit(BRIDGE_TITLE, BRIDGE_BODY,
       "∴ | Bridge: 1", "%.2f (repaired)" % Events.get_aggregate_clarity())
-  
   transition_to(State.BOUNDARY)
 
 # ── CL-043: Agent Routing ──
 func _activate_routing() -> void:
+  _routing_done = true
   if not _agent_deck or not is_instance_valid(_agent_deck):
     var DeckScript = preload("res://scripts/ritual/agent_routing_deck.gd")
     _agent_deck = Control.new()
@@ -436,11 +420,8 @@ func _activate_routing() -> void:
     _agent_deck.offset_top = get_viewport().get_visible_rect().size.y - 120
     _agent_deck.offset_bottom = 0
     get_parent().add_child(_agent_deck)
-  
   _agent_deck.activate()
   Events.question_shown.emit(ROUTING_QUESTION)
-  
-  # After a delay, show a consequence and close
   await get_tree().create_timer(5.0).timeout
   if current_state == State.ROUTING:
     Events.consequence_shown.emit("Routing complete",
@@ -452,7 +433,8 @@ func _activate_routing() -> void:
 # ── Distinction / Consequence handlers ──
 func _on_distinction_made(quality: StringName, _position: Vector2) -> void:
   if current_state == State.QUESTION or current_state == State.DISTINCTION:
-    Events.boundary_formed.emit(null)
+    transition_to(State.DISTINCTION)
+    await get_tree().create_timer(0.5).timeout
     transition_to(State.BOUNDARY)
 
 func _on_consequence_dismissed() -> void:
@@ -461,24 +443,29 @@ func _on_consequence_dismissed() -> void:
     # 1. After distinction → CONTEXT
     # 2. After scope → EVIDENCE
     # 3. After evidence → GUARD_CHECK
-    # 4a. Guard pass → WHOLENESS
+    # 4a. Guard pass (with residual) → WHOLENESS
     # 4b. Guard block → RESIDUAL
-    # 5. After residual → BOUNDARY → (if guard passed now) WHOLENESS
+    # 5. After residual → BOUNDARY → (guard re-eval) → WHOLENESS
     # If residual skipped → KNOT → BOUNDARY → QUESTION
     # 6. Wholeness complete → SEAL
-    # 6b. Wholeness incomplete → BOUNDARY → QUESTION
+    # 6b. Wholeness incomplete → QUESTION (new cycle)
     # 7. After seal → MATERIAL
     # 8. After material → BRIDGE
     # 9. After bridge → ROUTING
     # 10. After routing → QUESTION (new cycle)
     
-    if _seal_completed:
+    if _routing_done:
+      _routing_done = false
+      _reset_cycle()
+    elif _bridge_attempted:
+      _bridge_attempted = false
+      transition_to(State.ROUTING)
+    elif _material_created:
+      _material_created = false
+      transition_to(State.BRIDGE)
+    elif _seal_completed:
       _seal_completed = false
       transition_to(State.MATERIAL)
-    elif _wholeness_evaluated and not _guard_evaluated:
-      # Shouldn't happen, safety
-      _wholeness_evaluated = false
-      _reset_cycle()
     elif _wholeness_evaluated:
       var omega := _wholeness_boundary
       if omega and is_instance_valid(omega) and omega.is_complete():
@@ -495,7 +482,6 @@ func _on_consequence_dismissed() -> void:
     elif _evidence_count > 0 and not _guard_evaluated:
       transition_to(State.GUARD_CHECK)
     elif _guard_evaluated and Events.has_residual():
-      # Guard passed (or residual named after block) → WHOLENESS
       _guard_evaluated = false
       transition_to(State.WHOLENESS)
     elif _scope_changed_count > 0 and _evidence_count == 0:
