@@ -1,13 +1,13 @@
 # events.gd — Ontomatika Event Bus (Autoload Singleton)
 # Register as Autoload named "Events" in Project Settings.
 #
-# CL-033: Presence signals
-# CL-034: Scope/signal added
+# CL-033: Presence
+# CL-034: Ref Context / Scope
+# CL-035: Evidence
 
 extends Node
 
 signal ritual_state_changed(new_state: StringName)
-
 signal question_shown(text: String)
 signal distinction_made(quality: StringName, position: Vector2)
 signal boundary_formed(boundary: Line2D)
@@ -28,8 +28,9 @@ signal ref_activated(frame_rect: Rect2)
 signal ref_moved(frame_rect: Rect2)
 signal scope_changed(in_scope: Array, out_of_scope: Array)
 
-# CL-035: Evidence Spark (stubbed)
-# signal evidence_attached(event_id: String)
+# CL-035: Evidence Spark
+signal evidence_attached(node: Node2D)
+signal evidence_skipped  # player clicked empty space during evidence
 
 # CL-036: Guard Check (stubbed)
 # signal guard_check_requested
@@ -76,3 +77,10 @@ func get_max_clarity() -> float:
     if is_instance_valid(d) and d.local_clarity > max_c:
       max_c = d.local_clarity
   return max_c
+
+func get_witnessed_count() -> int:
+  var count := 0
+  for d in _distinction_registry:
+    if is_instance_valid(d) and d.is_witnessed:
+      count += 1
+  return count

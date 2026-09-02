@@ -1,12 +1,12 @@
 # ritual_state_machine.gd — Ontomatika Ritual State Machine
 #
-# CL-033: VOID -> PRESENCE -> QUESTION -> DISTINCTION -> BOUNDARY
-# CL-034: After BOUNDARY consequence dismissed, show "Where is this true?"
-#         and activate Ref frame. Player drags frame to scope distinctions.
-#         On scope_changed, show consequence. Then transition back to QUESTION
-#         for next distinction cycle.
+# CL-033: VOID -> PRESENCE -> QUESTION
+# CL-034: -> CONTEXT (Ref frame, scope)
+# CL-035: -> EVIDENCE (witness distinctions)
 #
-# The state machine owns the SEQUENCE. The event bus owns the PROPAGATION.
+# After scope is defined, the game asks the player to witness what they
+# have distinguished. Evidence is the ⟡ that turns an event into a
+# traceable consequence.
 
 extends Node
 
@@ -16,8 +16,8 @@ enum State {
   QUESTION,
   DISTINCTION,
   BOUNDARY,
-  CONTEXT,      # CL-034: NOW IMPLEMENTED
-  EVIDENCE,
+  CONTEXT,
+  EVIDENCE,     # CL-035: NOW IMPLEMENTED
   GUARD_CHECK,
   RESIDUAL,
   KNOT,
@@ -30,8 +30,8 @@ var _is_implemented: Dictionary = {
   State.QUESTION: true,
   State.DISTINCTION: true,
   State.BOUNDARY: true,
-  State.CONTEXT: true,   # CL-034: NOW IMPLEMENTED
-  State.EVIDENCE: false,
+  State.CONTEXT: true,
+  State.EVIDENCE: true,   # CL-035: NOW IMPLEMENTED
   State.GUARD_CHECK: false,
   State.RESIDUAL: false,
   State.KNOT: false,
@@ -39,16 +39,23 @@ var _is_implemented: Dictionary = {
 
 const FIRST_QUESTION := "What is different here?"
 const NEXT_QUESTION_AFTER_BOUNDARY := "Where is this true?"
+const EVIDENCE_QUESTION := "What have you witnessed?"
 const PRESENCE_HINT := "Something stirs in the void..."
+
 const CONTEXT_CONSEQUENCE_TITLE := "Scope defined"
 const CONTEXT_CONSEQUENCE_BODY := "Meaning holds where the frame encompasses it. Distinctions outside remain unbound."
 const CONTEXT_CONSEQUENCE_ALL_OUTSIDE_BODY := "No scope. Meaning unbound is meaning dissolved."
+
+const EVIDENCE_CONSEQUENCE_TITLE := "Witnessed"
+const EVIDENCE_CONSEQUENCE_BODY := "The distinction holds. It will not flicker. ⟡"
+const EVIDENCE_CONSEQUENCE_SKIP_BODY := "Unwitnessed distinctions remain effects, not consequences."
 
 var _question_shown: bool = false
 var _presence_node: Node2D = null
 var _presence_seed_position: Vector2 = Vector2.ZERO
 var _ref_region: Node2D = null
-var _scope_changed_count: int = 0  # count scope changes to limit consequence spam
+var _scope_changed_count: int = 0
+var _evidence_count: int = 0
 
 @onready var _distinction_field: Control = get_parent().get_node_or_null("DistinctionField")
 
@@ -58,6 +65,8 @@ func _ready() -> void:
   Events.consequence_dismissed.connect(_on_consequence_dismissed)
   Events.presence_noticed.connect(_on_presence_noticed)
   Events.scope_changed.connect(_on_scope_changed)
+  Events.evidence_attached.connect(_on_evidence_attached)
+  Events.evidence_skipped.connect(_on_evidence_skipped)
 
 func start_ritual() -> void:
   transition_to(State.PRESENCE)
@@ -82,6 +91,9 @@ func _on_state_changed(_state_name: StringName) -> void:
         Events.question_shown.emit(FIRST_QUESTION)
     State.CONTEXT:
       _activate_ref_frame()
+    State.EVIDENCE:
+      _evidence_count = 0
+      Events.question_shown.emit(EVIDENCE_QUESTION)
     State.BOUNDARY:
       pass
 
@@ -95,7 +107,6 @@ func _spawn_presence() -> void:
   
   var x := rng.randf_range(margin.x, viewport_size.x - margin.x)
   var y := rng.randf_range(margin.y, viewport_size.y * 0.6)
-  
   var pos := Vector2(x, y)
   
   var PresenceNodeScript = preload("res://scripts/ritual/presence_node.gd")
@@ -125,13 +136,11 @@ func get_presence_seed() -> Vector2:
 func _activate_ref_frame() -> void:
   _scope_changed_count = 0
   
-  # Create or activate the Ref region
   if not _ref_region or not is_instance_valid(_ref_region):
     var RefScript = preload("res://scripts/ritual/ref_region.gd")
     _ref_region = Node2D.new()
     _ref_region.set_script(RefScript)
     
-    # Position the frame near the distinctions, slightly offset
     var distinctions := Events.get_all_distinctions()
     if distinctions.size() > 0:
       var center := Vector2.ZERO
@@ -157,7 +166,6 @@ func _on_scope_changed(in_scope: Array, out_of_scope: Array) -> void:
   
   _scope_changed_count += 1
   
-  # Only show consequence once, after first scope change
   if _scope_changed_count == 1:
     var body := CONTEXT_CONSEQUENCE_BODY
     if in_scope.is_empty():
@@ -173,8 +181,38 @@ func _on_scope_changed(in_scope: Array, out_of_scope: Array) -> void:
       "κ | Scoped: %d/%d" % [scoped_count, total],
       "%.2f (%d scoped)" % [agg_kappa, scoped_count]
     )
-    # Transition to BOUNDARY (which waits for consequence_dismissed)
     transition_to(State.BOUNDARY)
+
+# ── CL-035: Evidence ──
+func _on_evidence_attached(node: Node2D) -> void:
+  if current_state != State.EVIDENCE:
+    return
+  
+  _evidence_count += 1
+  
+  var agg_kappa := Events.get_aggregate_clarity()
+  var witnessed := Events.get_witnessed_count()
+  var total := Events.get_distinction_count()
+  
+  Events.consequence_shown.emit(
+    EVIDENCE_CONSEQUENCE_TITLE,
+    EVIDENCE_CONSEQUENCE_BODY,
+    "κ | Witnessed: %d/%d" % [witnessed, total],
+    "%.2f (%d ⟡)" % [agg_kappa, witnessed]
+  )
+  transition_to(State.BOUNDARY)
+
+func _on_evidence_skipped() -> void:
+  if current_state != State.EVIDENCE:
+    return
+  
+  Events.consequence_shown.emit(
+    "Unwitnessed",
+    EVIDENCE_CONSEQUENCE_SKIP_BODY,
+    "κ | Witnessed: 0/%d" % Events.get_distinction_count(),
+    "What remains unheld?"
+  )
+  transition_to(State.BOUNDARY)
 
 # ── Distinction / Consequence handlers ──
 func _on_distinction_made(quality: StringName, _position: Vector2) -> void:
@@ -184,7 +222,26 @@ func _on_distinction_made(quality: StringName, _position: Vector2) -> void:
 
 func _on_consequence_dismissed() -> void:
   if current_state == State.BOUNDARY:
-    # After BOUNDARY consequence, go to CONTEXT (CL-034)
-    # Show the next question
-    Events.question_shown.emit(NEXT_QUESTION_AFTER_BOUNDARY)
-    transition_to(State.CONTEXT)
+    # Flow: BOUNDARY (after distinction) -> CONTEXT -> BOUNDARY (after scope) -> EVIDENCE
+    # We need to track where we came from.
+    # After first distinction cycle: go to CONTEXT
+    # After scope consequence: go to EVIDENCE
+    # After evidence consequence: go to GUARD_CHECK (future) or back to QUESTION
+    
+    var witnessed := Events.get_witnessed_count()
+    var total := Events.get_distinction_count()
+    
+    if _scope_changed_count > 0 and _evidence_count == 0:
+      # We just came from scope, go to evidence
+      transition_to(State.EVIDENCE)
+    elif _evidence_count > 0:
+      # We just witnessed, go back to QUESTION for next cycle
+      # (or in future: GUARD_CHECK)
+      _evidence_count = 0
+      _scope_changed_count = 0
+      Events.question_shown.emit(FIRST_QUESTION)
+      transition_to(State.QUESTION)
+    else:
+      # First cycle: after boundary consequence, go to context
+      Events.question_shown.emit(NEXT_QUESTION_AFTER_BOUNDARY)
+      transition_to(State.CONTEXT)
