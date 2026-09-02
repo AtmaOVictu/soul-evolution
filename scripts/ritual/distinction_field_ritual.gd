@@ -1,9 +1,11 @@
-# distinction_field_ritual.gd — Ritual Distinction Field (CL-035)
+# distinction_field_ritual.gd — Ritual Distinction Field (CL-037)
 #
 # PRESENCE: clicks check for presence node
 # QUESTION: clicks create distinctions
 # CONTEXT: clicks pass through to Ref frame
-# EVIDENCE: clicks on distinctions attach ⟡ (witness)
+# EVIDENCE: clicks on distinctions attach ⟡
+# GUARD_CHECK: no field interaction (guard panel handles it)
+# RESIDUAL: no field interaction (residual input handles it)
 
 extends Control
 
@@ -46,16 +48,13 @@ func _gui_input(event: InputEvent) -> void:
     elif _evidence_input_enabled:
       _on_evidence_click(event.position)
 
-# ── CL-033: Presence ──
 func _on_presence_click(pos: Vector2) -> void:
   var layer := get_parent().get_node_or_null("DistinctionLayer")
-  if not layer:
-    return
+  if not layer: return
   for child in layer.get_children():
     if child.get_script() == PresenceNode:
       if child.has_method("try_notice"):
-        if child.try_notice(pos):
-          return
+        if child.try_notice(pos): return
   _void_flicker(pos)
 
 func _void_flicker(pos: Vector2) -> void:
@@ -68,44 +67,29 @@ func _void_flicker(pos: Vector2) -> void:
   tween.tween_property(flicker, "color:a", 0.0, 0.3)
   tween.tween_callback(flicker.queue_free)
 
-# ── CL-035: Evidence ──
 func _on_evidence_click(pos: Vector2) -> void:
-  # Check if clicked on an existing distinction
   var layer := get_parent().get_node_or_null("DistinctionLayer")
-  if not layer:
-    return
-  
+  if not layer: return
   for child in layer.get_children():
     if child.get_script() == DistinctionNode:
       var d := child as Node2D
-      if d.is_sealed or d.is_witnessed:
-        continue  # already witnessed or sealed
-      
-      # Check if click is near the distinction
+      if d.is_sealed or d.is_witnessed: continue
       if pos.distance_to(d.position) < 30.0:
         _witness_distinction(d)
         return
-  
-  # Clicked empty space — evidence skipped
   Events.evidence_skipped.emit()
 
 func _witness_distinction(d: Node2D) -> void:
   d.set_witnessed()
-  
-  # Spawn evidence spark visual
   var spark := Node2D.new()
   spark.set_script(EvidenceSpark)
   spark.position = d.position + Vector2(12, -12)
   var layer := get_parent().get_node_or_null("DistinctionLayer")
-  if layer:
-    layer.add_child(spark)
-  else:
-    add_child(spark)
+  if layer: layer.add_child(spark)
+  else: add_child(spark)
   _all_evidence_sparks.append(spark)
-  
   Events.evidence_attached.emit(d)
 
-# ── Distinction handling (unchanged) ──
 func _on_field_click(pos: Vector2) -> void:
   _click_count += 1
   if _click_count == 1:

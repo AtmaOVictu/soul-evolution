@@ -4,6 +4,8 @@
 # CL-033: Presence
 # CL-034: Ref Context / Scope
 # CL-035: Evidence
+# CL-036: Guard
+# CL-037: Residual
 
 extends Node
 
@@ -28,16 +30,19 @@ signal ref_activated(frame_rect: Rect2)
 signal ref_moved(frame_rect: Rect2)
 signal scope_changed(in_scope: Array, out_of_scope: Array)
 
-# CL-035: Evidence Spark
+# CL-035: Evidence
 signal evidence_attached(node: Node2D)
-signal evidence_skipped  # player clicked empty space during evidence
+signal evidence_skipped
 
-# CL-036: Guard Check (stubbed)
-# signal guard_check_requested
-# signal guard_result(passed: bool, reasons: Array)
+# CL-036: Guard
+signal guard_check_requested
+signal guard_result(result: Dictionary)
+signal guard_shown
+signal guard_dismissed
 
-# CL-037: Residual Naming (stubbed)
-# signal residual_named(name: String)
+# CL-037: Residual
+signal residual_named(name: String)
+signal residual_seed_created(node: Node2D)
 
 # CL-038: Problem Knot (stubbed)
 # signal knot_created(knot_id: String, description: String)
@@ -47,6 +52,7 @@ signal evidence_skipped  # player clicked empty space during evidence
 # signal seal_blocked(reasons: Array)
 
 var _distinction_registry: Array[Node2D] = []
+var _residual_name: String = ""
 
 func register_distinction(node: Node2D) -> void:
   if node not in _distinction_registry:
@@ -84,3 +90,19 @@ func get_witnessed_count() -> int:
     if is_instance_valid(d) and d.is_witnessed:
       count += 1
   return count
+
+func get_scoped_count() -> int:
+  var count := 0
+  for d in _distinction_registry:
+    if is_instance_valid(d) and d.is_scoped:
+      count += 1
+  return count
+
+func has_residual() -> bool:
+  return _residual_name != ""
+
+func set_residual_name(name: String) -> void:
+  _residual_name = name
+
+func get_residual_name() -> String:
+  return _residual_name
