@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://ritual_loop_cl032"]
+
+[ext_resource type="Script" path="res://scripts/ritual/distinction_field_ritual.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ritual/ritual_state_machine.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/ritual/question_prompt.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/ritual/consequence_card.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/ritual/clarity_bar.gd" id="5"]
+[ext_resource type="Shader" path="res://shaders/void.gdshader" id="6"]
+
+[sub_resource type="ShaderMaterial" id="void_mat"]
+shader = ExtResource("6")
+shader_parameter/breath_speed = 0.3
+shader_parameter/breath_depth = 0.08
+shader_parameter/void_color = Color(0.02, 0.02, 0.04, 1.0)
+shader_parameter/presence_intensity = 0.0
+
+[node name="RitualLoop" type="Control"]
+custom_minimum_size = Vector2i(1024, 640)
+
+[node name="VoidBackground" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+material = SubResource("void_mat")
+color = Color(0.02, 0.02, 0.04, 1.0)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2")
+
+[node name="DistinctionField" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1")
+
+[node name="QuestionPrompt" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = 60.0
+offset_right = 200.0
+offset_bottom = 120.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3")
+
+[node name="ConsequenceCard" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 80.0
+offset_right = -40.0
+offset_bottom = 260.0
+script = ExtResource("4")
+
+[node name="VBox" type="VBoxContainer" parent="ConsequenceCard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+
+[node name="TitleLabel" type="Label" parent="ConsequenceCard/VBox"]
+unique_name_in_owner = true
+text = "—"
+
+[node name="BodyLabel" type="Label" parent="ConsequenceCard/VBox"]
+unique_name_in_owner = true
+text = "—"
+autowrap_mode = 2
+
+[node name="MetricRow" type="HBoxContainer" parent="ConsequenceCard/VBox"]
+
+[node name="MetricLabel" type="Label" parent="ConsequenceCard/VBox/MetricRow"]
+unique_name_in_owner = true
+text = "kappa"
+
+[node name="MetricValue" type="Label" parent="ConsequenceCard/VBox/MetricRow"]
+unique_name_in_owner = true
+text = "0.00"
+
+[node name="DismissHint" type="Label" parent="ConsequenceCard/VBox"]
+unique_name_in_owner = true
+text = "[ click or Space to continue ]"
+
+[node name="ClarityBar" type="ProgressBar" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 280.0
+offset_right = -20.0
+offset_bottom = 560.0
+orientation = 1
+script = ExtResource("5")
+
+[node name="ClarityLabel" type="Label" parent="ClarityBar"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -30.0
+offset_right = 20.0
+offset_bottom = -10.0
+text = "kappa"
+horizontal_alignment = 1
