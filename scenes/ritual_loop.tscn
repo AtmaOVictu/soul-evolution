@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ritual_loop_cl032"]
+[gd_scene load_steps=10 format=3 uid="uid://ritual_loop_cl032"]
 
 [ext_resource type="Script" path="res://scripts/ritual/ritual_loop_starter.gd" id="0"]
 [ext_resource type="Script" path="res://scripts/ritual/distinction_field_ritual.gd" id="1"]
@@ -6,14 +6,17 @@
 [ext_resource type="Script" path="res://scripts/ritual/question_prompt.gd" id="3"]
 [ext_resource type="Script" path="res://scripts/ritual/consequence_card.gd" id="4"]
 [ext_resource type="Script" path="res://scripts/ritual/clarity_bar.gd" id="5"]
-[ext_resource type="Shader" path="res://shaders/void.gdshader" id="6"]
+[ext_resource type="Shader" path="res://shaders/void_reactive.gdshader" id="6"]
+[ext_resource type="Script" path="res://scripts/ritual/void_reactive_controller.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/ritual/ritual_audio.gd" id="8"]
 
 [sub_resource type="ShaderMaterial" id="void_mat"]
 shader = ExtResource("6")
 shader_parameter/breath_speed = 0.3
 shader_parameter/breath_depth = 0.08
 shader_parameter/void_color = Color(0.02, 0.02, 0.04, 1.0)
-shader_parameter/presence_intensity = 0.0
+shader_parameter/light_color = Color(0.15, 0.2, 0.35, 1.0)
+shader_parameter/distinction_count = 0
 
 [node name="RitualLoop" type="Control"]
 custom_minimum_size = Vector2i(1024, 640)
@@ -25,6 +28,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 material = SubResource("void_mat")
 color = Color(0.02, 0.02, 0.04, 1.0)
+script = ExtResource("7")
+
+[node name="RitualAudio" type="Node" parent="."]
+script = ExtResource("8")
 
 [node name="DistinctionLayer" type="Node2D" parent="."]
 
@@ -83,7 +90,7 @@ autowrap_mode = 2
 
 [node name="MetricLabel" type="Label" parent="ConsequenceCard/VBox/MetricRow"]
 unique_name_in_owner = true
-text = "kappa"
+text = "κ"
 
 [node name="MetricValue" type="Label" parent="ConsequenceCard/VBox/MetricRow"]
 unique_name_in_owner = true
@@ -113,5 +120,5 @@ offset_left = -60.0
 offset_top = -30.0
 offset_right = 60.0
 offset_bottom = -10.0
-text = "kappa 0.00 | 0"
+text = "κ 0.00 | 0"
 horizontal_alignment = 1
