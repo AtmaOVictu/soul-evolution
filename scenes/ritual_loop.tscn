@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ritual_loop_cl032"]
+[gd_scene load_steps=8 format=3 uid="uid://ritual_loop_cl032"]
 
+[ext_resource type="Script" path="res://scripts/ritual/ritual_loop_starter.gd" id="0"]
 [ext_resource type="Script" path="res://scripts/ritual/distinction_field_ritual.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/ritual/ritual_state_machine.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/ritual/question_prompt.gd" id="3"]
@@ -16,6 +17,7 @@ shader_parameter/presence_intensity = 0.0
 
 [node name="RitualLoop" type="Control"]
 custom_minimum_size = Vector2i(1024, 640)
+script = ExtResource("0")
 
 [node name="VoidBackground" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -79,7 +81,7 @@ autowrap_mode = 2
 
 [node name="MetricLabel" type="Label" parent="ConsequenceCard/VBox/MetricRow"]
 unique_name_in_owner = true
-text = "kappa"
+text = "κ"
 
 [node name="MetricValue" type="Label" parent="ConsequenceCard/VBox/MetricRow"]
 unique_name_in_owner = true
@@ -109,5 +111,5 @@ offset_left = -20.0
 offset_top = -30.0
 offset_right = 20.0
 offset_bottom = -10.0
-text = "kappa"
+text = "κ"
 horizontal_alignment = 1
