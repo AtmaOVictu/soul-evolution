@@ -1,57 +1,49 @@
 # events.gd — Ontomatika Event Bus (Autoload Singleton)
 # Register as Autoload named "Events" in Project Settings.
 #
-# REFACTORED: clarity is per-distinction, not global.
-# Aggregate clarity is queried, not stored.
-#
-# CL-033: Presence signals activated.
+# CL-033: Presence signals
+# CL-034: Scope/signal added
 
 extends Node
 
-# ── Ritual state machine ──
 signal ritual_state_changed(new_state: StringName)
 
-# ── CL-032: Question + Consequence ──
 signal question_shown(text: String)
 signal distinction_made(quality: StringName, position: Vector2)
 signal boundary_formed(boundary: Line2D)
 signal consequence_shown(title: String, body: String, metric_label: String, metric_value: String)
 signal consequence_dismissed
 
-# ── Per-node clarity ──
 signal local_clarity_changed(node: Node, new_value: float, delta: float)
 signal distinction_stage_changed(node: Node2D, stage_name: StringName)
 signal distinction_spawned(node: Node2D)
 signal distinction_examined(node: Node2D)
 
-# ── CL-033: Presence Reveal ──
+# CL-033: Presence
 signal presence_activated(position: Vector2)
 signal presence_noticed(position: Vector2)
 
-# ── CL-034: Ref Context ──
+# CL-034: Ref Context
 signal ref_activated(frame_rect: Rect2)
 signal ref_moved(frame_rect: Rect2)
+signal scope_changed(in_scope: Array, out_of_scope: Array)
 
-# ── CL-035: Evidence Spark (stubbed) ──
-# signal evidenceattached(event_id: String)
+# CL-035: Evidence Spark (stubbed)
+# signal evidence_attached(event_id: String)
 
-# ── CL-036: Guard Check (stubbed) ──
+# CL-036: Guard Check (stubbed)
 # signal guard_check_requested
 # signal guard_result(passed: bool, reasons: Array)
 
-# ── CL-037: Residual Naming (stubbed) ──
+# CL-037: Residual Naming (stubbed)
 # signal residual_named(name: String)
 
-# ── CL-038: Problem Knot (stubbed) ──
+# CL-038: Problem Knot (stubbed)
 # signal knot_created(knot_id: String, description: String)
 
-# ── SEAL (future) ──
+# SEAL (future)
 # signal seal_attempted
 # signal seal_blocked(reasons: Array)
-
-# ── Aggregate clarity query ──
-# Clarity is NOT a stored value. It is computed from all distinction nodes.
-# The clarity bar calls this to get the aggregate.
 
 var _distinction_registry: Array[Node2D] = []
 

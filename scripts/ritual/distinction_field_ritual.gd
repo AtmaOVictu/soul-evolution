@@ -1,12 +1,9 @@
-# distinction_field_ritual.gd — Ritual Distinction Field (CL-033)
+# distinction_field_ritual.gd — Ritual Distinction Field (CL-034)
 #
-# Handles all player clicks on the field.
-# In PRESENCE state: clicks check for the presence node.
-# In QUESTION state: clicks create distinctions.
-#
-# Two distinction qualities:
-#   CUT     — first click: a single distinction appears
-#   BOUNDED — second click: second distinction + boundary
+# Handles player clicks on the field.
+# PRESENCE: clicks check for the presence node
+# QUESTION: clicks create distinctions
+# CONTEXT: clicks pass through to Ref frame (no distinction creation)
 
 extends Control
 
@@ -35,6 +32,7 @@ func _ready() -> void:
 func _on_state_changed(state_name: StringName) -> void:
   _input_enabled = (state_name == &"QUESTION")
   _presence_input_enabled = (state_name == &"PRESENCE")
+  # In CONTEXT state, field clicks are ignored — Ref frame handles input
 
 func _gui_input(event: InputEvent) -> void:
   if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -43,28 +41,20 @@ func _gui_input(event: InputEvent) -> void:
     elif _input_enabled:
       _on_field_click(event.position)
 
-# ── CL-033: Presence handling ──
 func _on_presence_click(pos: Vector2) -> void:
-  # Find the presence node in the DistinctionLayer
   var layer := get_parent().get_node_or_null("DistinctionLayer")
   if not layer:
     return
   
   for child in layer.get_children():
     if child.get_script() == PresenceNode:
-      var presence = child as Node2D
-      if presence.has_method("try_notice"):
-        if presence.try_notice(pos):
-          # Presence was noticed! The Events bus will propagate this.
-          # The FSM listens to presence_noticed and transitions to QUESTION.
+      if child.has_method("try_notice"):
+        if child.try_notice(pos):
           return
   
-  # Click missed the presence — void flickers slightly
   _void_flicker(pos)
 
 func _void_flicker(pos: Vector2) -> void:
-  # A small visual response to a missed click — the void acknowledges
-  # the player's attempt but does not reward inattention
   var flicker := ColorRect.new()
   flicker.size = Vector2(4, 4)
   flicker.position = pos - Vector2(2, 2)
@@ -75,7 +65,6 @@ func _void_flicker(pos: Vector2) -> void:
   tween.tween_property(flicker, "color:a", 0.0, 0.3)
   tween.tween_callback(flicker.queue_free)
 
-# ── Distinction handling (unchanged from CL-032) ──
 func _on_field_click(pos: Vector2) -> void:
   _click_count += 1
   
@@ -83,7 +72,6 @@ func _on_field_click(pos: Vector2) -> void:
     _first_node = _spawn_distinction(pos, QUALITY_CUT)
     _first_node.gain_clarity(clarity_per_cut)
     _emit_distinction(QUALITY_CUT, pos)
-  
   elif _click_count == 2:
     var second_node := _spawn_distinction(pos, QUALITY_BOUNDED)
     second_node.gain_clarity(clarity_per_bounded)
@@ -94,7 +82,6 @@ func _on_field_click(pos: Vector2) -> void:
       second_node.gain_clarity(pair_bonus)
     
     _emit_distinction(QUALITY_BOUNDED, pos)
-    
     _click_count = 0
     _first_node = null
 
