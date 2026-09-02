@@ -21,7 +21,7 @@ func _ready() -> void:
   _line_edit.text_submitted.connect(func(_t): _on_submit())
 
 func activate() -> void:
-  _is_active = = true
+  _is_active = true
   visible = true
   _line_edit.text = ""
   _line_edit.grab_focus()
