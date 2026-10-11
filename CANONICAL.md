@@ -18,13 +18,13 @@ This repository is the active game implementation surface. All gameplay, renderi
 
 ## Canonical Spec
 
-Game design specs live in Notion: Game Feature Translation Spine, Playable Slice Ladder, Canvas UI.
+Game design specs live in canon/ of this repo. Historical reference: Notion Game Feature Translation Spine, Playable Slice Ladder, Canvas UI (scratch, non-canonical).
 This repo implements those specs.
 
 ## Verification
 
-All sealed decisions are recorded in the Notion DOKAZ database (⊢ DOKAZ — Proof-of-Lineage Ledger).
-See also: Notion Source-of-Truth Map page for the full platform role declaration.
+All sealed decisions are recorded in the canonical ledger: Atmavictu/canon/DOKAZ.md (⊢ DOKAZ — Proof-of-Lineage Ledger).
+The platform role declaration lives in the CANONICAL.md files of each repository.
 
 ---
 Declared: 2026-09-11
