@@ -9,7 +9,7 @@ A Godot 4 game about the eternal war of light and dark souls. When a light soul 
 - `assets/`, `blender/` — assets and 3D sources
 - `docs/`, `DESIGN.md`, `CRITICAL_BRIEF.md` — design and direction
 - `icon.svg` — project icon
-- `LICENSE.md`, `TDM-RESERVATION.md`, `REGISTER-NEIMENOVANIH.jsonl`, `REGISTER-PADCEV.jsonl`, `VBL-10.5.1-KOMPIL-A-DRAFT-NOT-RELEASED.md` — license family
+- `LICENSE.md`, `TDM-RESERVATION.md`, `canon/REGISTER-NEIMENOVANIH.jsonl`, `canon/REGISTER-PADCEV.jsonl`, `canon/VBL-10.5.1-KOMPIL-A-DRAFT-NOT-RELEASED.md` — license family
 
 ## Run
 

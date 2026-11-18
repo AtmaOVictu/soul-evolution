@@ -9,7 +9,7 @@ Igra Godot 4 o večni vojni svetlih in temnih duš. Ko se svetla duša in temna 
 - `assets/`, `blender/` — gradiva in 3D-viri
 - `docs/`, `DESIGN.md`, `CRITICAL_BRIEF.md` — oblikovanje in smer
 - `icon.svg` — ikona projekta
-- `LICENSE.md`, `TDM-RESERVATION.md`, `REGISTER-NEIMENOVANIH.jsonl`, `REGISTER-PADCEV.jsonl`, `VBL-10.5.1-KOMPIL-A-DRAFT-NOT-RELEASED.md` — licenčna družina
+- `LICENSE.md`, `TDM-RESERVATION.md`, `canon/REGISTER-NEIMENOVANIH.jsonl`, `canon/REGISTER-PADCEV.jsonl`, `canon/VBL-10.5.1-KOMPIL-A-DRAFT-NOT-RELEASED.md` — licenčna družina
 
 ## Zagon
 
